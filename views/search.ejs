@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description"
+          content="Mobile UI Gallery search page. Search for widgets used by other developers. The repository has a total of 30,000 widgets used by Android developers, and are gleaned from the Google Play Store.">
+    <meta name="keywords"
+          content="mobile, mobile ui, mobile widgets, widget, widgets, mobile application, android, android widget, android widgets, android ui, ui">
+    <meta name="author" content="">
+
+    <title><%= title %></title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- CSS for ion.rangeSlider-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.2.0/css/ion.rangeSlider.min.css"
+          rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.2.0/css/ion.rangeSlider.skinHTML5.css"
+          rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="stylesheets/search.css" rel="stylesheet">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117332758-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-117332758-2');
+    </script>
+</head>
+
+<body>
+    <header>
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="/">Mobile UI Gallery</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="#navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Home</a>
+                        </li>
+                        <li class="nav-item active ">
+                            <a class="nav-link" href="/search?btnType=RadioButton&color=All&category=All&sortType=appDownloads&text=&width=0%3B800&height=0%3B1280&page=1">Search
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/compare?btnType=Button&color=All&category=All&DeveloperOneName=AI_Factory_Limited&DeveloperTwoName=GIOSIS_PTE._LTD.&sortType=appDownloads&text=&width=0%3B800&height=0%3B1280&page=1">Compare</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/about">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contact">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div> 
+        </nav>
+    </header>
+
+    <!-- Page content -->
+    <main role="main" class="container">
+        <h2 class="my-4 text-center text-lg-left">Widget Search</h2>
+        <hr/>
+        <p class="modal-body"> Find widgets with the following properties:</p>
+        <form name="search" method="get" id="myform" action="/search" class="panel-body">
+            <!-- Forms -->
+            <div class="row">
+                <div class="form-group form-inline">
+                    <fieldset class="pr-4">
+                        <label class="badge">Widget Class</label>
+                        <select class="custom-select mr-sm-4" id="btnType" name="btnType">
+                            <% if (!btnTypeArr.includes(query.btnType)) { %>
+                            <option selected value="All">All</option>
+                            <% } else { %>
+                            <option value="All">All</option>
+                            <% }
+                            for (i = 0; i < btnTypeArr.length; i++) {
+                                if (btnTypeArr[i] === 'All') {
+                                    continue;
+                                }
+                            if (query.btnType === btnTypeArr[i]) { %>
+                            <option selected> <%= btnTypeArr[i] %></option>
+                            <% }else { %>
+                            <option> <%= btnTypeArr[i] %></option>
+                            <% }
+                            } %>
+                        </select>
+                    </fieldset>
+                    <fieldset class="pr-4">
+                        <label class="badge">Color</label>
+                        <select class="custom-select mr-sm-4" id="color" name="color">
+                            <% if (!colArr.includes(query.color)) { %>
+                            <option selected value="All">All</option>
+                            <% } else { %>
+                            <option value="All">All</option>
+                            <% }
+                            for (var i = 0; i < colArr.length; i++) {
+                                if (colArr[i] === 'All') {
+                                    continue;
+                                }
+                            if (query.color === colArr[i]) { %>
+                            <option selected> <%= colArr[i] %></option>
+                            <% }else { %>
+                            <option> <%= colArr[i] %></option>
+                            <% }
+                            } %>
+                        </select>
+                    </fieldset>
+                    <fieldset class="pr-4">
+                        <label class="badge">Category</label>
+                        <select class="custom-select mr-sm-4" id="category" name="category">
+                            <% if (!catArr.includes(query.category)) { %>
+                            <option selected value="All">All</option>
+                            <% } else { %>
+                            <option value="All">All</option>
+                            <% }
+                            for (var i = 0; i < catArr.length; i++) {
+                                if (catArr[i] === 'All') {
+                                    continue;
+                                }
+                            if (query.category === catArr[i]) { %>
+                            <option selected> <%= catArr[i] %></option>
+                            <% }else { %>
+                            <option> <%= catArr[i] %></option>
+                            <% }
+                            } %>
+                        </select>
+                    </fieldset>
+                    <fieldset class="pr-4">
+                        <label class="badge">Category</label>
+                        <select class="custom-select mr-sm-4" id="sortType" name="sortType">
+                            <% if (!((query.sortType) in sortTypeDict)) { %>
+                            <option selected value="appDownloads"> <%= sortTypeDict['appDownloads'] %></option>
+                            <% } else { %>
+                            <option value="appDownloads"> <%= sortTypeDict['appDownloads'] %></option>
+                            <% } for (const [key, value] of Object.entries(sortTypeDict)) {
+                                if (key === 'appDownloads') {
+                                    continue;
+                                }
+                            if (query.sortType === key) { %>
+                            <option selected value="<%= key %>"><%= value %></option>
+                            <% }else { %>
+                            <option value="<%= key %>"><%= value %></option>
+                            <% }
+                            } %>
+                        </select>
+                    </fieldset>
+                </div>
+            </div>
+            <!-- RadioSlider -->
+            <div class="row">
+                <div class="form-group pr-4 text-center" style="min-width: 400px;">
+                    <label class="badge">Width</label>
+                    <input type="text" id="width-slider" name="width" value=""/>
+                </div>
+                <div class="form-group pr-4 text-center" style="min-width: 400px;">
+                    <label class="badge">Height</label>
+                    <input type="text" id="height-slider" name="height" value=""/>
+                </div>
+            </div>
+            <input type="hidden" name="page" value="1">
+            <!-- Submit -->
+            <div class="row">
+                <button type="submit" class="btn btn-primary" onclick="getWidthWithHeight()">Submit</button>
+            </div>
+        </form>
+        <hr/>
+        
+
+        <div class="demo container">
+        </div>
+        <div class="row mb-10">
+            <div id="endPage" class="loader" style="display:none;margin: 0 auto;"></div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-3 bg-dark footer">
+        <div class="container">
+            <div class="text-center text-white">Copyright &copy; Mobile UI Gallery 2018</div>
+        </div>
+    </footer>
+
+
+<!-- Bootstrap core JavaScript -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.2.0/js/ion.rangeSlider.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+<script src="/javascripts/imageSearch.js"></script>
+    
+
+<script>
+    function getWidthWithHeight(){
+        let widthArr;
+        let heightArr;
+
+        if (getUrlParameter('width') && getUrlParameter('height')) {
+            widthArr = getUrlParameter('width').split(';');
+            heightArr = getUrlParameter('height').split(';');
+        } else {
+            heightArr = [0, 1280];
+            widthArr = [0, 800];
+        }
+
+        $("#height-slider").ionRangeSlider({
+            type: "double",
+            min: 0,
+            max: 1280,
+            from: heightArr[0],
+            to: heightArr[1]
+        });
+        
+        $("#width-slider").ionRangeSlider({
+            type: "double",
+            min: 0,
+            max: 800,
+            from: widthArr[0],
+            to: widthArr[1]
+        });
+        /*checkbox, ProgressBar, ToggleButton, Spinner*/
+    }
+</script>
+<script>
+    $(window).onload = getWidthWithHeight();
+</script>
+<script>
+    $(document).ready(function () {
+        let _mainPage;
+        
+        if (getUrlParameter('page')) {
+            _mainPage = parseInt(getUrlParameter('page'));
+            loadImages(_mainPage);
+            console.log('loading images...');
+            let timer;
+            
+            $(window).scroll(function () {
+                if (_mainPage) {
+                    if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.75) {
+                        if (timer) {
+                            window.clearTimeout(timer);
+                        }
+                        document.body.scrollTop = document.body.scrollHeight;
+                        timer = window.setTimeout(function () {
+                            _mainPage += 1;
+                            loadImages(_mainPage);
+                        }, 500); //500
+                    }
+                }
+            });
+            
+        } else {
+            _mainPage = 1;
+        }
+    });
+</script>
+
+</body>
+</html>

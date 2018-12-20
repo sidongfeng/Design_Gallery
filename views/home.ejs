@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Mobile UI Gallery, a repository of widgets taken from Google Play Store.">
+    <meta name="keywords"
+          content="mobile, mobile ui, mobile widgets, widget, widgets, mobile application, android, android widget, android widgets, android ui, ui">
+    <meta name="author" content="">
+
+    <title><%= title %></title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="stylesheets/style.css" rel="stylesheet">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117332758-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-117332758-2');
+    </script>
+</head>
+
+<body>
+    <header>
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="/">Mobile UI Gallery</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="#navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/">Home
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/search?btnType=RadioButton&color=All&category=All&sortType=appDownloads&text=&width=0%3B800&height=0%3B1280&page=1">Search</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/compare?btnType=Button&color=All&category=All&DeveloperOneName=AI_Factory_Limited&DeveloperTwoName=GIOSIS_PTE._LTD.&sortType=appDownloads&text=&width=0%3B800&height=0%3B1280&page=1">Compare</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/about">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contact">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div> 
+        </nav>
+    </header>
+
+    <!-- Page content -->
+    <main role="main">
+        <div class="jumbotron">
+            <div class="container">
+                <h2 class="display-4 text-center text-lg-left pb-3"><strong>A gallery made for Android developers</strong></h2>
+                <p class="modal-body-home">
+                        A collection of 8279 UI components coming from different applications and screenshots from Google Play Store.
+                        In our repository, we make it simple for developers to use it by providing details of the application screenshot
+                        as
+                        well as a <b>red-box</b> of where the widget is located at. Duplicate or very similar UI components in the
+                        screenshots are excluded for the diversity of design kit. We have several examples of such widgets listed
+                        below.<br><br>
+                        To search for more widgets or particular classes, please click on the search button below:
+                </p>
+                <p>
+                    <a class="btn btn-primary btn-lg" href="/search?btnType=RadioButton&color=All&category=All&sortType=appDownloads&text=&width=0%3B800&height=0%3B1280&page=1" role="button">Search »</a>
+                </p>
+            </div>
+        </div>
+    
+        <div class="container">
+            <!-- PIE -->
+            <div class="d-flex bd-highlight">
+                <div class="p-2 flex-fill bd-highlight">
+                    <img src="https://storage.googleapis.com/ui-collection/Myoverview/class.png" class="img-responsive"/>
+                </div>
+                <div class="p-2 flex-fill bd-highlight">
+                    <img src="https://storage.googleapis.com/ui-collection/Myoverview/color.png" class="img-responsive"/>
+                </div>
+            </div>
+
+            <!-- TABLE -->
+            <div class="d-flex bd-highlight">
+                <div class="p-2 flex-fill bd-highlight">
+                    <img src="https://storage.googleapis.com/ui-collection/Myoverview/developer.png" class="img-responsive"/>
+                </div>
+                <div class="p-2 flex-fill bd-highlight">
+                    <img src="https://storage.googleapis.com/ui-collection/Myoverview/dim.png" class="img-responsive"/>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-3 bg-dark footer">
+        <div class="container">
+            <div class="text-center text-white">Copyright &copy; Mobile UI Gallery 2018</div>
+        </div>
+    </footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+</html>
