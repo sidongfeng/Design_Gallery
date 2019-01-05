@@ -54,7 +54,7 @@ function _initSetColor(){
 
 function _setColor(color){
 	$('.palette_color__main').css('background', color);
-	$('.wrapper').css('background', color);
+	//$('.wrapper').css('background', color);
 }
 
 _colorizePaletteItems();
