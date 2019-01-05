@@ -16,6 +16,7 @@
 
     <!-- Custom styles for this template -->
     <link href="stylesheets/style.css" rel="stylesheet">
+    <link href="stylesheets/palette.css" rel="stylesheet">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117332758-2"></script>
@@ -30,6 +31,9 @@
 
         gtag('config', 'UA-117332758-2');
     </script>
+    <!-- Custom js -->
+    <script src="/javascripts/home.js"></script>
+    
 </head>
 
 <body>
@@ -68,45 +72,39 @@
 
     <!-- Page content -->
     <main role="main">
-        <div class="jumbotron">
-            <div class="container">
-                <h2 class="display-4 text-center text-lg-left pb-3"><strong>A gallery made for Android developers</strong></h2>
-                <p class="modal-body-home">
-                        A collection of 8279 UI components coming from different applications and screenshots from Google Play Store.
-                        In our repository, we make it simple for developers to use it by providing details of the application screenshot
-                        as
-                        well as a <b>red-box</b> of where the widget is located at. Duplicate or very similar UI components in the
-                        screenshots are excluded for the diversity of design kit. We have several examples of such widgets listed
-                        below.<br><br>
-                        To search for more widgets or particular classes, please click on the search button below:
-                </p>
-                <p>
-                    <a class="btn btn-primary btn-lg" href="/search?btnType=RadioButton&color=All&category=All&sortType=appDownloads&text=&width=0%3B800&height=0%3B1280&page=1" role="button">Search »</a>
-                </p>
-            </div>
-        </div>
-    
-        <div class="container">
-            <!-- PIE -->
-            <div class="d-flex bd-highlight">
-                <div class="p-2 flex-fill bd-highlight">
-                    <img src="https://storage.googleapis.com/ui-collection/Myoverview/class.png" class="img-responsive"/>
-                </div>
-                <div class="p-2 flex-fill bd-highlight">
-                    <img src="https://storage.googleapis.com/ui-collection/Myoverview/color.png" class="img-responsive"/>
-                </div>
-            </div>
+        <!-- Search Engine -->
+        <center>
+            <h1>Search</h1>
+        </center>
+        <table align="center" cellspacing="0" cellpadding="10" border="0" >
+            <tr>
+                <td style="position: relative;">
+                    <input id="search" type="text" placeholder="Search for widgets">
+                    <button class="btn btn-primary" onclick="GoSearch()">Submit</button>
+                    <div id="search_list"></div>
+                </td>
+            </tr>
+        </table>
 
-            <!-- TABLE -->
-            <div class="d-flex bd-highlight">
-                <div class="p-2 flex-fill bd-highlight">
-                    <img src="https://storage.googleapis.com/ui-collection/Myoverview/developer.png" class="img-responsive"/>
+        <!-- Color Palette -->
+        <div class="wrapper">
+            <div class="palette">
+                <div class="palette_item_wrapper">
+                    <div data-color="#All" class="palette_color"></div>
+                    <div data-color="#FF3030" class="palette_color"></div>
+                    <div data-color="#FF9224" class="palette_color"></div>
+                    <div data-color="#FFFF6F" class="palette_color"></div>
+                    <div data-color="#53FF53" class="palette_color"></div>
+                    <div data-color="#0080FF" class="palette_color"></div>
+                    <div data-color="#BE77FF" class="palette_color"></div>
+                    <div data-color="#FFFFFF" class="palette_color"></div>
+                    <div data-color="#000000" class="palette_color"></div>
+                    <!--
+                    <div data-color="#83091d" class="palette_color"></div>
+                    -->
                 </div>
-                <div class="p-2 flex-fill bd-highlight">
-                    <img src="https://storage.googleapis.com/ui-collection/Myoverview/dim.png" class="img-responsive"/>
-                </div>
+                <div class="palette_color__main"></div>  
             </div>
-
         </div>
     </main>
 
@@ -122,5 +120,104 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+
+<!-- Color Palette JS !!!!!!!-->
+<script type="text/javascript" src="/javascripts/palette.js"></script>
+
+<!-- Search Engine JS !!!!!!!-->
+<script type="text/javascript">	
+    $(function() {
+        $('#search').keyup(function() {
+            var n=$(this).val();
+            if (n=='') { $('#search_list').hide(); return };
+            var input_list = n.split(" ");
+
+            const classnames = new Array("chronometer", "compoundbutton","progressbar", "checkbox", "button",
+                                  "radiobutton",  "ratingbar", "seekbar", "spinner", "switch", "togglebutton","imagebutton");
+            const colors = new Array("black","white","red","lime","yellow","green","cyan","blue","magenta");
+            
+            var classdic =  {},
+                colordic = {};
+            // initialize
+            for (var i=0;i<classnames.length;i++){
+                classname = classnames[i];
+                classdic[classname] = 0;
+            }
+            for (var i=0;i<colors.length;i++){
+                color = colors[i];
+                colordic[color] = 0;
+            }
+
+            var val;
+            for (var i=0;i<input_list.length;i++){
+                input = input_list[i].toLowerCase();
+                for (var j=0;j<classnames.length;j++){
+                    classname = classnames[j];
+                    val = 0;
+                    if (classname.indexOf(input)>=0){
+                        val = 0.45;
+                    }
+                    val += strSimilarity2Percent(input,classname)*0.55;
+                    if (classdic[classname] < val){
+                        classdic[classname] = val
+                    }
+                }
+                for (var j=0;j<colors.length;j++){
+                    color = colors[j];
+                    val = 0;
+                    if (color.indexOf(input)>=0){
+                        val = 0.45;
+                    }
+                    val += strSimilarity2Percent(input,color)*0.55;
+                    if (colordic[color] < val){
+                        colordic[color] = val
+                    }
+                }
+            }
+            var sorted_class = Object.keys(classdic).sort(function(a,b){ return classdic[a]-classdic[b]; }),
+                sorted_color = Object.keys(colordic).sort(function(a,b){ return colordic[a]-colordic[b]; });
+
+            let search_color = new Set();
+            let search_class = new Set();
+            for(var key in sorted_class){
+                if (classdic[sorted_class[key]]>0.6){
+                    search_class.add(sorted_class[key]);
+                }
+            }
+            for(var key in sorted_class){
+                if (colordic[sorted_color[key]]>0.6){
+                    search_color.add(sorted_color[key]);
+                }
+            }
+
+            //console.log(search_color);
+            //console.log(search_class);
+            
+            if(search_color.size!=0 || search_class.size!=0){
+                $("#search_list").empty().show();
+                var str = "";
+                var list = Array();
+                var suggest_list = combine(search_color, search_class);
+                //console.log(suggest_list)
+                for (var i=0;i<suggest_list.length;i++){
+                    suggestion = suggest_list[i];
+                    str += '<div class="click_work">'+ suggestion+'</div>'
+                }
+                $("#search_list").append(str);
+            }else{
+                $("#search_list").empty().show();
+            }
+            
+        });
+        //点击搜索数据复制给搜索框
+		$(document).on('click','.click_work',function(){
+            var word = $(this).text();
+			$('#search').val(word);
+			$('#search_list').hide();
+			// $('#texe').trigger('click');触发搜索事件
+		})
+    });
+</script>
+
 </body>
 </html>
