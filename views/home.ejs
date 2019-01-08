@@ -16,7 +16,8 @@
 
     <!-- Custom styles for this template -->
     <link href="stylesheets/style.css" rel="stylesheet">
-    <link href="stylesheets/palette.css" rel="stylesheet">
+    <link href="stylesheets/category_palette.css" rel="stylesheet">
+    <link href="stylesheets/color_palette.css" rel="stylesheet">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117332758-2"></script>
@@ -72,40 +73,31 @@
 
     <!-- Page content -->
     <main role="main">
-        <!-- Search Engine -->
-        <center>
-            <h1>Search</h1>
-        </center>
-        <table align="center" cellspacing="0" cellpadding="10" border="0" >
-            <tr>
-                <td style="position: relative;">
-                    <input id="search" type="text" placeholder="Search for widgets">
-                    <button class="btn btn-primary" onclick="GoSearch()">Submit</button>
-                    <div id="search_list"></div>
-                </td>
-            </tr>
-        </table>
-
         <!-- Color Palette -->
-        <div class="wrapper">
-            <div class="palette">
-                <div class="palette_item_wrapper">
-                    <div data-color="#All" class="palette_color"></div>
-                    <div data-color="#FF3030" class="palette_color"></div>
-                    <div data-color="#FF9224" class="palette_color"></div>
-                    <div data-color="#FFFF6F" class="palette_color"></div>
-                    <div data-color="#53FF53" class="palette_color"></div>
-                    <div data-color="#0080FF" class="palette_color"></div>
-                    <div data-color="#BE77FF" class="palette_color"></div>
-                    <div data-color="#FFFFFF" class="palette_color"></div>
-                    <div data-color="#000000" class="palette_color"></div>
-                    <!--
-                    <div data-color="#83091d" class="palette_color"></div>
-                    -->
-                </div>
-                <div class="palette_color__main"></div>  
+
+
+        <!-- Category Palette -->
+        <div class="category_palette">
+            <div class="category_palette_item_wrapper">
+                <div data-category="ALL" class="palette_category"></div>
+                <div data-category="EDUCATION" class="palette_category"></div>
+                <div data-category="LIFESTYLE" class="palette_category"></div>
+                <div data-category="ENTERTAINMENT" class="palette_category"></div>
+                <div data-category="MUSIC_AND_AUDIO" class="palette_category"></div>
+                <div data-category="TOOLS" class="palette_category"></div>
+                <div data-category="PERSONALIZATION" class="palette_category"></div>
+                <div data-category="FINANCE" class="palette_category"></div>
+                <div data-category="FOOD_AND_DRINK" class="palette_category"></div>
+                <div data-category="MORE" class="palette_category"></div>
             </div>
+            <div class="palette_category__main"></div> 
         </div>
+        <button class="btn btn-primary" onclick="GoSearch()">Submit</button>
+
+
+        <a href="/detail">
+            <button class="btn btn-primary">To Test</button>
+        </a>
     </main>
 
     <!-- Footer -->
@@ -121,103 +113,9 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 
-<!-- Color Palette JS !!!!!!!-->
-<script type="text/javascript" src="/javascripts/palette.js"></script>
-
-<!-- Search Engine JS !!!!!!!-->
-<script type="text/javascript">	
-    $(function() {
-        $('#search').keyup(function() {
-            var n=$(this).val();
-            if (n=='') { $('#search_list').hide(); return };
-            var input_list = n.split(" ");
-
-            const classnames = new Array("chronometer", "compoundbutton","progressbar", "checkbox", "button",
-                                  "radiobutton",  "ratingbar", "seekbar", "spinner", "switch", "togglebutton","imagebutton");
-            const colors = new Array("black","white","red","lime","yellow","green","cyan","blue","magenta");
-            
-            var classdic =  {},
-                colordic = {};
-            // initialize
-            for (var i=0;i<classnames.length;i++){
-                classname = classnames[i];
-                classdic[classname] = 0;
-            }
-            for (var i=0;i<colors.length;i++){
-                color = colors[i];
-                colordic[color] = 0;
-            }
-
-            var val;
-            for (var i=0;i<input_list.length;i++){
-                input = input_list[i].toLowerCase();
-                for (var j=0;j<classnames.length;j++){
-                    classname = classnames[j];
-                    val = 0;
-                    if (classname.indexOf(input)>=0){
-                        val = 0.45;
-                    }
-                    val += strSimilarity2Percent(input,classname)*0.55;
-                    if (classdic[classname] < val){
-                        classdic[classname] = val
-                    }
-                }
-                for (var j=0;j<colors.length;j++){
-                    color = colors[j];
-                    val = 0;
-                    if (color.indexOf(input)>=0){
-                        val = 0.45;
-                    }
-                    val += strSimilarity2Percent(input,color)*0.55;
-                    if (colordic[color] < val){
-                        colordic[color] = val
-                    }
-                }
-            }
-            var sorted_class = Object.keys(classdic).sort(function(a,b){ return classdic[a]-classdic[b]; }),
-                sorted_color = Object.keys(colordic).sort(function(a,b){ return colordic[a]-colordic[b]; });
-
-            let search_color = new Set();
-            let search_class = new Set();
-            for(var key in sorted_class){
-                if (classdic[sorted_class[key]]>0.6){
-                    search_class.add(sorted_class[key]);
-                }
-            }
-            for(var key in sorted_class){
-                if (colordic[sorted_color[key]]>0.6){
-                    search_color.add(sorted_color[key]);
-                }
-            }
-
-            //console.log(search_color);
-            //console.log(search_class);
-            
-            if(search_color.size!=0 || search_class.size!=0){
-                $("#search_list").empty().show();
-                var str = "";
-                var list = Array();
-                var suggest_list = combine(search_color, search_class);
-                //console.log(suggest_list)
-                for (var i=0;i<suggest_list.length;i++){
-                    suggestion = suggest_list[i];
-                    str += '<div class="click_work">'+ suggestion+'</div>'
-                }
-                $("#search_list").append(str);
-            }else{
-                $("#search_list").empty().show();
-            }
-            
-        });
-        //点击搜索数据复制给搜索框
-		$(document).on('click','.click_work',function(){
-            var word = $(this).text();
-			$('#search').val(word);
-			$('#search_list').hide();
-			// $('#texe').trigger('click');触发搜索事件
-		})
-    });
-</script>
+<!-- Palette JS !!!!!!!-->
+<script type="text/javascript" src="/javascripts/color_palette.js"></script>
+<script type="text/javascript" src="/javascripts/category_palette.js"></script>
 
 </body>
 </html>
