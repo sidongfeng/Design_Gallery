@@ -18,6 +18,7 @@
     <link href="stylesheets/style.css" rel="stylesheet">
     <link href="stylesheets/category_palette.css" rel="stylesheet">
     <link href="stylesheets/color_palette.css" rel="stylesheet">
+    <link href="stylesheets/widget_palette.css" rel="stylesheet">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117332758-2"></script>
@@ -74,10 +75,43 @@
     <!-- Page content -->
     <main role="main">
         <!-- Color Palette -->
+        <div class="color">
+            <div class="color_palette_item_wrapper">
+                <div data-color="#All" class="palette_color"></div>
+                <div data-color="#FF3030" class="palette_color"></div>
+                <div data-color="#FF9224" class="palette_color"></div>
+                <div data-color="#FFFF6F" class="palette_color"></div>
+                <div data-color="#53FF53" class="palette_color"></div>
+                <div data-color="#0080FF" class="palette_color"></div>
+                <div data-color="#BE77FF" class="palette_color"></div>
+                <div data-color="#FFFFFF" class="palette_color"></div>
+                <div data-color="#00000F" class="palette_color"></div>
+            </div>
+            <div class="palette_color__main"></div> 
+        </div>
 
+        <!-- Widgets Palette -->
+        <div class="widget">
+            <div class="widget_palette_item_wrapper">
+                <div data-widget="All" class="palette_widget"></div>
+                <div data-widget="CompoundButton" class="palette_widget"></div>
+                <div data-widget="Chronometer" class="palette_widget"></div>
+                <div data-widget="ProgressBar" class="palette_widget"></div>
+                <div data-widget="CheckBox" class="palette_widget"></div>
+                <div data-widget="Button" class="palette_widget"></div>
+                <div data-widget="RadioButton" class="palette_widget"></div>
+                <div data-widget="RatingBar" class="palette_widget"></div>
+                <div data-widget="SeekBar" class="palette_widget"></div>
+                <div data-widget="Spinner" class="palette_widget"></div>
+                <div data-widget="Switch" class="palette_widget"></div>
+                <div data-widget="ToggleButton" class="palette_widget"></div>
+                <div data-widget="ImageButton" class="palette_widget"></div>
+            </div>
+            <div class="palette_widget__main"></div> 
+        </div>
 
         <!-- Category Palette -->
-        <div class="category_palette">
+        <div class="category">
             <div class="category_palette_item_wrapper">
                 <div data-category="ALL" class="palette_category"></div>
                 <div data-category="EDUCATION" class="palette_category"></div>
@@ -92,6 +126,7 @@
             </div>
             <div class="palette_category__main"></div> 
         </div>
+        
         <button class="btn btn-primary" onclick="GoSearch()">Submit</button>
 
 
@@ -116,6 +151,7 @@
 <!-- Palette JS !!!!!!!-->
 <script type="text/javascript" src="/javascripts/color_palette.js"></script>
 <script type="text/javascript" src="/javascripts/category_palette.js"></script>
+<script type="text/javascript" src="/javascripts/widget_palette.js"></script>
 
 </body>
 </html>

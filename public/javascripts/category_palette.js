@@ -1,10 +1,10 @@
-var _$paletteElement = $('.palette_category');
+var _$category_paletteElement = $('.palette_category');
 const categorylist = {"ALL": "ALL.png", "EDUCATION":"EDUCATION.png", "LIFESTYLE": "LIFESTYLE.png","ENTERTAINMENT":"ENTERTAINMENT.png", "MUSIC_AND_AUDIO":"MUSIC_AND_AUDIO.png", "BACK":"BACK.png",
 				"TOOLS": "TOOLS.png", "PERSONALIZATION":"PERSONALIZATION.png",  "FINANCE":"FINANCE.png", "SPORTS":"SPORTS.png", "PHOTOGRAPHY":"PHOTOGRAPHY.png","BEAUTY":"BEAUTY.png",
 				"NEWS_AND_MAGAZINES": "NEWS_AND_MAGAZINES.png", "BOOKS_AND_REFERENCE":"BOOKS_AND_REFERENCE.png",  "BUSINESS":"BUSINESS.png", "PRODUCTIVITY":"PRODUCTIVITY.png", "HEALTH_AND_FITNESS":"HEALTH_AND_FITNESS.png", 
 				"TRANSPORTATION": "TRANSPORTATION.png", "COMMUNICATION":"COMMUNICATION.png",  "SOCIAL":"SOCIAL.png", "MEDIA_AND_VIDEO":"MEDIA_AND_VIDEO.png", "SHOPPING":"SHOPPING.png", 
 				"MEDICAL": "MEDICAL.png", "WEATHER":"WEATHER.png",  "LIBRARIES_AND_DEMO":"LIBRARIES_AND_DEMO.png", "COMICS":"COMICS.png", "MAPS_AND_NAVIGATION":"MAPS_AND_NAVIGATION.png", 
-				"VIDEO PLAYERS_AND_EDITORS": "VIDEO PLAYERS_AND_EDITORS.png", "FOOD_AND_DRINK":"FOOD_AND_DRINK.png",  "DATING":"DATING.png", "EVENTS":"EVENTS.png", "AUTO_AND_VEHICLES":"AUTO_AND_VEHICLES.png", 
+				"VIDEO_PLAYERS_AND_EDITORS": "VIDEO_PLAYERS_AND_EDITORS.png", "FOOD_AND_DRINK":"FOOD_AND_DRINK.png",  "DATING":"DATING.png", "EVENTS":"EVENTS.png", "AUTO_AND_VEHICLES":"AUTO_AND_VEHICLES.png", 
 				"GAME":"GAME.png", "MORE":"MORE.png","TRAVEL_AND_LOCAL":"TRAVEL_AND_LOCAL.png","ART_AND_DESIGN":"ART_AND_DESIGN.png", "PARENTING":"PARENTING.png","HOUSE_AND_HOME":"HOUSE_AND_HOME.png"}
 
 function hide_category_palette(){
@@ -15,7 +15,7 @@ function show_category_palette(){
 }
 
 function _categoryizePaletteItems(){
-	$.each(_$paletteElement, function(i){ 
+	$.each(_$category_paletteElement, function(i){ 
 		$(this).css('background-image', "url(../images/category/"+categorylist[$(this).data('category')] );
 	})
 }
@@ -29,7 +29,7 @@ function _toggleCategoryPalette(){
 			setTimeout(hide_category_palette,515);
 		}
 		click_time += 1;
-		$('.category_palette').toggleClass('palette__opened');	
+		$('.category').toggleClass('category_palette__opened');	
 	})
 }
 
@@ -51,7 +51,7 @@ function _initSetCategory(){
 				$('.palette_category:nth-child(1)').data('category',"LIBRARIES_AND_DEMO");
 				$('.palette_category:nth-child(2)').data('category',"COMICS");
 				$('.palette_category:nth-child(3)').data('category',"MAPS_AND_NAVIGATION");
-				$('.palette_category:nth-child(4)').data('category',"VIDEO PLAYERS_AND_EDITORS");
+				$('.palette_category:nth-child(4)').data('category',"VIDEO_PLAYERS_AND_EDITORS");
 				$('.palette_category:nth-child(5)').data('category',"BEAUTY");
 				$('.palette_category:nth-child(6)').data('category',"DATING");
 				$('.palette_category:nth-child(7)').data('category',"EVENTS");
