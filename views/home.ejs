@@ -19,6 +19,7 @@
     <link href="stylesheets/category_palette.css" rel="stylesheet">
     <link href="stylesheets/color_palette.css" rel="stylesheet">
     <link href="stylesheets/widget_palette.css" rel="stylesheet">
+    <link href="stylesheets/search_palette.css" rel="stylesheet">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117332758-2"></script>
@@ -34,8 +35,7 @@
         gtag('config', 'UA-117332758-2');
     </script>
     <!-- Custom js -->
-    <script src="/javascripts/home.js"></script>
-    
+    <!-- <script src="/javascripts/home.js"></script> -->
 </head>
 
 <body>
@@ -78,14 +78,14 @@
         <div class="color">
             <div class="color_palette_item_wrapper">
                 <div data-color="#All" class="palette_color"></div>
-                <div data-color="#FF3030" class="palette_color"></div>
-                <div data-color="#FF9224" class="palette_color"></div>
-                <div data-color="#FFFF6F" class="palette_color"></div>
-                <div data-color="#53FF53" class="palette_color"></div>
-                <div data-color="#0080FF" class="palette_color"></div>
-                <div data-color="#BE77FF" class="palette_color"></div>
-                <div data-color="#FFFFFF" class="palette_color"></div>
-                <div data-color="#00000F" class="palette_color"></div>
+                <div data-color="#ff3030" class="palette_color"></div>
+                <div data-color="#ff9224" class="palette_color"></div>
+                <div data-color="#ffff6f" class="palette_color"></div>
+                <div data-color="#53ff53" class="palette_color"></div>
+                <div data-color="#0080ff" class="palette_color"></div>
+                <div data-color="#be77ff" class="palette_color"></div>
+                <div data-color="#ffffff" class="palette_color"></div>
+                <div data-color="#00000f" class="palette_color"></div>
             </div>
             <div class="palette_color__main"></div> 
         </div>
@@ -126,9 +126,19 @@
             </div>
             <div class="palette_category__main"></div> 
         </div>
-        
-        <button class="btn btn-primary" onclick="GoSearch()">Submit</button>
 
+        <!-- Search Palette -->
+        <div class="search">
+            <div class="search_palette_item_wrapper">
+                <div data-search="#All" class="palette_search"></div>
+                <div data-search="All" class="palette_search"></div>
+                <div data-search="All" class="palette_search"></div>
+            </div>
+            <a id="go_search" href="/search?btnType=Spinner&color=Blue&category=All&sortType=appDownloads&width=0%3B800&height=0%3B1280&page=1">
+                <div class="palette_search__main"></div> 
+            </a>
+        </div>
+        
 
         <a href="/detail">
             <button class="btn btn-primary">To Test</button>
@@ -152,6 +162,7 @@
 <script type="text/javascript" src="/javascripts/color_palette.js"></script>
 <script type="text/javascript" src="/javascripts/category_palette.js"></script>
 <script type="text/javascript" src="/javascripts/widget_palette.js"></script>
+<script type="text/javascript" src="/javascripts/search_palette.js"></script>
 
 </body>
 </html>

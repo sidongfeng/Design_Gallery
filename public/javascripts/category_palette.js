@@ -18,6 +18,7 @@ function _categoryizePaletteItems(){
 	$.each(_$category_paletteElement, function(i){ 
 		$(this).css('background-image', "url(../images/category/"+categorylist[$(this).data('category')] );
 	})
+	$('.palette_search:nth-child(3)').css('background-image', "url(../images/category/"+categorylist["ALL"] );
 }
 
 function _toggleCategoryPalette(){
@@ -86,6 +87,7 @@ function _initSetCategory(){
 			page = 0;
 		}else{
 			_setCategory($(this).data('category'));
+			_setCategorySearch($(this).data('category'));
 		}
 	})
 }
@@ -100,6 +102,14 @@ function _findCategory(){
 	str = str.split('/')[5];
 	str = str.split('.')[0];
 	return str
+}
+
+function _setCategorySearch(category){
+	$('.palette_search:nth-child(3)').data('search',category);
+	$('.palette_search:nth-child(3)').css('background-image', "url(../images/category/"+categorylist[category] );
+	var str = $('#go_search').attr('href').split('&');
+	var location = str[0]+"&"+str[1]+"&category="+category+"&"+str[3]+"&"+str[4]+"&"+str[5]+"&"+str[6];
+	$('#go_search').attr('href',location); 
 }
 
 _categoryizePaletteItems();

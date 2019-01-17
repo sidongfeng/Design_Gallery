@@ -1,13 +1,5 @@
-var arr = {
-    arrHeight:Array(),
-    arrWidth:Array(),
-    arrCheck:Array(),
-    arrClassWithName:Array()
- };
-
-var heightWithName = []; //关联Height和Name; 只需要能按 key 得到 value 即可
-var btnDetail = []; // 存储要传给子窗体的信息
-var devOption = []; //存储所选择的Develper的信息
+var out_widgets = Array(); // filtered widgets
+const colors = {"Red":"#ff3030","Lime":"#ff9224", "Yellow":"#ffff6f","Green":"#53ff53","Blue":"#0080ff","Purple":"#be77ff","Black":"#00000f","White":"#ffffff"};
 
 function getUrlParameter(sParam) {
     let sPageURL = decodeURIComponent(window.location.search.substring(1)),
@@ -22,8 +14,22 @@ function getUrlParameter(sParam) {
     }
 }
 
-function loadImages(_page) { //loadSearchPage
-    //document.getElementsByClassName("loader")[0].style.display = "block";
+function compare(property1,p2){
+    return function(a,b){
+        var value1 = a[property1][p2];
+        var value2 = b[property1][p2];
+        return value1 - value2;
+    }
+}
+function compare2(property){
+    return function(a,b){
+        var value1 = a[property];
+        var value2 = b[property];
+        return value2 - value1;
+    }
+}
+
+function loadImages() { //loadSearchPage
     let ajaxData = {
         btnType: getUrlParameter('btnType'),
         color: getUrlParameter('color'),
@@ -31,136 +37,144 @@ function loadImages(_page) { //loadSearchPage
         category: getUrlParameter('category'),
         sortType: getUrlParameter('sortType'),
         width: getUrlParameter('width'),
-        height: getUrlParameter('height'),
-        page: _page
+        height: getUrlParameter('height')
     };
-    console.log(ajaxData.width)
-    let html = "";
-    $.ajax({
-        url: "./search",
-        type: 'POST',
-        data: ajaxData,
-        async: false,
-        success: function (widgets) {   
-            
-            if (widgets.length === 0) {
-                $("#endPage").removeClass("loader").append("End of Page.");
-                $(window).unbind('scroll');
-            } else {
-                //document.getElementsByClassName("loader")[0].style.display = "none";
-                for (let i = 0; i < widgets.length; i++) {
-                    arr.arrHeight.push(widgets[i].dimensions['height']); 
-                    heightWithName.push([widgets[i].dimensions['height'], widgets[i].name, i]); 
-                }
-                heightWithName.sort(function(x, y){
-                    return(x[0]-y[0])
-                });
+    $.ajaxSettings.async = false;
+    $.getJSON('./data/fake.json',function(result){
+        for (let i = 0; i < result.length; i++) {
+            let widget = result[i];
+            if ((ajaxData.btnType=='All' || ajaxData.btnType==widget['widget_class']) &&
+                (ajaxData.category=='All' || ajaxData.category==widget['category']) &&
+                (ajaxData.color=='All' || widget['color'][ajaxData.color] > 0.5) &&
+                (parseInt(ajaxData.width.split(';')[0]) <= widget['dimensions']['width'] && parseInt(ajaxData.width.split(';')[1]) >= widget['dimensions']['width']) &&
+                (parseInt(ajaxData.height.split(';')[0]) <= widget['dimensions']['height'] && parseInt(ajaxData.height.split(';')[1]) >= widget['dimensions']['height'])
+            ){
+                out_widgets.push(widget);
             }
-
-            
-            html += '<div class="row">'
-            /* heightWithName.length */
-            for(let j = 1; j < heightWithName.length; j++){
-                var i = heightWithName[j][2];
-                let btnSize = widgets[i].dimensions["width"] + 'x' + widgets[i].dimensions["height"];
-
-                var i = heightWithName[j][2];
-                let screenSrc = widgets[i].src.split('/'); //获取urlAdd & similarAdd
-                var urlAdd = '', similarAdd = '';
-                urlAdd = screenSrc[3] + '/' + screenSrc[4];
-                similarAdd = screenSrc[4];
-                btnDetail.push([heightWithName[j][1], urlAdd, similarAdd, widgets[i].url, widgets[i].application_name, widgets[i].package_name, widgets[i].category, 
-                    + widgets[i].text, widgets[i].widget_class, widgets[i].coordinates['from'], widgets[i].coordinates['to'], btnSize, widgets[i].color, widgets[i].downloads]);  
-
-                
-                let _left = parseInt(widgets[i].coordinates['from'][0])+10;
-                let _top = parseInt(widgets[i].coordinates['from'][1])-5;
-                let _width = parseInt(widgets[i].dimensions["width"])+10;
-                let _height = parseInt(widgets[i].dimensions["height"])+10;
-                
-                html += '<div id="widget' + j + '" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridModalLabel" style="display: none;" aria-hidden="true">'
-                html += '   <div class="modal-dialog modal-lg" role="document">'
-                html += '       <div class="modal-content">'
-                
-                html += '           <div class="modal-header">'
-                html += '               <h5 class="modal-title"><a href="' + widgets[i].url + '">' + widgets[i].application_name + '</a></h5>'
-                html += '               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>'
-                html += '           </div>'
-    
-                html += '           <div class="modal-body">'
-                html += '               <div class="container-fluid">'
-                html += '                   <div class="row">'
-                html += '                       <div class="col-md-7" style="position:relative; zoom:0.5">'
-                html += '                           <img src="https://storage.googleapis.com/ui-collection/' + urlAdd + '" style=" cursor: hand;"/>'
-                html += '                           <div style="position:absolute; border: 5px solid red; z-indent:2; left:' + _left + 'px;top: ' + _top +'px;width:'+_width+'px;height:'+_height+'px;"></div>'
-                html += '                       </div>'
-                html += '                       <div class="col-md-5">'
-                html += '                           <table class="table table-borderless">'
-                html += '                               <tbody>'
-                html += '                                   <tr>'
-                html += '                                       <th scope="row">Package:</th>'
-                html += '                                       <td style="word-break:break-all">' + widgets[i].package_name + '</td>'
-                html += '                                   </tr>'
-                html += '                                   <tr>'
-                html += '                                       <th scope="row">Category:</th>'
-                html += '                                       <td>' + widgets[i].category + '</td>'
-                html += '                                   </tr>'
-                html += '                                   <tr>'
-                html += '                                       <th scope="row">Text:</th>'
-                if(widgets[i].text == 0){
-                    html +=	'	    	<td>' + " " + '</td>';
-                }else{
-                    html +=	'	    	<td>' + widgets[i].text + '</td>';
-                }
-                html += '                                   </tr>'
-                html += '                                   <tr>'
-                html += '                                       <th scope="row">Class:</th>'
-                html += '                                       <td>' + widgets[i].widget_class + '</td>'
-                html += '                                   </tr>'
-                html += '                                   <tr>'
-                html += '                                       <th scope="row">Coordinates:</th>'
-                html += '                                       <td class="coords">[' + widgets[i].coordinates['from'] + '][' + widgets[i].coordinates['to'] + ']</td>'
-                html += '                                   </tr>'
-                html += '                                   <tr>'
-                html += '                                       <th scope="row">Size:</th>'
-                html += '                                       <td class="widSize">' + btnSize + '</td>'
-                html += '                                   </tr>'
-                html += '                                   <tr>'
-                html += '                                       <th scope="row">Color:</th>'
-                html += '                                       <td>' + widgets[i].color + '</td>'
-                html += '                                   </tr>'
-                html += '                                   <tr>'
-                html += '                                       <th scope="row">Downloads:</th>'
-                html += '                                       <td>' + widgets[i].downloads + '</td>'
-                html += '                                   </tr>'
-                html += '                                   <tr>'
-                html += '                                       <td align="center" colspan="2"><i>We only annotate the selected UI elements in theimage.</i></td>'
-                html += '                                   </tr>'
-                html += '                               </tbody>'
-                html += '                           </table>'
-                html += '                       </div>'
-                html += '                   </div>'
-                html += '               </div>'
-                html += '           </div>'
-
-                html += '           <div class="modal-footer">'
-                html += '               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>'
-                /* html += '               <button type="button" class="btn btn-primary">Detail</button>' */
-                html += '           </div>'
-                
-                html += '       </div>'
-                html += '   </div>'
-                html += '</div>'
-                html += '<div class="col-md-auto">'
-                html += '   <img data-toggle="modal" data-target="#widget' + j + '" class="img-fluid" src="https://storage.googleapis.com/ui-collection/Mywidgets/' + heightWithName[j][1] + '.png" style="max-height:100px" />'
-                html += '</div>'
-            }
-            html += '</div>'
+        }
+        out_widgets.sort(compare('color',ajaxData.color));
+    })
+    return out_widgets
+}
+function showImages(widgets, no){
+    if (widgets.length != 0){
+        
+        let output;
+        if (widgets.length>no){
+            output = no;
+        }else{
+            output = widgets.length;
         }
 
-    })
-        
-        
-        $(".demo").append(html);    // This will be the div where our content will be loaded
-}
+        let = html = '';
+        html += '<div class="row">'
+        for(let j = 0; j < output; j++){
+            let widget = widgets.pop();
 
+            let screenSrc = widget['src'].split('/'); //获取urlAdd & similarAdd
+            var urlAdd = '', similarAdd = '';
+            urlAdd = screenSrc[3] + '/' + screenSrc[4];
+            similarAdd = screenSrc[4];
+
+            let _left = parseInt(widget['coordinates']['from'][0])+10;
+            let _top = parseInt(widget['coordinates']['from'][1])-5;
+            let _width = parseInt(widget['dimensions']['width'])+10;
+            let _height = parseInt(widget['dimensions']["height"])+10;
+
+            let btnSize = widget['dimensions']['width'] + 'x' + widget['dimensions']["height"];
+
+            var colors_Array = [];
+            for (let i = 0; i < Object.keys(colors).length; i++){
+                if (widget['color'][Object.keys(colors)[i]]>0.3){
+                    colors_Array.push({"c":Object.keys(colors)[i],"no":widget['color'][Object.keys(colors)[i]]});
+                }
+            }
+            colors_Array.sort(compare2('no'))
+
+            html += '<div id="'+ widget['name'] + '" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridModalLabel" style="display: none;" aria-hidden="true">'
+            html += '   <div class="modal-dialog modal-lg" role="document">'
+            html += '       <div class="modal-content">'
+            
+            html += '           <div class="modal-header">'
+            html += '               <h5 class="modal-title"><a href="' + widget['url'] + '">' + widget['application_name'] + '</a></h5>'
+            html += '               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>'
+            html += '           </div>'
+
+            html += '           <div class="modal-body">'
+            html += '               <div class="container-fluid">'
+            html += '                   <div class="row">'
+            html += '                       <div class="col-md-7" style="position:relative; zoom:0.5">'
+            html += '                           <img  src="https://storage.googleapis.com/ui-collection/' + urlAdd + '" style=" cursor: hand;"/>'
+            html += '                           <div style="position:absolute; border: 5px solid red; z-indent:2; left:' + _left + 'px;top: ' + _top +'px;width:'+_width+'px;height:'+_height+'px;"></div>'
+            html += '                       </div>'
+            html += '                       <div class="col-md-5">'
+            html += '                           <table class="table table-borderless">'
+            html += '                               <tbody>'
+            html += '                                   <tr>'
+            html += '                                       <th scope="row">Package:</th>'
+            html += '                                       <td style="word-break:break-all">' + widget['package_name'] + '</td>'
+            html += '                                   </tr>'
+            html += '                                   <tr>'
+            html += '                                       <th scope="row">Category:</th>'
+            html += '                                       <td>' + widget['category'] + '</td>'
+            html += '                                   </tr>'
+            html += '                                   <tr>'
+            html += '                                       <th scope="row">Text:</th>'
+            if(widget['text'] == 0){
+                html +=	'	    	<td>' + " " + '</td>';
+            }else{
+                html +=	'	    	<td>' + widget['text'] + '</td>';
+            }
+            html += '                                   </tr>'
+            html += '                                   <tr>'
+            html += '                                       <th scope="row">Class:</th>'
+            html += '                                       <td>' + widget['widget_class'] + '</td>'
+            html += '                                   </tr>'
+            html += '                                   <tr>'
+            html += '                                       <th scope="row">Coordinates:</th>'
+            html += '                                       <td class="coords">[' + widget['coordinates']['from'] + '][' + widget['coordinates']['to'] + ']</td>'
+            html += '                                   </tr>'
+            html += '                                   <tr>'
+            html += '                                       <th scope="row">Size:</th>'
+            html += '                                       <td class="widSize">' + btnSize + '</td>'
+            html += '                                   </tr>'
+            html += '                                   <tr>'
+            html += '                                       <th scope="row">Color:</th>'
+            html += '                                       <td>'
+            for (let z = 0; z < colors_Array.length; z++){
+                html += '                                       <div class="row">'+'<div class="circle" style="background-color:'+colors[colors_Array[z]['c']]+'"></div>'
+            }
+            html += '                                       </td>'
+            html += '                                   </tr>'
+            html += '                                   <tr>'
+            html += '                                       <th scope="row">Downloads:</th>'
+            html += '                                       <td>' + widget['downloads'] + '</td>'
+            html += '                                   </tr>'
+            html += '                                   <tr>'
+            html += '                                       <td align="center" colspan="2"><i>We only annotate the selected UI elements in theimage.</i></td>'
+            html += '                                   </tr>'
+            html += '                               </tbody>'
+            html += '                           </table>'
+            html += '                       </div>'
+            html += '                   </div>'
+            html += '               </div>'
+            html += '           </div>'
+
+            html += '           <div class="modal-footer">'
+            html += '               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>'
+            html += '           </div>'
+            
+            html += '       </div>'
+            html += '   </div>'
+            html += '</div>'
+            html += '<div class="col-md-auto">'
+            html += '   <img data-toggle="modal" data-target="#'+widget['name'] + '" class="img-fluid" src="https://storage.googleapis.com/ui-collection/Mywidgets/' + widget['name'] + '.png" style="max-height:100px" />'
+            html += '</div>'
+        }
+        html += '</div>'
+        $(".demo").append(html);    // This will be the div where our content will be loaded
+    }else{
+        $("#endPage").removeClass("loader").append("End of Page.");
+        $(window).unbind('scroll');
+    }
+}

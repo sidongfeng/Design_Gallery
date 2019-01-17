@@ -14,6 +14,7 @@ function _widgetizePaletteItems(){
 	$.each(_$widget_paletteElement, function(i){ 
 		$(this).css('background-image', "url(../images/widgets/"+widgetlist[$(this).data('widget')] );
 	})
+	$('.palette_search:nth-child(2)').css('background-image', "url(../images/widgets/"+widgetlist["All"] );
 }
 
 function _toggleWidgetPalette(){
@@ -32,6 +33,7 @@ function _toggleWidgetPalette(){
 function _initSetWidget(){
 	$('.palette_widget').on('click', function(){
 		_setWidget($(this).data('widget'));
+		_setWidgetSearch($(this).data('widget'))
 	})
 }
 
@@ -44,6 +46,14 @@ function _findWidget(){
 	str = str.split('/')[5];
 	str = str.split('.')[0];
 	return str
+}
+
+function _setWidgetSearch(widget){
+	$('.palette_search:nth-child(2)').data('search',widget);
+	$('.palette_search:nth-child(2)').css('background-image', "url(../images/widgets/"+widgetlist[widget] );
+	var str = $('#go_search').attr('href').split('&');
+	var location = "/search?btnType="+widget+"&"+str[1]+"&"+str[2]+"&"+str[3]+"&"+str[4]+"&"+str[5]+"&"+str[6];
+	$('#go_search').attr('href',location); 
 }
 
 _widgetizePaletteItems();

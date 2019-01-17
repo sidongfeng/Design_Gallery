@@ -1,3 +1,27 @@
+function getUrlParameter(sParam) {
+    let sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+}
+
+function GoSearch() {
+	var color = _findColor();
+	var widget = _findWidget();
+	var category = _findCategory();
+	//console.log(color);
+	//console.log(widget);
+	//console.log(category);
+	location.href = "search?btnType="+"Spinner"+"&color="+"Blue"+"&category="+category+"&sortType=appDownloads&width=0%3B800&height=0%3B1280&page=1"; 
+}
+
+/*
 function compareStr(str1,str2){
     if(str1.toLowerCase() == str2.toLowerCase()){
         return true;
@@ -5,35 +29,6 @@ function compareStr(str1,str2){
         return false;
     }
 }
-function GoSearch() {
-	var n=$('#search').val();
-	var input_list = n.split(" ");
-	const classnames = new Array("Chronometer", "CompoundButton","ProgressBar", "CheckBox", "Button",
-							"RadioButton",  "RatingBar", "SeekBar", "Spinner", "Switch", "ToggleButton","ImageButton");
-	const colors = new Array("Black","White","Red","Lime","Yellow","Green","Cyan","Blue","Magenta");
-	
-	var search_class = "RadioButton";
-	var search_color = "Green";
-	for (var i=0;i<input_list.length;i++){
-		input = input_list[i]
-		for (var j=0;j<classnames.length;j++){
-			classname = classnames[j]
-			if (compareStr(input,classname)) {
-				search_class = classname
-			}
-		}
-		for (var j=0;j<colors.length;j++){
-			color = colors[j]
-			if (compareStr(input,color)) {
-				search_color = color
-			}
-		}
-	}
-	//console.log(search_color)
-	//console.log(search_class)
-	window.location = "search?btnType="+search_class+"&color="+search_color+"&category=All&sortType=appDownloads&text=&width=0%3B800&height=0%3B1280&page=1" 
-}
-
 function combine(set1,set2){
 	result = []
 	if (set1.size==0){
@@ -51,7 +46,7 @@ function combine(set1,set2){
 		return result
 	}
 }
-
+*/
 /*
 //将字符串转换成二进制形式，中间用空格隔开
 function strToBinary(str){
@@ -101,6 +96,7 @@ function simHash(x,y){
 }
 */
 
+/*
 
 //两个字符串的相似程度，并返回相差字符个数
 function strSimilarity2Number(s, t){
@@ -138,3 +134,4 @@ function strSimilarity2Percent(s, t){
 function Minimum(a,b,c){
 	return a<b?(a<c?a:c):(b<c?b:c);
 }
+*/

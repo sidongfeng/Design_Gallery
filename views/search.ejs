@@ -37,8 +37,9 @@
 
         gtag('config', 'UA-117332758-2');
     </script>
-
+    
     <!-- Custom js -->
+    <script src="/javascripts/home.js"></script>
     <script src="/javascripts/search.js"></script>
 </head>
 
@@ -182,9 +183,9 @@
             <div class="row">
                 <button type="submit" class="btn btn-primary" onclick="getWidthWithHeight()">Submit</button>
             </div>
+            
         </form>
-        <hr/>
-        
+        <hr>
 
         <div class="demo container">
         </div>
@@ -207,7 +208,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-    
 
 <script>
     function getWidthWithHeight(){
@@ -240,16 +240,33 @@
         /*checkbox, ProgressBar, ToggleButton, Spinner*/
     }
 </script>
+
 <script>
     $(window).onload = getWidthWithHeight();
 </script>
 <script>
+    
+$(function(){
+    let widgets = loadImages();
+    showImages(widgets,50);
+    console.log('loading images...');
+    $(window).on("scroll",function(){
+		if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.1){
+		//当最短的ul的高度比窗口滚出去的高度+浏览器高度大时加载新图片
+            showImages(widgets,20);
+		}
+    })
+});
+
+
+/*
     $(document).ready(function () {
         let _mainPage;
         
         if (getUrlParameter('page')) {
             _mainPage = parseInt(getUrlParameter('page'));
-            loadImages(_mainPage);
+            let widgets = loadImages(_mainPage);
+            showImages(widgets);
             console.log('loading images...');
             let timer;
             
@@ -262,16 +279,17 @@
                         document.body.scrollTop = document.body.scrollHeight;
                         timer = window.setTimeout(function () {
                             _mainPage += 1;
-                            loadImages(_mainPage);
+                            showImages(widgets);
                         }, 500); //500
                     }
                 }
             });
-            
+            console.log('ending loading images...');
         } else {
             _mainPage = 1;
         }
     });
+*/
 </script>
 
 </body>
