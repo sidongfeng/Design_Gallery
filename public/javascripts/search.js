@@ -1,4 +1,9 @@
 var out_widgets = Array(); // filtered widgets
+var out_widgets_1 = Array(); // filtered widgets
+var out_widgets_2 = Array(); // filtered widgets
+var out_widgets_3 = Array(); // filtered widgets
+var out_widgets_4 = Array(); // filtered widgets
+var out_widgets_5 = Array(); // filtered widgets
 const colors = {"Red":"#ff3030","Lime":"#ff9224", "Yellow":"#ffff6f","Green":"#53ff53","Blue":"#0080ff","Purple":"#be77ff","Black":"#00000f","White":"#ffffff"};
 
 function getUrlParameter(sParam) {
@@ -18,7 +23,7 @@ function compare(property1,p2){
     return function(a,b){
         var value1 = a[property1][p2];
         var value2 = b[property1][p2];
-        return value1 - value2;
+        return value2 - value1;
     }
 }
 function compare2(property){
@@ -45,14 +50,38 @@ function loadImages() { //loadSearchPage
             let widget = result[i];
             if ((ajaxData.btnType=='All' || ajaxData.btnType==widget['widget_class']) &&
                 (ajaxData.category=='All' || ajaxData.category==widget['category']) &&
-                (ajaxData.color=='All' || widget['color'][ajaxData.color] > 0.5) &&
                 (parseInt(ajaxData.width.split(';')[0]) <= widget['dimensions']['width'] && parseInt(ajaxData.width.split(';')[1]) >= widget['dimensions']['width']) &&
                 (parseInt(ajaxData.height.split(';')[0]) <= widget['dimensions']['height'] && parseInt(ajaxData.height.split(';')[1]) >= widget['dimensions']['height'])
             ){
-                out_widgets.push(widget);
+                if (ajaxData.color=='All'){
+                    out_widgets.push(widget);
+                }else{
+                    if (widget['color'][ajaxData.color] >= 0.8){
+                        out_widgets_1.push(widget);
+                    }else if (widget['color'][ajaxData.color] >= 0.6 && widget['color'][ajaxData.color] < 0.8){
+                        out_widgets_2.push(widget);
+                    }else if (widget['color'][ajaxData.color] >= 0.5 && widget['color'][ajaxData.color] < 0.6){
+                        out_widgets_3.push(widget);
+                    }else if (widget['color'][ajaxData.color] >= 0.4 && widget['color'][ajaxData.color] < 0.5){
+                        out_widgets_4.push(widget);
+                    }else if (widget['color'][ajaxData.color] >= 0.3 && widget['color'][ajaxData.color] < 0.4){
+                        out_widgets_5.push(widget);
+                    }else{
+                        var ii = 1;
+                    }
+                }
             }
         }
-        out_widgets.sort(compare('color',ajaxData.color));
+        if (ajaxData.color!='All'){
+            out_widgets_1.sort(compare('dimensions','height'));
+            out_widgets_2.sort(compare('dimensions','height'));
+            out_widgets_3.sort(compare('dimensions','height'));
+            out_widgets_4.sort(compare('dimensions','height'));
+            out_widgets_5.sort(compare('dimensions','height'));
+            out_widgets = out_widgets.concat(out_widgets_5).concat(out_widgets_4).concat(out_widgets_3).concat(out_widgets_2).concat(out_widgets_1);
+        }else{
+            out_widgets.sort(compare('dimensions','height'));   
+        }
     })
     return out_widgets
 }
