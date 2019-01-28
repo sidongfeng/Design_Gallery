@@ -197,7 +197,7 @@ function showImages(widgets, no){
             html += '   </div>'
             html += '</div>'
             html += '<div class="col-md-auto">'
-            html += '   <img data-toggle="modal" data-target="#'+widget['name'] + '" class="img-fluid" src="https://storage.googleapis.com/ui-collection/Mywidgets/' + widget['name'] + '.png" style="max-height:100px" />'
+            html += '   <img data-toggle="modal" data-target="#'+widget['name'] + '" class="img-fluid pb-1" src="https://storage.googleapis.com/ui-collection/Mywidgets/' + widget['name'] + '.png" style="max-height:100px; cursor:pointer" />'
             html += '</div>'
         }
         html += '</div>'
