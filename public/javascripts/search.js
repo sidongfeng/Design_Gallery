@@ -33,6 +33,17 @@ function compare2(property){
         return value2 - value1;
     }
 }
+function getHeightArray(){
+    var height = document.URL.split("&")[4].split("=")[1];
+    var h_array = [height.split("+")[0],height.split("+")[2]];
+    return h_array
+}
+
+function getWidthArray(){
+    var width = document.URL.split("&")[5].split("=")[1];
+    var w_array = [width.split("+")[0],width.split("+")[2]];
+    return w_array
+}
 
 function loadImages() { //loadSearchPage
     let ajaxData = {
@@ -41,8 +52,8 @@ function loadImages() { //loadSearchPage
         text: getUrlParameter('text'),
         category: getUrlParameter('category'),
         sortType: getUrlParameter('sortType'),
-        width: getUrlParameter('width'),
-        height: getUrlParameter('height')
+        width: getWidthArray(),
+        height: getHeightArray()
     };
     $.ajaxSettings.async = false;
     $.getJSON('./data/fake.json',function(result){
@@ -50,8 +61,8 @@ function loadImages() { //loadSearchPage
             let widget = result[i];
             if ((ajaxData.btnType=='All' || ajaxData.btnType==widget['widget_class']) &&
                 (ajaxData.category=='All' || ajaxData.category==widget['category']) &&
-                (parseInt(ajaxData.width.split(';')[0]) <= widget['dimensions']['width'] && parseInt(ajaxData.width.split(';')[1]) >= widget['dimensions']['width']) &&
-                (parseInt(ajaxData.height.split(';')[0]) <= widget['dimensions']['height'] && parseInt(ajaxData.height.split(';')[1]) >= widget['dimensions']['height'])
+                (parseInt(ajaxData.width[0]) <= widget['dimensions']['width'] && parseInt(ajaxData.width[1]) >= widget['dimensions']['width']) &&
+                (parseInt(ajaxData.height[0]) <= widget['dimensions']['height'] && parseInt(ajaxData.height[1]) >= widget['dimensions']['height'])
             ){
                 if (ajaxData.color=='All'){
                     out_widgets.push(widget);
@@ -134,7 +145,7 @@ function showImages(widgets, no){
             html += '                   <div class="row">'
             html += '                       <div class="col-md-7" style="position:relative; zoom:0.5">'
             html += '                           <img  src="https://storage.googleapis.com/ui-collection/' + urlAdd + '" style=" cursor: hand;"/>'
-            html += '                           <div style="position:absolute; border: 5px solid red; z-indent:2; left:' + _left + 'px;top: ' + _top +'px;width:'+_width+'px;height:'+_height+'px;"></div>'
+            html += '                           <div style="position:absolute; border: 5px solid red; z-indent:2; left:' + (_left+30) + 'px;top: ' + _top +'px;width:'+_width+'px;height:'+_height+'px;"></div>'
             html += '                       </div>'
             html += '                       <div class="col-md-5">'
             html += '                           <table class="table table-borderless">'
@@ -154,10 +165,6 @@ function showImages(widgets, no){
             }else{
                 html +=	'	    	<td>' + widget['text'] + '</td>';
             }
-            html += '                                   </tr>'
-            html += '                                   <tr>'
-            html += '                                       <th scope="row">Font:</th>'
-            html += '                                       <td>' + widget['font'] + '</td>'
             html += '                                   </tr>'
             html += '                                   <tr>'
             html += '                                       <th scope="row">Class:</th>'

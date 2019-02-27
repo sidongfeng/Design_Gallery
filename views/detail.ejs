@@ -1,140 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Mobile UI Gallery, a repository of widgets taken from Google Play Store.">
+    <meta name="keywords"
+          content="mobile, mobile ui, mobile widgets, widget, widgets, mobile application, android, android widget, android widgets, android ui, ui">
+    <meta name="author" content="">
 
-	<!-- Bootstrap core CSS -->
+    <title><%= title %></title>
+
+    <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
-    <link href="stylesheets/style.css" rel="stylesheet">
+    <link href="stylesheets/detail/styles.css" rel="stylesheet">
 
-	<!-- Bootstrap core JavaScript -->
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117332758-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
-	<script type="text/javascript">
+        function gtag() {
+            dataLayer.push(arguments);
+        }
 
-	function getMeta(url, _thisCell, _coordRes, _widRes) {
-	    let img = new Image();
-	    img.onload = function () {
-	        let width = _thisCell.find('.image--large')[0].clientWidth;
-	        let ratio = width / this.width;
-	        let _left = parseInt(_coordRes[0]) * ratio +10;
-	        let _top = parseInt(_coordRes[1]) * ratio -5;     
-	        let _width = parseInt(_widRes[0]) * ratio+10 ;
-	        let _height = parseInt(_widRes[1]) * ratio+10;
+        gtag('js', new Date());
 
-	        let styles = {
-	            position: 'absolute',
-	            left: _left,
-	            top: _top,
-	            width: _width,
-	            height: _height,
-	            border: "5px solid red"
-	        };
-	        //_thisCell.find('#highlight-box').css(styles)
-	        $('#highlight-box').css(styles);
-	    };
-	    img.src = url;
-	}
-
-	function addHtml(){
-		let html = "";
-		/*
-		heightWithName[j][1] = sURLVariables[1]
-		urlAdd = sURLVariables[2]
-		similarAdd = sURLVariables[3]
-		widgets[j].url = sURLVariables[4]
-		widgets[j].application_name = sURLVariables[5]
-		widgets[j].package_name	= sURLVariables[6]
-		widgets[j].category = sURLVariables[7]
-		widgets[j].text = sURLVariables[8]
-		widgets[j].widget_class = sURLVariables[9]
-		widgets[j].coordinates['from'] = sURLVariables[10]
-		widgets[j].coordinates['to'] = sURLVariables[11]
-		btnSize = sURLVariables[12]
-		widgets[j].color = sURLVariables[13]
-		widgets[j].downloads = sURLVariables[14]
-		*/
-
-		html += '<div class="modal-body row";> ';
-	    html += '<div class="col-md-6 ">';
-	    html += '<div id="highlight-box" style="position:absolute;left:10.4px;top:22.625px;width:8.175px;height:1.075px;border:5px solid red;">';
-	    html += '</div>'
-		html += '<a href="./search/'+ sURLVariables[6]+ '/' + sURLVariables[3] + '">';
-		html += '<img class = "image--large" src="https://storage.googleapis.com/ui-collection/' + sURLVariables[2] + '" style="max-height:640px;"/></a>';
-		html +=	'</div>';
-		html += '<div class="col-md-6 align-self-center;">';
-		html += '<table cellpadding="15" cellspacing="0" border="0" class="app-detail ">';
-		html += '<tbody>';
-		html += '<tr>';
-		html +=	'   	<td><b>Application: </b></td>';
-		html +=	'    	<td><a href="' + sURLVariables[4] + '">' + sURLVariables[5] + '</a>';
-		html +=	'    	</td>';
-		html +=	'    </tr>';
-		html +=	'    	<td><b>Package: </b></td>';
-		html +=	'	    	<td style="word-break:break-all"> ' + sURLVariables[6] + '</td>'; 
-		html +=	'	    <tr>';
-		html +=	'	    	<td><b>Category:</b></td>';
-		html +=	'	    	<td>' + sURLVariables[7] + '</td>';
-		html +=	'	    </tr>';
-		html +=	'	    <tr>';
-		html +=	'	    	<td><b>Text: </b></td>';
-		if(sURLVariables[8] == 0){
-			html +=	'	    	<td>' + " " + '</td>';
-		}else{
-			html +=	'	    	<td>' + sURLVariables[8] + '</td>';
-		}
-		html +=	'	    </tr>';
-		html +=	'	    <tr>';
-		html +=	'	    	<td><b>Class: </b></td>';
-		html +=	'	    	<td>' + sURLVariables[9] + '</td>';
-		html +=	'	    </tr>';
-		html +=	'	    <tr>';
-		html +=	'	    	<td><b>Coordinates:&emsp;</b></td>';
-		html +=	'	    	<td class="coords">[' + sURLVariables[10] + '][' + sURLVariables[11] + ']</td>';
-		html +=	'	    </tr>';
-		html +=	'	    <tr>';
-		html +=	'	    	<td><b>Size:</b></td>';
-		html +=	'	    	<td class="widSize">' + sURLVariables[12] + '</td>';
-		html +=	'	    </tr>';
-		html +=	'	    <tr>';
-		html +=	'	    	<td><b>Color: </b></td>';
-		html +=	'	    	<td>' + sURLVariables[13] + '</td>';
-		html +=	'	    </tr>';
-		html +=	'	    <tr>';
-		html +=	'	    	<td><b>Downloads:</b></td>';
-		html +=	'	    	<td>' + sURLVariables[14] + '</td>';
-		html +=	'	    </tr>';	
-		html += '</tbody>';
-		html +=	'    </table>';
-		html +=	'<span style = "color:white"><br>We only annotate the selected UI elements in the image</br></span>';
-		html +=	'</div>';
-		html +=	'</div>';
-		html +=	'</div>';
-
-		$(".container").append(html);
-	}
-
-	function getUrlParameter() { //解析URL
-		var sURL = decodeURIComponent(window.location.href);	
-		sURLVariables = sURL.split("#");
-		//console.log(sURLVariables);
-		addHtml();
-		var coordRes = [];
-		var widRes = [];
-		coordRes = sURLVariables[10].split(',');
-		widRes = sURLVariables[12].split('x');
-		let imageUrl = 'https://storage.googleapis.com/ui-collection/' + sURLVariables[2];
-		getMeta(imageUrl, $(".container"), coordRes, widRes);
-		}
-	
-	$(window).on('load', function(){
-		getUrlParameter();
-	})
-	</script>
+        gtag('config', 'UA-117332758-2');
+    </script>
+    <!-- Custom js -->
+    <script src="/javascripts/test.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="/javascripts/js/selectize.js"></script>
+    <!-- <script src="/javascripts/js/main.js"></script> -->
 </head>
-<body>	
-	<div class= "container" style="background-color: black "></div>
+
+<body>
+    <header>
+        <!-- Fixed navbar -->
+
+    </header>
+
+    <!-- Page content -->
+    <main role="main">
+		<form name="search" method="get" id="myform" action="/detail" class="panel-body">
+            <section class="demo plugin">
+                <div class="header">&quot;Search&quot; </div>
+                <div class="sandbox">
+                    <label for="input-tags3">Tags:</label>
+                    <input type="text" id="input-tags3" class="demo-default">
+                </div>
+                <script>
+                    $('#input-tags3').selectize({
+                        searchField: ['name'],
+						options: [
+							{email: 'brian@thirdroute.com', name: 'Brian Reavis'},
+							{email: 'nikola@tesla.com', name: 'Nikola Tesla'},
+							{email: 'someone@gmail.com'}
+                        ],
+                        render: {
+							item: function(item, escape) {
+								return '<div>' +
+									(item.name ? '<span class="name">' + escape(item.name) + '</span>' : '') +
+									(item.email ? '<span class="email">' + escape(item.email) + '</span>' : '') +
+								'</div>';
+							},
+							option: function(item, escape) {
+								return '<div>' +
+									'<span class="label">' + '123' + '</span>' +
+									(caption ? '<span class="caption">' + escape(caption) + '</span>' : '') +
+								'</div>';
+							}
+						},
+                        plugins: ['remove_button'],
+                        delimiter: ',',
+                        persist: false,
+                        create: function(input) {
+                            return {
+                                value: input,
+                                text: input
+                            }
+                        },
+                        maxOption:2,
+                    });
+                </script>
+            </section>
+			<button type="submit"class="btn btn-primary" id="send">Submit</button>
+		</form>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-3 bg-dark footer">
+        <div class="container">
+            <div class="text-center text-white">Copyright &copy; Mobile UI Gallery 2018</div>
+        </div>
+    </footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
+
+<script type="text/javascript">	
+/*
+	$(function() {
+        $('#input-tags3').keyup(function() {
+            var n=$(this).val();
+            if (n=='') { $('#search_list').hide(); return };
+            var input_list = n.split(" ");
+
+            const classnames = new Array("chronometer", "compoundbutton","progressbar", "checkbox", "button",
+                                  "radiobutton",  "ratingbar", "seekbar", "spinner", "switch", "togglebutton","imagebutton");
+            const colors = new Array("black","white","red","lime","yellow","green","cyan","blue","magenta");
+            
+            var classdic =  {},
+                colordic = {};
+            // initialize
+            for (var i=0;i<classnames.length;i++){
+                classname = classnames[i];
+                classdic[classname] = 0;
+            }
+            for (var i=0;i<colors.length;i++){
+                color = colors[i];
+                colordic[color] = 0;
+            }
+
+            var val;
+            for (var i=0;i<input_list.length;i++){
+                input = input_list[i].toLowerCase();
+                for (var j=0;j<classnames.length;j++){
+                    classname = classnames[j];
+                    val = 0;
+                    if (classname.indexOf(input)>=0){
+                        val = 0.45;
+                    }
+                    val += strSimilarity2Percent(input,classname)*0.55;
+                    if (classdic[classname] < val){
+                        classdic[classname] = val
+                    }
+                }
+                for (var j=0;j<colors.length;j++){
+                    color = colors[j];
+                    val = 0;
+                    if (color.indexOf(input)>=0){
+                        val = 0.45;
+                    }
+                    val += strSimilarity2Percent(input,color)*0.55;
+                    if (colordic[color] < val){
+                        colordic[color] = val
+                    }
+                }
+            }
+            var sorted_class = Object.keys(classdic).sort(function(a,b){ return classdic[a]-classdic[b]; }),
+                sorted_color = Object.keys(colordic).sort(function(a,b){ return colordic[a]-colordic[b]; });
+
+            let search_color = new Set();
+            let search_class = new Set();
+            for(var key in sorted_class){
+                if (classdic[sorted_class[key]]>0.6){
+                    search_class.add(sorted_class[key]);
+                }
+            }
+            for(var key in sorted_class){
+                if (colordic[sorted_color[key]]>0.6){
+                    search_color.add(sorted_color[key]);
+                }
+            }
+
+            //console.log(search_color);
+            //console.log(search_class);
+            
+            if(search_color.size!=0 || search_class.size!=0){
+                $("#search_list").empty().show();
+                var str = "";
+                var list = Array();
+                var suggest_list = combine(search_color, search_class);
+                //console.log(suggest_list)
+                for (var i=0;i<suggest_list.length;i++){
+                    suggestion = suggest_list[i];
+                    str += '<div class="click_work">'+ suggestion+'</div>'
+                }
+                $("#search_list").append(str);
+            }else{
+                $("#search_list").empty().show();
+            }
+            
+        });
+        //点击搜索数据复制给搜索框
+		$(document).on('click','.click_work',function(){
+            var word = $(this).text();
+			$('#search').val(word);
+			$('#search_list').hide();
+			// $('#texe').trigger('click');触发搜索事件
+		})
+    });
+*/
+</script>
 </body>
 </html>

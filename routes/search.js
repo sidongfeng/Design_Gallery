@@ -64,7 +64,6 @@ router.post('/', function (req, res, next) {
             // findObj.widget_class = req.body.btnType;
         }
         if (req.body.color !== 'All') {
-
             findObj.color = req.body.color;
         }
         if (req.body.category !== 'All') {
@@ -109,7 +108,7 @@ router.post('/', function (req, res, next) {
         }
 
         Widget.find(findObj)
-            .sort(_sortType)
+            //.sort(_sortType)
             .skip((req.body.page - 1) * displayPerPage)
             .limit(displayPerPage)
             .exec(function (err, doc) {

@@ -14,6 +14,8 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 require('./models/widget');
 require('./models/company');
+require('./models/new_widget');
+
 
 const homeRouter = require('./routes/home');
 //const indexRouter = require('./routes/index');
@@ -23,6 +25,7 @@ const contactRouter = require('./routes/contact');
 const detailRouter = require('./routes/detail');  // test
 const compareRouter = require('./routes/compare');
 const seemoreRouter = require('./routes/seemore');
+const galleryRouter = require('./routes/gallery');
 const app = express();
 
 
@@ -45,6 +48,7 @@ app.use('/contact', contactRouter);
 app.use('/detail', detailRouter);
 app.use('/compare',compareRouter);
 app.use('/seemore',seemoreRouter);
+app.use('/gallery',galleryRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

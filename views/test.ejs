@@ -1,498 +1,116 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+ 
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+        <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+		<style type="text/css">
+			thead th{width: 100px;text-align: center;}
+		</style>
+	</head>
 
-<head>
-	<meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description"
-          content="Mobile UI Gallery compare page. Compare widgets from different companies. The repository has a total of 30,000 widgets used by Android developers, and are gleaned from the Google Play Store.">
-    <meta name="keywords"
-          content="mobile, mobile ui, mobile widgets, widget, widgets, mobile application, android, android widget, android widgets, android ui, ui">
-    <meta name="author" content="">
+	<body>
+		<label>姓名：</label><input type="text" id="username" />
+		<label>备注：</label><input type="text" id="content" />
+		<input type="button" id="send" value="点击" />
+		<table>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>姓名</th>
+					<th>备注</th>
+				</tr>
+			</thead>
+			<tbody id="tb">
+				
+			</tbody>
+		</table>
+	</body>
+	<script src="/javascripts/test.js"></script>
+	<script type="text/javascript">
+	
+		$(function() {
+			$('#username').keyup(function() {
+				var n=$(this).val();
+				var input_list = n.split(" ");
 
-    <title><%= title %></title>
+				const classnames = new Array("Chronometer", "CompoundButton","ProgressBar", "CheckBox", "Button",
+									  "RadioButton",  "RatingBar", "SeekBar", "Spinner", "Switch", "ToggleButton","ImageButton");
+				const colors = new Array("Black","White","Red","Lime","Yellow","Green","Cyan","Blue","Magenta");
 
-    <!-- Bootstrap core CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <!-- CSS for ion.rangeSlider-->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.2.0/css/ion.rangeSlider.min.css"
-          rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.2.0/css/ion.rangeSlider.skinHTML5.css"
-          rel="stylesheet">
-
-
-    <!-- Custom styles for this template -->
-    <link href="stylesheets/style.css" rel="stylesheet">
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117332758-2"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-
-        gtag('js', new Date());
-
-        gtag('config', 'UA-117332758-2');
-    </script>
-</head>
-
-<body>
-    <header>
-        <!-- Fixed navbar -->
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
-            <div class="container">
-                <a class="navbar-brand" href="/">Mobile UI Gallery</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="#navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/search?btnType=RadioButton&color=All&category=All&sortType=appDownloads&text=&width=0%3B800&height=0%3B1280&page=1">Search</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/compare?btnType=Button&color=All&category=All&DeveloperOneName=AI_Factory_Limited&DeveloperTwoName=GIOSIS_PTE._LTD.&sortType=appDownloads&text=&width=0%3B800&height=0%3B1280&page=1">Compare
-                                <span class="sr-only">(current)</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/about">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/contact">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-            </div> 
-        </nav>
-    </header>
-
-
-    <!-- Page content -->
-    <main role="main" class="container">
-        <h2 class="my-4 text-center text-lg-left">Widget Compare</h2>
-        <hr/>
-        <span class="modal-body"> Compare widgets with the following properties:</span><br>
-        <span class="modal-body font-italic p-4" style="font-size: 14px"> (note: do not choose the same developer)</span>
-        <!-- Forms -->
-        <form name="compare" method="get" id="myform" action="/compare" class="panel-body p-4">
-            <div class="row">
-                <div class="form-group form-inline">
-                    <fieldset class="pr-4">
-                        <label class="badge">Widget Class</label>
-                        <select class="custom-select mr-sm-4" id="btnType" name="btnType">
-                            <% if (!btnTypeArr.includes(query.btnType)) { %>
-                            <option selected value="All">All</option>
-                            <% } else { %>
-                            <option value="All">All</option>
-                            <% }
-                            for (i = 0; i < btnTypeArr.length; i++) {
-                                if (btnTypeArr[i] === 'All') {
-                                    continue;
-                                }
-                            if (query.btnType === btnTypeArr[i]) { %>
-                            <option selected> <%= btnTypeArr[i] %></option>
-                            <% }else { %>
-                            <option> <%= btnTypeArr[i] %></option>
-                            <% }
-                            } %>
-                        </select>
-                    </fieldset>
-                    <fieldset class="pr-4">
-                        <label class="badge">Color</label>
-                        <select class="custom-select mr-sm-4" id="color" name="color">
-                            <% if (!colArr.includes(query.color)) { %>
-                            <option selected value="All">All</option>
-                            <% } else { %>
-                            <option value="All">All</option>
-                            <% }
-                            for (var i = 0; i < colArr.length; i++) {
-                                if (colArr[i] === 'All') {
-                                    continue;
-                                }
-                            if (query.color === colArr[i]) { %>
-                            <option selected> <%= colArr[i] %></option>
-                            <% }else { %>
-                            <option> <%= colArr[i] %></option>
-                            <% }
-                            } %>
-                        </select>
-                    </fieldset>
-                    <fieldset class="pr-4">
-                        <label class="badge">Category</label>
-                        <select class="custom-select mr-sm-4" id="category" name="category">
-                            <% if (!catArr.includes(query.category)) { %>
-                            <option selected value="All">All</option>
-                            <% } else { %>
-                            <option value="All">All</option>
-                            <% }
-                            for (var i = 0; i < catArr.length; i++) {
-                                if (catArr[i] === 'All') {
-                                    continue;
-                                }
-                            if (query.category === catArr[i]) { %>
-                            <option selected> <%= catArr[i] %></option>
-                            <% }else { %>
-                            <option> <%= catArr[i] %></option>
-                            <% }
-                            } %>
-                        </select>
-                    </fieldset>
-                    <fieldset class="pr-4">
-                        <label class="badge">Category</label>
-                        <select class="custom-select mr-sm-4" id="sortType" name="sortType">
-                            <% if (!((query.sortType) in sortTypeDict)) { %>
-                            <option selected value="appDownloads"> <%= sortTypeDict['appDownloads'] %></option>
-                            <% } else { %>
-                            <option value="appDownloads"> <%= sortTypeDict['appDownloads'] %></option>
-                            <% } for (const [key, value] of Object.entries(sortTypeDict)) {
-                                if (key === 'appDownloads') {
-                                    continue;
-                                }
-                            if (query.sortType === key) { %>
-                            <option selected value="<%= key %>"><%= value %></option>
-                            <% }else { %>
-                            <option value="<%= key %>"><%= value %></option>
-                            <% }
-                            } %>
-                        </select>
-                    </fieldset>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group form-inline">
-                    <fieldset class="pr-4">
-                        <label class="badge">DeveloperOne</label>
-                        <select class="custom-select mr-sm-4" id="DeveloperOne" name="DeveloperOneName" >
-                            <option value="Empty">--PLEASE SELECT--</option>
-                            <option value="AI_Factory_Limited">AI_Factory_Limited</option>
-                            <option value="GIOSIS_PTE._LTD.">GIOSIS_PTE._LTD.</option>
-                            <option value="JRJ_Unlimited">JRJ_Unlimited</option>
-                            <option value="SMSROBOT_LTD">SMSROBOT_LTD</option>
-                            <option value="NAVER_Corp.">NAVER_Corp.</option>
-                            <option value="Corcanoe">Corcanoe</option>
-                            <option value="Gemego_Ltd">Gemego_Ltd</option>
-                            <option value="SMSROBOT_LTD">SMSROBOT_LTD</option>
-                            <option value="Mirco_Bettelini">Mirco_Bettelini</option>
-                            <option value="Boreumdal_Lab">Boreumdal_Lab</option>
-                            <option value="Code_Sector">Code_Sector</option>
-                            <option value="RATP">RATP</option>
-                            <option value="joysoft">joysoft</option>
-                            <option value="Molatra">Molatra</option>
-                            <option value="NyxCore">NyxCore</option>
-                            <option value="YinzCam,_Inc.">YinzCam,_Inc.</option>
-                            <option value="Recruit_Holdings_Co.,Ltd.">Recruit_Holdings_Co.,Ltd.</option>
-                        </select>
-                    </fieldset>
-                    <fieldset class="pr-4">
-                        <label class="badge">DeveloperTwo</label>
-                        <select class="custom-select mr-sm-4" id="DeveloperTwo" name="DeveloperTwoName" >
-                            <option value="Empty">--PLEASE SELECT--</option>
-                            <option value="AI_Factory_Limited">AI_Factory_Limited</option>
-                            <option value="GIOSIS_PTE._LTD.">GIOSIS_PTE._LTD.</option>
-                            <option value="JRJ_Unlimited">JRJ_Unlimited</option>
-                            <option value="SMSROBOT_LTD">SMSROBOT_LTD</option>
-                            <option value="NAVER_Corp.">NAVER_Corp.</option>
-                            <option value="Corcanoe">Corcanoe</option>
-                            <option value="Gemego_Ltd">Gemego_Ltd</option>
-                            <option value="SMSROBOT_LTD">SMSROBOT_LTD</option>
-                            <option value="Mirco_Bettelini">Mirco_Bettelini</option>
-                            <option value="Boreumdal_Lab">Boreumdal_Lab</option>
-                            <option value="Code_Sector">Code_Sector</option>
-                            <option value="RATP">RATP</option>
-                            <option value="joysoft">joysoft</option>
-                            <option value="Molatra">Molatra</option>
-                            <option value="NyxCore">NyxCore</option>
-                            <option value="YinzCam,_Inc.">YinzCam,_Inc.</option>
-                            <option value="Recruit_Holdings_Co.,Ltd.">Recruit_Holdings_Co.,Ltd.</option>
-                        </select>
-                    </fieldset>
-                </div>
-            </div>
-            <!-- RadioSlider -->
-            <div class="row">
-                <div class="form-group pr-4 text-center" style="min-width: 280px;">
-                    <label class="badge">Width</label>
-                    <input type="text" id="width-slider" name="width" value=""/>
-                </div>
-                <div class="form-group pr-4 text-center" style="min-width: 280px;">
-                    <label class="badge">Height</label>
-                    <input type="text" id="height-slider" name="height" value=""/>
-                </div>
-            </div>
-
-            <!-- Submit -->
-            <input type="hidden" name="page" value="1">
-            <div class="row">
-                <button type="submit" class="btn btn-primary" onclick="getWidthWithHeight()">Submit</button>
-            </div>
-        </form>
-    
-        <!-- Table -->
-        <hr/>
-        <div class="row">
-            <div id = "DeveloperOneName"class="col-md-6 text-center"></div>
-            <div id = "DeveloperTwoName"class="col-md-6 text-center"></div>
-        </div>
-    
-    
-        <section class="image-grid">
-    	    <div id = "compare-grid" class="row">
-    	        <div id = "cmpOneButton" class="col-md-5" style = "max-height:200px; overflow: hidden; border:1px solid #000; padding:5px 2px 3px 2px"></div>
-        <div id = "cmpClass"class="col-md-2" style = "max-height:200px; overflow: hidden; border:1px solid #000; padding:5px 2px 3px 2px">
-            <div style="text-align:center;">
-                <span style="font-size: 20px; font-weight: bold; vertical-align:middle;">Button</span> 
-            </div>
-            <div style="text-align:center;">
-                <button type="submit" class="btn btn-primary btn-sm" onclick="sendSeeMoreURL('Button','0');">SeeMore</button>          
-                <button type="submit" class="btn btn-primary" onclick="sendSeeMoreURL('Button','1');">SeeMore</button> 
-            </div>  
-        </div>
-    	<div id = "cmpTwoButton"class="col-md-5" style = "max-height:200px;overflow: hidden; border:1px solid #000; padding:5px 2px 3px 2px"></div>
-        <hr>
-
-        <div id = "cmpOneChronometer"class="col-md-5" style = "max-height:200px;overflow: hidden; border:1px solid #000; padding:5px 2px 3px 2px"></div>
-        <div id = "cmpClass"class="col-md-2" style = "max-height:200px;overflow: hidden; border:1px solid #000; padding:5px 2px 3px 2px">
-            <div style="text-align:center;">
-                <span style="font-size: 20px; font-weight: bold; text-align: middle;">Chronometer</span> 
-            </div>
-            <div style="text-align:center;">
-                <button type="submit" class="btn btn-primary" onclick="sendSeeMoreURL('Chronometer','0');">SeeMore  </button> 
-                <button type="submit" class="btn btn-primary" onclick="sendSeeMoreURL('Chronometer','1');">  SeeMore</button> 
-            </div>  
-        </div>
-        <div id = "cmpTwoChronometer"class="col-md-5" style = "max-height:200px;overflow: hidden; border:1px solid #000; padding:5px 2px 3px 2px"></div>
-        <hr>
-
-        <div id = "cmpOneCompoundButton"class="col-md-5" style = "max-height:200px;overflow: hidden; border:1px solid #000; padding:5px 2px 3px 2px"></div>
-        <div id = "cmpClass"class="col-md-2" style = "max-height:200px;overflow: hidden; border:1px solid #000; padding:5px 2px 3px 2px">
-            <div style="text-align:center;">
-                <span style="font-size: 20px; font-weight: bold; vertical-align:middle;">CompoundButton</span> 
-            </div>
-            <div style="text-align:center;">
-                <button type="submit" class="btn btn-primary" onclick="sendSeeMoreURL('CompoundButton','0');">SeeMore  </button> 
-                
-                <button type="submit" class="btn btn-primary" onclick="sendSeeMoreURL('CompoundButton','1');">  SeeMore</button> 
-            </div>
-        </div>
-        <div id = "cmpTwoCompoundButton"class="col-md-5" style = "max-height:200px;overflow: hidden; border:1px solid #000; padding:5px 2px 3px 2px"></div>
-        <hr>
-
-        <div id = "cmpOneImageButton"class="col-md-5" style = "max-height:200px;overflow: hidden; border:1px solid #000; padding:5px 2px 3px 2px"></div>
-        <div id = "cmpClass"class="col-md-2" style = "max-height:200px;overflow: hidden; border:1px solid #000; padding:5px 2px 3px 2px">
-            <div style="text-align:center;">
-                <span style="font-size: 20px; font-weight: bold; vertical-align:middle;">ImageButton</span> 
-            </div>
-            <div style="text-align:center;">
-                <button type="submit" class="btn btn-primary" onclick="sendSeeMoreURL('ImageButton','0');">SeeMore  </button> 
-                <button type="submit" class="btn btn-primary" onclick="sendSeeMoreURL('ImageButton','1');">  SeeMore</button> 
-            </div>
-        </div>
-        <div id = "cmpTwoImageButton"class="col-md-5" style = "max-height:200px;overflow: hidden; border:1px solid #000; padding:5px 2px 3px 2px"></div>
-        <hr>
-
-        <div id = "cmpOneProgressBar"class="col-md-5" style = "max-height:200px;overflow: hidden; border:1px solid #000; padding:5px 2px 3px 2px"></div>
-        <div id = "cmpClass"class="col-md-2" style = "max-height:200px;overflow: hidden; border:1px solid #000; padding:5px 2px 3px 2px">
-            <div style="text-align:center;">
-                <span style="font-size: 20px; font-weight: bold; vertical-align:middle;">ProgressBar</span> 
-            </div>
-            <div style="text-align:center;">
-                <button type="submit" class="btn btn-primary" onclick="sendSeeMoreURL('ProgressBar','0');">SeeMore  </button> 
-                <button type="submit" class="btn btn-primary" onclick="sendSeeMoreURL('ProgressBar','1');">  SeeMore</button> 
-            </div>
-        </div>
-        <div id = "cmpTwoProgressBar"class="col-md-5" style = "max-height:200px;overflow: hidden; border:1px solid #000; padding:5px 2px 3px 2px"></div>
-        <hr>
-        <div id = "cmpOneRadioButton"class="col-md-5" style = "max-height:200px;overflow: hidden; border:1px solid #000; padding:5px 2px 3px 2px"></div>
-        <div id = "cmpClass"class="col-md-2" style = "max-height:200px;overflow: hidden; border:1px solid #000; padding:5px 2px 3px 2px">
-            <div style="text-align:center;">
-                <span style="font-size: 20px; font-weight: bold; vertical-align:middle;">RadioButton</span> 
-            </div>
-            <div style="text-align:center;">
-                <button type="submit" class="btn btn-primary" onclick="sendSeeMoreURL('RadioButton','0');">SeeMore  </button> 
-                <button type="submit" class="btn btn-primary" onclick="sendSeeMoreURL('RadioButton','1');">  SeeMore</button> 
-            </div>
-        </div>
-        <div id = "cmpTwoRadioButton"class="col-md-5" style = "max-height:200px;overflow: hidden; border:1px solid #000; padding:5px 2px 3px 2px"></div>
-        <hr>
-
-        <div id = "cmpOneRatingBar"class="col-md-5" style = "max-height:200px;overflow: hidden; border:1px solid #000; padding:5px 2px 3px 2px"></div>
-        <div id = "cmpClass"class="col-md-2" style = "max-height:200px;overflow: hidden; border:1px solid #000; padding:5px 2px 3px 2px">
-            <div style="text-align:center;">
-                <span style="font-size: 20px; font-weight: bold; vertical-align:middle;">RatingBar</span> 
-            </div>
-            <div style="text-align:center;">
-                <button type="submit" class="btn btn-primary" onclick="sendSeeMoreURL('RatingBar','0');">SeeMore  </button> 
-                <button type="submit" class="btn btn-primary" onclick="sendSeeMoreURL('RatingBar','1');">  SeeMore</button> 
-            </div>
-        </div>
-        <div id = "cmpTwoRatingBar"class="col-md-5" style = "max-height:200px;overflow: hidden; border:1px solid #000; padding:5px 2px 3px 2px"></div>
-        <hr>
-
-        <div id = "cmpOneSeekBar"class="col-md-5" style = "max-height:200px;overflow: hidden; border:1px solid #000; padding:5px 2px 3px 2px"></div>
-        <div id = "cmpClass"class="col-md-2" style = "max-height:200px;overflow: hidden; border:1px solid #000; padding:5px 2px 3px 2px">
-            <div style="text-align:center;">
-                <span style="font-size: 20px; font-weight: bold; vertical-align:middle;">SeekBar</span> 
-            </div>
-            <div style="text-align:center;">
-                <button type="submit" class="btn btn-primary" onclick="sendSeeMoreURL('SeekBar','0');">SeeMore  </button> 
-                <button type="submit" class="btn btn-primary" onclick="sendSeeMoreURL('SeekBar','1');">  SeeMore</button> 
-            </div>
-        </div>
-        <div id = "cmpTwoSeekBar"class="col-md-5" style = "max-height:200px;overflow: hidden; border:1px solid #000; padding:5px 2px 3px 2px"></div>
-        <hr>
-
-        <div id = "cmpOneSpinner"class="col-md-5" style = "max-height:200px;overflow: hidden; border:1px solid #000; padding:5px 2px 3px 2px"></div>
-        <div id = "cmpClass"class="col-md-2" style = "max-height:200px;overflow: hidden; border:1px solid #000; padding:5px 2px 3px 2px">
-            <div style="text-align:center;">
-                <span style="font-size: 20px; font-weight: bold; vertical-align:middle;">Spinner</span> 
-            </div>
-            <div style="text-align:center;">
-                <button type="submit" class="btn btn-primary" onclick="sendSeeMoreURL('Spinner','0');">SeeMore  </button> 
-                <button type="submit" class="btn btn-primary" onclick="sendSeeMoreURL('Spinner','1');">  SeeMore</button> 
-            </div>
-        </div>
-        <div id = "cmpTwoSpinner"class="col-md-5" style = "max-height:200px;overflow: hidden; border:1px solid #000; padding:5px 2px 3px 2px"></div>
-        <hr>
-
-        <div id = "cmpOneSwitch"class="col-md-5" style = "max-height:200px;overflow: hidden; border:1px solid #000; padding:5px 2px 3px 2px"></div>
-        <div id = "cmpClass"class="col-md-2" style = "max-height:200px;overflow: hidden; border:1px solid #000; padding:5px 2px 3px 2px">
-            <div style="text-align:center;">
-                <span style="font-size: 20px; font-weight: bold; vertical-align:middle;">Switch</span> 
-            </div>
-            <div style="text-align:center;">
-                <button type="submit" class="btn btn-primary" onclick="sendSeeMoreURL('Switch','0');">SeeMore  </button> 
-                <button type="submit" class="btn btn-primary" onclick="sendSeeMoreURL('Switch','1');">  SeeMore</button> 
-            </div>
-        </div>
-        <div id = "cmpTwoSwitch"class="col-md-5" style = "max-height:200px;overflow: hidden; border:1px solid #000; padding:5px 2px 3px 2px"></div>
-        <hr>
-
-        <div id = "cmpOneToggleButton"class="col-md-5" style = "max-height:200px;overflow: hidden; border:1px solid #000; padding:5px 2px 3px 2px"></div>
-        <div id = "cmpClass"class="col-md-2" style = "max-height:200px;overflow: hidden; border:1px solid #000; padding:5px 2px 3px 2px">
-            <div style="text-align:center;">
-                <span style="font-size: 20px; font-weight: bold; vertical-align:middle;">ToggleButton</span> 
-            </div>
-            <div style="text-align:center;">
-                <button type="submit" class="btn btn-primary" onclick="sendSeeMoreURL('ToggleButton','0');">SeeMore  </button> 
-                <button type="submit" class="btn btn-primary" onclick="sendSeeMoreURL('ToggleButton','1');">  SeeMore</button> 
-            </div>
-        </div>
-        <div id = "cmpTwoToggleButton"class="col-md-5" style = "max-height:200px;overflow: hidden; border:1px solid #000; padding:5px 2px 3px 2px"></div>
-        <hr>
-
-    	</div>
-   	</section> 
-    <div class="row" style="margin-bottom:10px">
-        <div id="endPage" class="loader" style="display:none;margin: 0 auto;"></div>
-    </div>
-   </div>
-
-
-<!-- /.container -->
-<!-- footer -->
-<footer class="py-5 bg-dark">
-    <div class="container-fluid">
-        <p class="m-0 text-center text-white">Copyright &copy; Mobile UI Gallery 2018</p>
-    </div>
-</footer>
-
-<!-- Bootstrap core JavaScript -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.2.0/js/ion.rangeSlider.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-
-<script src="/javascripts/imageCell.js"></script>
-
-<script>
-    function getWidthWithHeight(){
-        let widthArr;
-        let heightArr;
-
-        if (getUrlParameter('width') && getUrlParameter('height')) {
-            widthArr = getUrlParameter('width').split(';');
-            heightArr = getUrlParameter('height').split(';');
-        } else {
-            heightArr = [0, 1280];
-            widthArr = [0, 800];
-        }
-
-        $("#height-slider").ionRangeSlider({
-            type: "double",
-            min: 0,
-            max: 1280,
-            from: heightArr[0],
-            to: heightArr[1]
-        });
-        
-        $("#width-slider").ionRangeSlider({
-            type: "double",
-            min: 0,
-            max: 800,
-            from: widthArr[0],
-            to: widthArr[1]
-        });
-        let htmlCmp1 = "";
-        let htmlCmp2 = "";
-        let sPageURL = decodeURIComponent(window.location.search.substring(1));
-        sURLVariables = sPageURL.split('&');
-        if(sURLVariables.length > 3){
-            var devOptionOne = sURLVariables[3].split('=')[1].toString();
-            var devOptionTwo = sURLVariables[4].split('=')[1].toString();
-            if(devOptionOne != devOptionTwo){
-                htmlCmp1 += '</span>';
-                htmlCmp1 += '<span style="font-size: 18px; font-weight: bold;">'+devOptionOne+'</span>';
-                htmlCmp2 += '<span style="font-size: 18px; font-weight: bold;">'+devOptionTwo+'</span>';
-                $('#DeveloperOneName').append(htmlCmp1);
-                $('#DeveloperTwoName').append(htmlCmp2);
-            }
-        }
-    }
-</script>
-<script>
-    $(window).onload = getWidthWithHeight();
-</script>
-<script>
-    $(document).ready(function () {
-        let _mainPage;
-        
-        if (getUrlParameter('page')) {
-            _mainPage = parseInt(getUrlParameter('page'));
-            console.log("cmpload");
-            loadCmpImages(_mainPage);
-            console.log('loading images...');
-            let timer;
-            
-            $(window).scroll(function () {
-                if (_mainPage) {
-                    if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.75) {
-                        if (timer) {
-                            window.clearTimeout(timer);
-                        }
-                        document.body.scrollTop = document.body.scrollHeight;
-                        timer = window.setTimeout(function () {
-                            _mainPage += 1;
-                            loadCmpImages(_mainPage);
-                        }, 500); //500
-                    }
-                }
-            });
-            
-        } else {
-            _mainPage = 1;
-        }
-
-    });
-</script>
-</body>
+				let search_class = new Set();
+				let search_color = new Set();
+				for (var i=0;i<input_list.length;i++){
+					input = input_list[i]
+					for (var j=0;j<classnames.length;j++){
+						classname = classnames[j]
+						value = strSimilarity2Percent(input,classname)
+						if (value >= 0.5){
+							search_class.add(classname)
+						}
+					}
+					for (var j=0;j<colors.length;j++){
+						color = colors[j]
+						value = strSimilarity2Percent(input,color)
+						if (value >= 0.45){
+							search_color.add(color)
+						}
+					}
+				}
+				if (search_class.size == 0){
+					search_class.add("All")
+				}
+				if (search_color.size == 0){
+					search_color.add("All")
+				}
+				
+				console.log(search_color)
+				console.log(search_class)
+				//console.log("Red" in colors)
+				
+				if(n!=''){
+					$.ajax({
+						type: "GET",
+						url: "data/widgets.json",
+						//url: "data/text.json",
+						//data:{"name":n},
+						data:{"type":search_class,
+								"color":search_color},
+						dataType: "json",
+						error : function() {
+        					alert('json error');
+					    },
+						success: function(data) {
+							$("#tb").empty();
+			                var str = "";
+							
+			                $.each(data,function(commendIndex,comment){
+								for (let classname of search_class){
+									for (let color of search_color){
+										if (comment['type']==classname && comment['majority'].indexOf(color) >= 0){
+											str +='<tr><th>'+comment['name']+'</th><th>'+comment["Developer"]+'</th><th>'+comment['package_name']+'</th></tr>';
+										}
+									}
+									
+								}
+								/* 检索出来下拉
+								if (comment['type'].indexOf("Button")>=0){
+			                	//if(comment['username'].indexOf(n)>=0){
+									//str +='<tr><th>'+comment['ID']+'</th><th>'+comment['username']+'</th><th>'+comment['content']+'</th></tr>';
+									str +='<tr><th>'+comment['type']+'</th><th>'+comment['color']+'</th><th>'+comment['package_name']+'</th></tr>';
+								}
+								*/
+								
+			                });
+			                $("#tb").append(str);
+						}
+					});	
+				}else{
+					$("#tb").empty()
+				}
+			});
+		});
+	</script>
+ 
 </html>

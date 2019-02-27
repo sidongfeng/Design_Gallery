@@ -20,7 +20,7 @@ const displayPerPage = 1001;
 /* GET compare pageff */
 router.get('/', function (req, res, next) {
     res.render('compare', {
-        title: 'MobDile UI Gallery - Compare',
+        title: 'Mobile UI Gallery - Compare',
         url: req.originalUrl,
         //developer:_developer,
         btnTypeArr: _btnTypeArr,

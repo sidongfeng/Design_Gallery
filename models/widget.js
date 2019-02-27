@@ -22,7 +22,7 @@ const widgetSchema = new Schema({
     downloads: String,
     url: String,
     src: {type: String, required: true}
-});
+},{ collection: "widgets" });
 
 
 

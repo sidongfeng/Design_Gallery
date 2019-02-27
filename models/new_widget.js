@@ -1,10 +1,20 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const widgetSchema = new Schema({
+const new_widgetSchema = new Schema({
     _id: Schema.Types.ObjectId,
     name: {type: String, required: true, max: 100},
-    color: {type: String, max: 50},
+    color: {
+        Black: Number,
+        White: Number,
+        Red: Number,
+        Lime: Number,
+        Yellow:Number,
+        Green: Number,
+        Cyan: Number,
+        Blue: Number,
+        Magenta: Number
+    },
     coordinates: {
         from: [Number],
         to: [Number]
@@ -22,8 +32,8 @@ const widgetSchema = new Schema({
     downloads: String,
     url: String,
     src: {type: String, required: true}
-});
+},{ collection: "new_widgets" });
 
 
 
-module.exports = mongoose.model('Widget', widgetSchema);
+module.exports = mongoose.model('New_Widget', new_widgetSchema);
