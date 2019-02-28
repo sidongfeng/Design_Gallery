@@ -167,6 +167,14 @@ function showImages(widgets, no){
             }
             html += '                                   </tr>'
             html += '                                   <tr>'
+            html += '                                       <th scope="row">Font:</th>'
+            if(widget['font'] == 0){
+                html +=	'	    	<td>' + " " + '</td>';
+            }else{
+                html +=	'	    	<td>' + widget['font'] + '</td>';
+            }
+            html += '                                   </tr>'
+            html += '                                   <tr>'
             html += '                                       <th scope="row">Class:</th>'
             html += '                                       <td>' + widget['widget_class'] + '</td>'
             html += '                                   </tr>'
