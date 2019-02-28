@@ -168,7 +168,7 @@ function showImages(widgets, no){
             html += '                                   </tr>'
             html += '                                   <tr>'
             html += '                                       <th scope="row">Font:</th>'
-            if(widget['font'] == 0){
+            if(widget['font'] == ""){
                 html +=	'	    	<td>' + " " + '</td>';
             }else{
                 html +=	'	    	<td>' + widget['font'] + '</td>';
