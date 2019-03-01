@@ -59,8 +59,8 @@ $(document).ready(function(){
             h_array = [0,1280];
             w_array = [0,800];
         }else{
-            var height = document.URL.split("&")[4].split("=")[1]
-            var width = document.URL.split("&")[5].split("=")[1]
+            var height = document.URL.split("&")[5].split("=")[1]
+            var width = document.URL.split("&")[6].split("=")[1]
             h_array = [height.split("+")[0],height.split("+")[2]]
             w_array = [width.split("+")[0],width.split("+")[2]]
         }

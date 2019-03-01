@@ -2221,9 +2221,7 @@ font-family: 'Poppins', sans-serif;
 .boxx ul li {
 
 	list-style: none;
-
-	
-
+	float:left;
 }
 
 .boxx select,.boxx input,.boxx textarea,.boxx button{box-shadow:none;outline:0!important;}
@@ -2578,7 +2576,7 @@ font-family: 'Poppins', sans-serif;
     right: 0px;
     top: 0;
     font-size: 18px;
-    color: #aaa;
+    color: #7f878f;
     background: #f9f9f9;
     font-family: "fontAwesome";
     pointer-events: none;
@@ -2596,7 +2594,7 @@ font-family: 'Poppins', sans-serif;
     right: 0px;
     top: 0;
     font-size: 18px;
-    color: #aaa;
+    color: #7f878f;
     background: #f9f9f9;
     font-family: "fontAwesome";
     pointer-events: none;
@@ -2605,15 +2603,24 @@ font-family: 'Poppins', sans-serif;
     padding: 10px 8px;
 }/*travel-select-icon*/
 
-.boxx .travel-select-icon  select,.travel-check-icon  input {
-	color:#aaa;
+.boxx .travel-select-icon  select,.travel-check-icon input {
+	color:#7f878f;
 	font-size:14px;
 	font-family: 'Poppins', sans-serif;
 	text-transform: capitalize;
 	height: 48px;
-}/*select*/
+}
 
-.boxx .travel-select-icon .form-control,.travel-check-icon .form-control{
+.boxx_input_text,input,textarea{
+	color:#7f878f;
+	font-size:14px;
+	font-family: 'Poppins', sans-serif;
+	text-transform: capitalize;
+	height: 35px;
+}
+/*select*/
+
+.boxx .travel-select-icon .form-control,.travel-check-icon .form-control,.boxx .form-control{
 	-webkit-appearance:none;
 	-moz-appearance:none;
 	-o-appearance:none;
@@ -2729,7 +2736,7 @@ font-family: 'Poppins', sans-serif;
 .boxx .price_slider_amount > input[type="text"] {
     font-weight: 500;
     font-size: 14px;
-    color: #aaa;
+    color: #7f878f;
     letter-spacing: 5.5px;
     height: 40px;
     text-align: center;
@@ -2787,7 +2794,7 @@ font-family: 'Poppins', sans-serif;
     font-weight: 500;
 }
 .service-content p{
-    color:#aaa;
+    color:#7f878f;
     font-size:14px;
     text-transform:inherit;
     font-family: 'Poppins', sans-serif;

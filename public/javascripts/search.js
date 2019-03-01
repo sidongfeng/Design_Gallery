@@ -34,13 +34,13 @@ function compare2(property){
     }
 }
 function getHeightArray(){
-    var height = document.URL.split("&")[4].split("=")[1];
+    var height = document.URL.split("&")[5].split("=")[1];
     var h_array = [height.split("+")[0],height.split("+")[2]];
     return h_array
 }
 
 function getWidthArray(){
-    var width = document.URL.split("&")[5].split("=")[1];
+    var width = document.URL.split("&")[6].split("=")[1];
     var w_array = [width.split("+")[0],width.split("+")[2]];
     return w_array
 }
@@ -61,6 +61,7 @@ function loadImages() { //loadSearchPage
             let widget = result[i];
             if ((ajaxData.btnType=='All' || ajaxData.btnType==widget['widget_class']) &&
                 (ajaxData.category=='All' || ajaxData.category==widget['category']) &&
+                (ajaxData.text=='' || widget['text'].toLowerCase().includes(ajaxData.text.toLowerCase())) &&
                 (parseInt(ajaxData.width[0]) <= widget['dimensions']['width'] && parseInt(ajaxData.width[1]) >= widget['dimensions']['width']) &&
                 (parseInt(ajaxData.height[0]) <= widget['dimensions']['height'] && parseInt(ajaxData.height[1]) >= widget['dimensions']['height'])
             ){
