@@ -61,7 +61,7 @@ function loadImages() { //loadSearchPage
             let widget = result[i];
             if ((ajaxData.btnType=='All' || ajaxData.btnType==widget['widget_class']) &&
                 (ajaxData.category=='All' || ajaxData.category==widget['category']) &&
-                (ajaxData.text=='' || widget['text'].toLowerCase().includes(ajaxData.text.toLowerCase())) &&
+                (ajaxData.text=='' || widget['text'].toLowerCase() == ajaxData.text.toLowerCase()) &&
                 (parseInt(ajaxData.width[0]) <= widget['dimensions']['width'] && parseInt(ajaxData.width[1]) >= widget['dimensions']['width']) &&
                 (parseInt(ajaxData.height[0]) <= widget['dimensions']['height'] && parseInt(ajaxData.height[1]) >= widget['dimensions']['height'])
             ){
