@@ -56,12 +56,12 @@ function loadImages() { //loadSearchPage
         height: getHeightArray()
     };
     $.ajaxSettings.async = false;
-    $.getJSON('./data/fake.json',function(result){
+    $.getJSON('./data/nnnfake.json',function(result){
         for (let i = 0; i < result.length; i++) {
             let widget = result[i];
             if ((ajaxData.btnType=='All' || ajaxData.btnType==widget['widget_class']) &&
                 (ajaxData.category=='All' || ajaxData.category==widget['category']) &&
-                (ajaxData.text=='' || widget['text'].toLowerCase() == ajaxData.text.toLowerCase()) &&
+                (ajaxData.text=='' ||  ajaxData.text.toLowerCase() == widget['text'].toLowerCase() || widget['syns'].includes(ajaxData.text.toLowerCase())) &&
                 (parseInt(ajaxData.width[0]) <= widget['dimensions']['width'] && parseInt(ajaxData.width[1]) >= widget['dimensions']['width']) &&
                 (parseInt(ajaxData.height[0]) <= widget['dimensions']['height'] && parseInt(ajaxData.height[1]) >= widget['dimensions']['height'])
             ){
@@ -106,6 +106,7 @@ function showImages(widgets, no){
         }else{
             output = widgets.length;
         }
+        //console.log(widgets)
 
         let = html = '';
         html += '<div class="row">'

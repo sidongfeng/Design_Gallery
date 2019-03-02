@@ -96,43 +96,8 @@
         </div>
     </footer>
 
-<!-- Bootstrap core JavaScript -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.2.0/js/ion.rangeSlider.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-<script src="/javascripts/imageCell.js"></script>
-<script>
 
-</script>
-<script>
-   $(document).ready(function () {
-    let _mainPage;
-    if (getUrlParameter('page')) {
-        _mainPage = parseInt(getUrlParameter('page'));
-        loadSeeMoreImages(_mainPage);
-        console.log('loading images...');
-        let timer;
-        $(window).scroll(function () {
-            if (_mainPage) {
-                if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.75) {
-                    if (timer) {
-                        window.clearTimeout(timer);
-                    }
-                    document.body.scrollTop = document.body.scrollHeight;
-                    timer = window.setTimeout(function () {
-                        _mainPage += 1;
-                        loadSeeMoreImages(_mainPage);
-                    }, 500); //500
-                }
-            }
-        });  
-    } else {
-        _mainPage = 1;
-    }
-});
-</script>
+
 
 </body>
 </html>
