@@ -2800,3 +2800,10 @@ font-family: 'Poppins', sans-serif;
     font-family: 'Poppins', sans-serif;
     margin-top: 17px;
 }
+
+@media (min-width: 768px) {
+    .modal-xl {
+        width: 70%;
+        max-width:1200px;
+    }
+  }

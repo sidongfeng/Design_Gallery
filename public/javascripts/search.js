@@ -56,7 +56,7 @@ function loadImages() { //loadSearchPage
         height: getHeightArray()
     };
     $.ajaxSettings.async = false;
-    $.getJSON('./data/nnnfake.json',function(result){
+    $.getJSON('./data/ours.json',function(result){
         for (let i = 0; i < result.length; i++) {
             let widget = result[i];
             if ((ajaxData.btnType=='All' || ajaxData.btnType==widget['widget_class']) &&
@@ -134,7 +134,7 @@ function showImages(widgets, no){
             colors_Array.sort(compare2('no'))
 
             html += '<div id="'+ widget['name'] + '" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridModalLabel" style="display: none;" aria-hidden="true">'
-            html += '   <div class="modal-dialog modal-lg" role="document">'
+            html += '   <div class="modal-dialog modal-xl" role="document">'
             html += '       <div class="modal-content">'
             
             html += '           <div class="modal-header">'
@@ -147,7 +147,7 @@ function showImages(widgets, no){
             html += '                   <div class="row">'
             html += '                       <div class="col-md-7" style="position:relative; zoom:0.5">'
             html += '                           <img  src="https://storage.googleapis.com/ui-collection/' + urlAdd + '" style=" cursor: hand;"/>'
-            html += '                           <div style="position:absolute; border: 5px solid red; z-indent:2; left:' + (_left+30) + 'px;top: ' + _top +'px;width:'+_width+'px;height:'+_height+'px;"></div>'
+            html += '                           <div style="position:absolute; border: 5px solid red; z-indent:2; left:' + (_left+86) + 'px;top: ' + _top +'px;width:'+_width+'px;height:'+_height+'px;"></div>'
             html += '                       </div>'
             html += '                       <div class="col-md-5">'
             html += '                           <table class="table table-borderless">'
