@@ -56,7 +56,7 @@ function loadImages() { //loadSearchPage
         height: getHeightArray()
     };
     $.ajaxSettings.async = false;
-    $.getJSON('./data/ours.json',function(result){
+    $.getJSON('./data/rico-1.json',function(result){
         for (let i = 0; i < result.length; i++) {
             let widget = result[i];
             if ((ajaxData.btnType=='All' || ajaxData.btnType==widget['widget_class']) &&
@@ -195,6 +195,10 @@ function showImages(widgets, no){
                 html += '                                       <div class="row">'+'<div class="circle" style="background-color:'+colors[colors_Array[z]['c']]+'"></div>'
             }
             html += '                                       </td>'
+            html += '                                   </tr>'
+            html += '                                   <tr>'
+            html += '                                       <th scope="row">Developer:</th>'
+            html += '                                       <td>' + widget['Developer']+ '</td>'
             html += '                                   </tr>'
             html += '                                   <tr>'
             html += '                                       <th scope="row">Downloads:</th>'
