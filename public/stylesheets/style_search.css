@@ -2806,4 +2806,15 @@ font-family: 'Poppins', sans-serif;
         width: 70%;
         max-width:1200px;
     }
-  }
+}
+
+.circle{    
+    width: 30px;      
+    height: 30px;    
+    margin: 0px 20px 0px 0px;      
+    border-radius: 50%;  
+    -webkit-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);  
+    -moz-border-radius: 50%;      
+    -webkit-border-radius: 50%;    
+}
