@@ -147,7 +147,6 @@ function showImages(widgets, no){
             html += '                   <div class="row">'
             html += '                       <div class="col-md-7" style="position:relative; zoom:0.5">'
             html += '                           <img  src="https://storage.googleapis.com/ui-collection/' + urlAdd + '" style=" cursor: hand;"/>'
-            html += '                           <div style="position:absolute; border: 5px solid red; z-indent:2; left:' + (_left+86) + 'px;top: ' + _top +'px;width:'+_width+'px;height:'+_height+'px;"></div>'
             html += '                       </div>'
             html += '                       <div class="col-md-5">'
             html += '                           <table class="table table-borderless">'
