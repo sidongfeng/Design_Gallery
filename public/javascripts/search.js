@@ -108,7 +108,7 @@ function showImages(widgets, no){
         }
         //console.log(widgets)
 
-        let = html = '';
+        let html = '';
         html += '<div class="row">'
         for(let j = 0; j < output; j++){
             let widget = widgets.pop();
