@@ -1,117 +1,413 @@
 <!DOCTYPE html>
-<html>
- 
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-        <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-		<style type="text/css">
-			thead th{width: 100px;text-align: center;}
-		</style>
-	</head>
+<html lang="en">
 
-	<body>
-		<label>姓名：</label><input type="text" id="username" />
-		<label>备注：</label><input type="text" id="content" />
-		<input type="button" id="send" value="点击" />
-		<table>
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>姓名</th>
-					<th>备注</th>
-				</tr>
-			</thead>
-			<tbody id="tb">
-				
-			</tbody>
-		</table>
-	</body>
-	
-	<script src="/javascripts/test.js"></script>
-	<script type="text/javascript">
-	
-		$(function() {
-			$('#username').keyup(function() {
-				var n=$(this).val();
-				var input_list = n.split(" ");
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description"
+          content="Mobile UI Gallery, a repository of widgets taken from Google Play Store. We aim to make life easier for mobile application developers by providing a database of widgets used by other developers.">
+    <meta name="keywords"
+          content="mobile, mobile ui, mobile widgets, widget, widgets, mobile application, android, android widget, android widgets, android ui, ui">
+    <meta name="author" content="">
+    <script>
+        /*
+		addEventListener("load", function () {
+			setTimeout(hideURLbar, 0);
+		}, false);
 
-				const classnames = new Array("Chronometer", "CompoundButton","ProgressBar", "CheckBox", "Button",
-									  "RadioButton",  "RatingBar", "SeekBar", "Spinner", "Switch", "ToggleButton","ImageButton");
-				const colors = new Array("Black","White","Red","Lime","Yellow","Green","Cyan","Blue","Magenta");
-
-				let search_class = new Set();
-				let search_color = new Set();
-				for (var i=0;i<input_list.length;i++){
-					input = input_list[i]
-					for (var j=0;j<classnames.length;j++){
-						classname = classnames[j]
-						value = strSimilarity2Percent(input,classname)
-						if (value >= 0.5){
-							search_class.add(classname)
-						}
-					}
-					for (var j=0;j<colors.length;j++){
-						color = colors[j]
-						value = strSimilarity2Percent(input,color)
-						if (value >= 0.45){
-							search_color.add(color)
-						}
-					}
-				}
-				if (search_class.size == 0){
-					search_class.add("All")
-				}
-				if (search_color.size == 0){
-					search_color.add("All")
-				}
-				
-				console.log(search_color)
-				console.log(search_class)
-				//console.log("Red" in colors)
-				
-				if(n!=''){
-					$.ajax({
-						type: "GET",
-						url: "data/widgets.json",
-						//url: "data/text.json",
-						//data:{"name":n},
-						data:{"type":search_class,
-								"color":search_color},
-						dataType: "json",
-						error : function() {
-        					alert('json error');
-					    },
-						success: function(data) {
-							$("#tb").empty();
-			                var str = "";
-							
-			                $.each(data,function(commendIndex,comment){
-								for (let classname of search_class){
-									for (let color of search_color){
-										if (comment['type']==classname && comment['majority'].indexOf(color) >= 0){
-											str +='<tr><th>'+comment['name']+'</th><th>'+comment["Developer"]+'</th><th>'+comment['package_name']+'</th></tr>';
-										}
-									}
-									
-								}
-								/* 检索出来下拉
-								if (comment['type'].indexOf("Button")>=0){
-			                	//if(comment['username'].indexOf(n)>=0){
-									//str +='<tr><th>'+comment['ID']+'</th><th>'+comment['username']+'</th><th>'+comment['content']+'</th></tr>';
-									str +='<tr><th>'+comment['type']+'</th><th>'+comment['color']+'</th><th>'+comment['package_name']+'</th></tr>';
-								}
-								*/
-								
-			                });
-			                $("#tb").append(str);
-						}
-					});	
-				}else{
-					$("#tb").empty()
-				}
-			});
-		});
+		function hideURLbar() {
+			window.scrollTo(0, 1);
+        }
+        */
 	</script>
- 
+
+    <title><%= title %></title>
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="stylesheets/css/bootstrap.css">
+	<!-- Bootstrap-Core-CSS -->
+	<link rel="stylesheet" href="stylesheets/style1.css"> <!-- Resource style -->
+    <link rel="stylesheet" href="stylesheets/style.css" type="text/css" media="all" />
+	<!-- Style-CSS -->
+	<link rel="stylesheet" href="stylesheets/reset.css"> <!-- CSS reset -->
+
+	<link href="stylesheets/font-awesome.min.css" rel="stylesheet">
+	<!-- Font-Awesome-Icons-CSS -->
+	<!-- //Custom-Files -->
+
+	<!-- Web-Fonts -->
+	<link href="http://fonts.googleapis.com/css?family=Crimson+Text:400,400i,600,600i,700,700i" rel="stylesheet">
+	<link href="http://fonts.googleapis.com/css?family=Oxygen:300,400,700&amp;subset=latin-ext" rel="stylesheet">
+	<!-- //Web-Fonts -->
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117332758-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-117332758-2');
+    </script>
+</head>
+
+<body>
+    <!-- main banner -->
+	<div class="main-top" id="home">
+        <!-- header -->
+        <header>
+            <div class="container-fluid">
+                <div class="header d-md-flex justify-content-between align-items-center py-3 px-xl-5 px-lg-3 px-2">
+                    <!-- logo -->
+                    <div id="logo">
+                        <h1><a href="/">Mobile UI Gallery</a></h1>
+                    </div>
+                    <!-- //logo -->
+                    <!-- nav -->
+                    <div class="nav_w3ls">
+                        <nav>
+                            <label for="drop" class="toggle">Menu</label>
+                            <input type="checkbox" id="drop" />
+                            <ul class="menu">
+                                <li><a href="/">Home</a></li>
+                                <li><a href="/about">About Us</a></li>
+                                <li><a href="/gallery">Gallery</a></li>
+                                <li><a href="/search">Services</a></li>
+                                <li><a href="/contact">Contact Us</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <!-- //nav -->
+                </div>
+            </div>
+        </header>
+        <!-- //header -->
+    
+        <!-- banner -->
+        <div class="banner_w3lspvt">
+
+        </div>
+        <!-- //banner -->
+    </div>
+	<!-- //main banner -->
+
+	<div class="test">
+	    <section class="cd-products-comparison-table">
+		    <!-- page details -->
+            <div class="breadcrumb">
+                <a href="/screenshot?color=Red+Yellow+Green+Blue+Cyan+Black+White+Lime+Magenta" class="back">Back</a>
+                <a href="#0" class="reset">Reset</a>
+                <a href="#0" class="filter">Compare</a>
+            </div>
+		    <!-- //page details -->
+		
+			<div class="cd-products-table">
+				<div class="features">
+					<div class="top-info">Models</div>
+					<ul class="cd-features-list">
+						<li>Price</li>
+						<li>Customer Rating</li>
+						<li>Resolution</li>
+						<li>Screen Type</li>
+						<li>Display Size</li>
+						<li>Refresh Rate</li>
+						<li>Model Year</li>
+						<li>Tuner Technology</li>
+						<li>Ethernet Input</li>
+						<li>USB Input</li>
+						<li>Scart Input</li>
+					</ul>
+				</div> <!-- .features -->
+				
+				<div class="cd-products-wrapper">
+					<ul class="cd-products-columns">
+						<li class="product">
+							<div class="top-info">
+								<div class="check"></div>
+								<img src="img/product.png" alt="product image">
+								<h3>Sumsung Series 6 J6300</h3>
+							</div> <!-- .top-info -->
+		
+							<ul class="cd-features-list">
+								<li>$600</li>
+								<li class="rate"><span>5/5</span></li>
+								<li>1080p</li>
+								<li>LED</li>
+								<li>47.6 inches</li>
+								<li>800Hz</li>
+								<li>2015</li>
+								<li>mpeg4</li>
+								<li>1 Side</li>
+								<li>3 Port</li>
+								<li>1 Rear</li>
+							</ul>
+						</li> <!-- .product -->
+		
+						<li class="product">
+							<div class="top-info">
+								<div class="check"></div>
+								<img src="img/product.png" alt="product image">
+								<h3>Sumsung Series 6 J6300</h3>
+							</div> <!-- .top-info -->
+		
+							<ul class="cd-features-list">
+								<li>$600</li>
+								<li class="rate"><span>5/5</span></li>
+								<li>1080p</li>
+								<li>LED</li>
+								<li>47.6 inches</li>
+								<li>800Hz</li>
+								<li>2015</li>
+								<li>mpeg4</li>
+								<li>1 Side</li>
+								<li>3 Port</li>
+								<li>1 Rear</li>
+							</ul>
+						</li> <!-- .product -->
+		
+						<li class="product">
+							<div class="top-info">
+								<div class="check"></div>
+								<img src="img/product.png" alt="product image">
+								<h3>Sumsung Series 6 J6300</h3>
+							</div> <!-- .top-info -->
+		
+							<ul class="cd-features-list">
+								<li>$600</li>
+								<li class="rate"><span>5/5</span></li>
+								<li>1080p</li>
+								<li>LED</li>
+								<li>47.6 inches</li>
+								<li>800Hz</li>
+								<li>2015</li>
+								<li>mpeg4</li>
+								<li>1 Side</li>
+								<li>3 Port</li>
+								<li>1 Rear</li>
+							</ul>
+						</li> <!-- .product -->
+		
+						<li class="product">
+							<div class="top-info">
+								<div class="check"></div>
+								<img src="img/product.png" alt="product image">
+								<h3>Sumsung Series 6 J6300</h3>
+							</div> <!-- .top-info -->
+		
+							<ul class="cd-features-list">
+								<li>$600</li>
+								<li class="rate"><span>5/5</span></li>
+								<li>1080p</li>
+								<li>LED</li>
+								<li>47.6 inches</li>
+								<li>800Hz</li>
+								<li>2015</li>
+								<li>mpeg4</li>
+								<li>1 Side</li>
+								<li>3 Port</li>
+								<li>1 Rear</li>
+							</ul>
+						</li> <!-- .product -->
+		
+						<li class="product">
+							<div class="top-info">
+								<div class="check"></div>
+								<img src="img/product.png" alt="product image">
+								<h3>Sumsung Series 6 J6300</h3>
+							</div> <!-- .top-info -->
+		
+							<ul class="cd-features-list">
+								<li>$600</li>
+								<li class="rate"><span>5/5</span></li>
+								<li>1080p</li>
+								<li>LED</li>
+								<li>47.6 inches</li>
+								<li>800Hz</li>
+								<li>2015</li>
+								<li>mpeg4</li>
+								<li>1 Side</li>
+								<li>3 Port</li>
+								<li>1 Rear</li>
+							</ul>
+						</li> <!-- .product -->
+		
+						<li class="product">
+							<div class="top-info">
+								<div class="check"></div>
+								<img src="img/product.png" alt="product image">
+								<h3>Sumsung Series 6 J6300</h3>
+							</div> <!-- .top-info -->
+		
+							<ul class="cd-features-list">
+								<li>$600</li>
+								<li class="rate"><span>5/5</span></li>
+								<li>1080p</li>
+								<li>LED</li>
+								<li>47.6 inches</li>
+								<li>800Hz</li>
+								<li>2015</li>
+								<li>mpeg4</li>
+								<li>1 Side</li>
+								<li>3 Port</li>
+								<li>1 Rear</li>
+							</ul>
+						</li> <!-- .product -->
+		
+						<li class="product">
+							<div class="top-info">
+								<div class="check"></div>
+								<img src="img/product.png" alt="product image">
+								<h3>Sumsung Series 6 J6300</h3>
+							</div> <!-- .top-info -->
+		
+							<ul class="cd-features-list">
+								<li>$600</li>
+								<li class="rate"><span>5/5</span></li>
+								<li>1080p</li>
+								<li>LED</li>
+								<li>47.6 inches</li>
+								<li>800Hz</li>
+								<li>2015</li>
+								<li>mpeg4</li>
+								<li>1 Side</li>
+								<li>3 Port</li>
+								<li>1 Rear</li>
+							</ul>
+						</li> <!-- .product -->
+		
+						<li class="product">
+							<div class="top-info">
+								<div class="check"></div>
+								<img src="img/product.png" alt="product image">
+								<h3>Sumsung Series 6 J6300</h3>
+							</div> <!-- .top-info -->
+		
+							<ul class="cd-features-list">
+								<li>$600</li>
+								<li class="rate"><span>5/5</span></li>
+								<li>1080p</li>
+								<li>LED</li>
+								<li>47.6 inches</li>
+								<li>800Hz</li>
+								<li>2015</li>
+								<li>mpeg4</li>
+								<li>1 Side</li>
+								<li>3 Port</li>
+								<li>1 Rear</li>
+							</ul>
+						</li> <!-- .product -->
+					</ul> <!-- .cd-products-columns -->
+				</div> <!-- .cd-products-wrapper -->
+				
+				<ul class="cd-table-navigation">
+					<li><a href="#0" class="prev inactive">Prev</a></li>
+					<li><a href="#0" class="next">Next</a></li>
+				</ul>
+			</div> <!-- .cd-products-table -->
+		</section> <!-- .cd-products-comparison-table -->
+    </div>
+
+    <!-- footer -->
+    <footer class="py-5">
+        <div class="container pt-xl-4">
+            <div class="row footer-top">
+                <div class="col-lg-4 col-md-6 footer-grid_section_1its">
+                    <h2 class="logo-2 mb-lg-4 mb-3">
+                        <a href="/" class="text-uppercase text-wh">Design Gallery</a>
+                    </h2>
+                    <!-- Map -->
+                    <div class="map-fo">
+                        <iframe src=""></iframe>
+                    </div>
+                    <!-- //Map -->
+                </div>
+                <div class="col-lg-2 col-md-6 footer-grid_section_1its mt-md-0 mt-4">
+                    <h3 class="footer-title text-uppercase text-wh mb-lg-4 mb-3">Links</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-3">
+                            <a href="/">Home</a>
+                        </li>
+                        <li class="mb-3">
+                            <a href="/about">About Us</a>
+                        </li>
+                        <li class="mb-3">
+                            <a href="/search">Search</a>
+                        </li>
+                        <li class="mb-3">
+                            <a href="/compare">Compare</a>
+                        </li>
+                        <li class="mb-3">
+                            <a href="/contact">Contact Us</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 footer-grid_section_1its mt-lg-0 mt-4">
+                    <h3 class="footer-title text-uppercase text-wh mb-lg-4 mb-3">Contact Info</h3>
+                    <div class="contact-info">
+                        <div class="footer-style-w3ls mb-4">
+                            <h4 class="text-li mb-2">Phone</h4>
+                            <p>+1234567890</p>
+                        </div>
+                        <div class="footer-style-w3ls mb-4">
+                            <h4 class="text-li mb-2">Email </h4>
+                            <p><a href="mailto:u6063820@anu.edu.au">u6063820@anu.edu.au</a></p>
+                        </div>
+                        <div class="footer-style-w3ls mb-4">
+                            <h4 class="text-li mb-2">Location</h4>
+                            <p>The Australian National University</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 footer-grid_section_1its mt-lg-0 mt-4">
+                    <!-- social icons -->
+                    <div class="mobamuinfo_social_icons">
+                        <h3 class="footer-title text-uppercase text-wh mb-lg-4 mb-3">Social Info</h3>
+                        <p>We aim to build mobile ui gallery to help designers to bring some inspirations</p>
+                        <h4 class="sub-con-fo text-li my-4">Catch on Social</h4>
+                        <ul class="mobamuits_social_list list-unstyled">
+                            <li class="w3_mobamu_facebook">
+                                <a href="https://www.facebook.com/profile.php?id=100006350080957">
+                                    <span class="fa fa-facebook-f"></span>
+                                </a>
+                            </li>
+                            <li class="w3_mobamu_twitter">
+                                <a href="https://twitter.com/loveromance09">
+                                    <span class="fa fa-twitter"></span>
+                                </a>
+                            </li>
+                            <li class="w3_mobamu_dribble">
+                                <a href="#">
+                                    <span class="fa fa-dribbble"></span>
+                                </a>
+                            </li>
+                            <li class="w3_mobamu_google">
+                                <a href="#">
+                                    <span class="fa fa-google-plus"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- social icons -->
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- //footer -->
+    <!-- copyright -->
+    <div class="cpy-right text-center py-3">
+        <p>Copyright &copy; 2019. Mobile UI Gallery All rights reserved</p>
+    </div>
+	<!-- //copyright -->
+
+	<!-- jquery -->
+	<script src="javascripts/js/jquery.js"></script>
+	<!--jquery-ui.min.js-->
+	<script src="javascripts/js/jquery-ui.min.js"></script>
+    <script src="javascripts/main.js"></script> <!-- Resource jQuery -->
+</body>
+
 </html>

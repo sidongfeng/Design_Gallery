@@ -90,6 +90,18 @@
         <!-- //banner -->
     </div>
     <!-- //main banner -->
+
+    <!-- page details -->
+	<div class="breadcrumb-mobamu">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/">Home</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Compare</li>
+        </ol>
+    </div>
+    <!-- //page details -->
+
     <div id="sidebar">
         <h3>CART</h3>
         <div id="cart">
@@ -1008,7 +1020,7 @@
         crossorigin="anonymous"></script>
         <script src="javascripts/sc_ready.js"></script>
         <script src='javascripts/stopExecutionOnTimeout.js?t=1'></script>
-        <script type="text/javascript" src="javascripts/main.js"></script>
+        <script type="text/javascript" src="javascripts/main_sc.js"></script>
 
 <script>
     function filtering(){
@@ -1036,7 +1048,7 @@
             return $(this).text(); 
         }).get().join('+');
         //console.log(text)
-        window.location = '/compare?'+text
+        window.location = '/test?apps='+text
     }
 </script>
 
@@ -1073,8 +1085,18 @@ jQuery.fn.onPositionChanged = function (trigger, millis) {
 <script>
     $("#submit").onPositionChanged(function(){
         var height = document.getElementById("submit").offsetTop -200;
-        $("#sidebar").css("height",height+"px");
-        $("footer").css("margin-top",'300px');
+        var products = document.getElementsByClassName("product");
+        var height_pro = products[products.length-1].offsetTop + 250;
+        //console.log(height,height_pro)
+
+        if (height_pro>height){
+            $("#grid").css("height",height_pro+"px");
+            $("#sidebar").css("height",height_pro+"px");
+        }else{
+            $("#sidebar").css("height",height+"px");
+            $("footer").css("margin-top",'300px');
+        }
+
     });
 </script>
 
