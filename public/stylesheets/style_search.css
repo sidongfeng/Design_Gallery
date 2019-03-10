@@ -2803,7 +2803,7 @@ font-family: 'Poppins', sans-serif;
 
 @media (min-width: 768px) {
     .modal-xl {
-        width: 70%;
+        width: 85%;
         max-width:1200px;
     }
 }
@@ -2811,7 +2811,7 @@ font-family: 'Poppins', sans-serif;
 .circle{    
     width: 30px;      
     height: 30px;    
-    margin: 0px 20px 0px 0px;      
+    margin: 0px 20px 0px 10px;      
     border-radius: 50%;  
     -webkit-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);
             box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);  
