@@ -56,7 +56,7 @@ function loadImages() { //loadSearchPage
         height: getHeightArray()
     };
     $.ajaxSettings.async = false;
-    $.getJSON('./data/rico-1.json',function(result){
+    $.getJSON('./data/all_our.json',function(result){
         for (let i = 0; i < result.length; i++) {
             let widget = result[i];
             if ((ajaxData.btnType=='All' || ajaxData.btnType==widget['widget_class']) &&
