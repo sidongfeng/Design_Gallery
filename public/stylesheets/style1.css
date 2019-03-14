@@ -110,7 +110,7 @@ Main Components
 }
 @media only screen and (min-width: 1170px) {
   .cd-products-comparison-table {
-    margin-bottom: 8em;
+    margin-bottom: 2em;
   }
   .cd-products-comparison-table::after {
     /* never visible - this is used in jQuery to check the current MQ */
