@@ -596,3 +596,11 @@ No JS
 .no-js .cd-products-columns .check {
   display: none;
 }
+
+.top-info img{
+  position: relative;
+  height: 100px;
+  width: 100px;
+  margin-left: 1.6em;
+  margin-bottom: 1em; 
+}
