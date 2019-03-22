@@ -56,7 +56,7 @@ function loadImages() { //loadSearchPage
         height: getHeightArray()
     };
     $.ajaxSettings.async = false;
-    $.getJSON('./data/all_our.json',function(result){
+    $.getJSON('./data/widgets.json',function(result){
         for (let i = 0; i < result.length; i++) {
             let widget = result[i];
             if ((ajaxData.btnType=='All' || ajaxData.btnType==widget['widget_class']) &&
@@ -109,7 +109,6 @@ function showImages(widgets, no){
         //console.log(widgets)
 
         let html = '';
-        html += '<div class="row">'
         for(let j = 0; j < output; j++){
             let widget = widgets.pop();
 
@@ -224,7 +223,7 @@ function showImages(widgets, no){
             html += '   <img data-toggle="modal" data-target="#'+widget['name'] + '" class="img-fluid pb-1" src="https://storage.googleapis.com/ui-collection/Mywidgets/' + widget['name'] + '.png" style="max-height:100px; cursor:pointer" />'
             html += '</div>'
         }
-        html += '</div>'
+
         $(".demo").append(html);    // This will be the div where our content will be loaded
     }else{
         $("#endPage").removeClass("loader").append("End of Page.");

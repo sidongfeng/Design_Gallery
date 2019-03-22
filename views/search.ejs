@@ -75,8 +75,8 @@
                             <ul class="menu">
                                 <li><a href="/">Home</a></li>
                                 <li><a href="/about">About Us</a></li>
-                                <li><a href="/gallery">Gallery</a></li>
-                                <li><a href="/search">Services</a></li>
+                                <li><a href="/search">Search</a></li>
+                                <li><a href="/compare?color=Red+Yellow+Green+Blue+Cyan+Black+White+Lime+Magenta">Compare</a></li>
                                 <li><a href="/contact">Contact Us</a></li>
                             </ul>
                         </nav>
@@ -135,12 +135,6 @@
                                         <a href="#searchs" aria-controls="searchs" role="tab" data-toggle="tab">
                                             <i class="fa fa-search"></i>
                                             Search
-                                        </a>
-                                    </li>
-                                    <li role="presentation">
-                                        <a href="#compares" aria-controls="compares" role="tab" data-toggle="tab">
-                                            <i class="fa fa-building"></i>
-                                            Compare
                                         </a>
                                     </li>
                                 </ul>
@@ -336,172 +330,6 @@
                                             </div><!--/.tab-para-->
                                         </form>
                                     </div><!--/.tabpannel-->
-
-                                    
-                                    <div role="tabpanel" class="tab-pane fade in" id="compares">
-                                        <form name="compare" method="get" id="myform-1" action="/compare" class="panel-body">
-                                            <div class="tab-para">
-        
-                                                <div class="row">
-                                                    <div class="col-lg-5 col-md-4 col-sm-12">
-                                                        <div class="single-tab-select-box">
-                                                            <h2>DeveloperOne</h2>
-                                                            <fieldset>
-                                                                <div class="travel-select-icon">
-                                                                    <select class="form-control" id="DeveloperOne" name="DeveloperOne">
-                                                                        <option value="Empty">--PLEASE SELECT--</option>
-                                                                        <option value="AI_Factory_Limited">AI_Factory_Limited</option>
-                                                                        <option value="GIOSIS_PTE._LTD.">GIOSIS_PTE._LTD.</option>
-                                                                        <option value="JRJ_Unlimited">JRJ_Unlimited</option>
-                                                                        <option value="SMSROBOT_LTD">SMSROBOT_LTD</option>
-                                                                        <option value="NAVER_Corp.">NAVER_Corp.</option>
-                                                                        <option value="Corcanoe">Corcanoe</option>
-                                                                        <option value="Gemego_Ltd">Gemego_Ltd</option>
-                                                                        <option value="SMSROBOT_LTD">SMSROBOT_LTD</option>
-                                                                        <option value="Mirco_Bettelini">Mirco_Bettelini</option>
-                                                                        <option value="Boreumdal_Lab">Boreumdal_Lab</option>
-                                                                        <option value="Code_Sector">Code_Sector</option>
-                                                                        <option value="RATP">RATP</option>
-                                                                        <option value="joysoft">joysoft</option>
-                                                                        <option value="Molatra">Molatra</option>
-                                                                        <option value="NyxCore">NyxCore</option>
-                                                                        <option value="YinzCam,_Inc.">YinzCam,_Inc.</option>
-                                                                        <option value="Recruit_Holdings_Co.,Ltd.">Recruit_Holdings_Co.,Ltd.</option>
-                                                                    </select><!-- /.select-->
-                                                                </div><!-- /.travel-select-icon -->
-                                                            </fieldset>
-                                                        </div><!--/.single-tab-select-box-->
-                                                    </div><!--/.col-->
-    
-                                                    <div class="col-lg-5 col-md-4 col-sm-12">
-                                                        <div class="single-tab-select-box">
-                                                            <h2>DeveloperTwo</h2>
-                                                            <fieldset>
-                                                                <div class="travel-select-icon">
-                                                                    <select class="form-control" id="DeveloperTwo" name="DeveloperTwo">
-                                                                        <option value="Empty">--PLEASE SELECT--</option>
-                                                                        <option value="AI_Factory_Limited">AI_Factory_Limited</option>
-                                                                        <option value="GIOSIS_PTE._LTD.">GIOSIS_PTE._LTD.</option>
-                                                                        <option value="JRJ_Unlimited">JRJ_Unlimited</option>
-                                                                        <option value="SMSROBOT_LTD">SMSROBOT_LTD</option>
-                                                                        <option value="NAVER_Corp.">NAVER_Corp.</option>
-                                                                        <option value="Corcanoe">Corcanoe</option>
-                                                                        <option value="Gemego_Ltd">Gemego_Ltd</option>
-                                                                        <option value="SMSROBOT_LTD">SMSROBOT_LTD</option>
-                                                                        <option value="Mirco_Bettelini">Mirco_Bettelini</option>
-                                                                        <option value="Boreumdal_Lab">Boreumdal_Lab</option>
-                                                                        <option value="Code_Sector">Code_Sector</option>
-                                                                        <option value="RATP">RATP</option>
-                                                                        <option value="joysoft">joysoft</option>
-                                                                        <option value="Molatra">Molatra</option>
-                                                                        <option value="NyxCore">NyxCore</option>
-                                                                        <option value="YinzCam,_Inc.">YinzCam,_Inc.</option>
-                                                                        <option value="Recruit_Holdings_Co.,Ltd.">Recruit_Holdings_Co.,Ltd.</option>
-                                                                    </select><!-- /.select-->
-                                                                </div><!-- /.travel-select-icon -->
-                                                            </fieldset>
-                                                        </div><!--/.single-tab-select-box-->
-                                                    </div><!--/.col-->
-
-                                                    <div class="col-lg-3 col-md-4 col-sm-12">
-                                                        <div class="single-tab-select-box">
-                                                            <h2>Widget Class</h2>
-                                                            <!-- Widget Class -->
-                                                            <fieldset>
-                                                                <div class="travel-select-icon">
-                                                                    <select class="form-control" id="btnType" name="btnType">
-                                                                        <% if (!btnTypeArr.includes(query.btnType)) { %>
-                                                                        <option selected value="All">All</option>
-                                                                        <% } else { %>
-                                                                        <option value="All">All</option>
-                                                                        <% }
-                                                                        for (i = 0; i < btnTypeArr.length; i++) {
-                                                                            if (btnTypeArr[i] === 'All') {
-                                                                                continue;
-                                                                            }
-                                                                        if (query.btnType === btnTypeArr[i]) { %>
-                                                                        <option selected> <%= btnTypeArr[i] %></option>
-                                                                        <% }else { %>
-                                                                        <option> <%= btnTypeArr[i] %></option>
-                                                                        <% }
-                                                                        } %>
-                                                                    </select>
-                                                                </div><!-- /.travel-select-icon -->
-                                                            </fieldset>
-                                                            <!-- //Widget Class -->
-                                                        </div><!--/.single-tab-select-box-->
-                                                    </div><!--/.col-->
-                                                
-        
-                                                    <div class="col-lg-2 col-md-1 col-sm-4">
-                                                        <div class="single-tab-select-box">
-                                                            <h2>Color</h2>
-                                                            <fieldset>
-                                                                <div class="travel-select-icon">
-                                                                    <select class="form-control" id="color" name="color">
-                                                                        <% if (!colArr.includes(query.color)) { %>
-                                                                            <option selected value="All">All</option>
-                                                                            <% } else { %>
-                                                                            <option value="All">All</option>
-                                                                            <% }
-                                                                            for (var i = 0; i < colArr.length; i++) {
-                                                                                if (colArr[i] === 'All') {
-                                                                                    continue;
-                                                                                }
-                                                                            if (query.color === colArr[i]) { %>
-                                                                            <option selected> <%= colArr[i] %></option>
-                                                                            <% }else { %>
-                                                                            <option> <%= colArr[i] %></option>
-                                                                            <% }
-                                                                            } %>
-                                                                    </select><!-- /.select-->
-                                                                </div><!-- /.travel-select-icon -->
-                                                            </fieldset>
-                                                        </div><!--/.single-tab-select-box-->
-                                                    </div><!--/.col-->
-
-                                                    <div class="col-lg-5 col-md-3 col-sm-10">
-                                                        <div class="single-tab-select-box">
-                                                            <h2>Category</h2>
-                                                            <fieldset>
-                                                                <div class="travel-select-icon">
-                                                                    <select class="form-control" id="category" name="category">
-                                                                        <% if (!catArr.includes(query.category)) { %>
-                                                                        <option selected value="All">All</option>
-                                                                        <% } else { %>
-                                                                        <option value="All">All</option>
-                                                                        <% }
-                                                                        for (var i = 0; i < catArr.length; i++) {
-                                                                            if (catArr[i] === 'All') {
-                                                                                continue;
-                                                                            }
-                                                                        if (query.category === catArr[i]) { %>
-                                                                        <option selected> <%= catArr[i] %></option>
-                                                                        <% }else { %>
-                                                                        <option> <%= catArr[i] %></option>
-                                                                        <% }
-                                                                        } %>
-                                                                    </select><!-- /.select-->
-                                                                </div><!-- /.travel-select-icon -->
-                                                            </fieldset>
-                                                        </div><!--/.single-tab-select-box-->
-                                                    </div><!--/.col-->
-                                                </div><!--/.row-->
-
-                                                <div class="row">
-                                                    <div class="col-sm-5"></div>
-                                                    <div class="col-sm-7">
-                                                        <div class="about-btn travel-mrt-0 pull-right">
-                                                            <button  class="about-view travel-btn">
-                                                                Compare	
-                                                            </button><!--/.travel-btn-->
-                                                        </div><!--/.about-btn-->
-                                                    </div><!--/.col-->
-                                                </div><!--/.row-->
-            
-                                            </div><!--/.tab-para-->
-                                        </form>
-                                    </div><!--/.tabpannel-->
         
                                 </div><!--/.tab content-->
                             </div><!--/.desc-tabs-->
@@ -517,8 +345,7 @@
     <!--service start-->
     <section id="service" class="service">
         <div class="container">
-
-            <div class="service-counter text-center demo">
+            <div class="service-counter text-center demo row">
             </div>
         </div>
     </section>
@@ -555,7 +382,7 @@
                             <a href="/search">Search</a>
                         </li>
                         <li class="mb-3">
-                            <a href="/compare">Compare</a>
+                            <a href="/compare?color=Red+Yellow+Green+Blue+Cyan+Black+White+Lime+Magenta">Compare</a>
                         </li>
                         <li class="mb-3">
                             <a href="/contact">Contact Us</a>
@@ -583,7 +410,7 @@
                     <!-- social icons -->
                     <div class="mobamuinfo_social_icons">
                         <h3 class="footer-title text-uppercase text-wh mb-lg-4 mb-3">Social Info</h3>
-                        <p>We aim to build mobile ui gallery to help designers to bring some inspirations</p>
+                        <p>The new ways of design sharing and knowledge discovery, enables through advanced search, summarization and comparison of real-application GUI designs, beyond the content sharing of GUI design artwork.</p>
                         <h4 class="sub-con-fo text-li my-4">Catch on Social</h4>
                         <ul class="mobamuits_social_list list-unstyled">
                             <li class="w3_mobamu_facebook">
@@ -597,13 +424,8 @@
                                 </a>
                             </li>
                             <li class="w3_mobamu_dribble">
-                                <a href="#">
+                                <a href="https://dribbble.com/loveromance09">
                                     <span class="fa fa-dribbble"></span>
-                                </a>
-                            </li>
-                            <li class="w3_mobamu_google">
-                                <a href="#">
-                                    <span class="fa fa-google-plus"></span>
                                 </a>
                             </li>
                         </ul>
@@ -639,12 +461,12 @@
             if (document.URL.split("&").length>5){
                 $("html,body").animate({scrollTop:$("#service").offset().top})
                 let widgets = loadImages();
-                showImages(widgets,100);
+                showImages(widgets,200);
                 console.log('loading images...');
                 $(window).on("scroll",function(){
                     if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.1){
                     //当最短的ul的高度比窗口滚出去的高度+浏览器高度大时加载新图片
-                        showImages(widgets,20);
+                        showImages(widgets,30);
                     }
                 })
             }

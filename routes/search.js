@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const Widget = mongoose.model('Widget');
 const Util = require('../util/util');
 
-const _btnTypeArr = ["All", "Button", "CheckBox", "Chronometer", "CompoundButton", "ImageButton", "ProgressBar", "RadioButton", "RatingBar", "SeekBar", "Spinner", "Switch", "ToggleButton"];
+const _btnTypeArr = ["All", "Button", "CheckBox", "Chronometer", "ImageButton", "ProgressBar", "RadioButton", "RatingBar", "SeekBar", "Spinner", "Switch", "ToggleButton"];
 //"EditText", "View"
 const _sortTypeDict = {
     appDownloads: "Descending Number of Application Downloads",

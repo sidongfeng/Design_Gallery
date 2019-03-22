@@ -25,8 +25,8 @@ const contactRouter = require('./routes/contact');
 const detailRouter = require('./routes/detail');  // test
 const compareRouter = require('./routes/compare');
 const seemoreRouter = require('./routes/seemore');
-const galleryRouter = require('./routes/gallery');
-const screenshotRouter = require('./routes/screenshot');
+//const galleryRouter = require('./routes/gallery');
+//const screenshotRouter = require('./routes/screenshot');
 const testRouter = require('./routes/test');
 const app = express();
 
@@ -50,8 +50,8 @@ app.use('/contact', contactRouter);
 app.use('/detail', detailRouter);
 app.use('/compare',compareRouter);
 app.use('/seemore',seemoreRouter);
-app.use('/gallery',galleryRouter);
-app.use('/screenshot',screenshotRouter);
+//app.use('/gallery',galleryRouter);
+//app.use('/screenshot',screenshotRouter);
 app.use('/test',testRouter);
 
 // catch 404 and forward to error handler

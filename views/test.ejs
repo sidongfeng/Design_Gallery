@@ -1,44 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description"
-          content="Mobile UI Gallery, a repository of widgets taken from Google Play Store. We aim to make life easier for mobile application developers by providing a database of widgets used by other developers.">
+    <meta name="description" content="Mobile UI Gallery, a repository of widgets taken from Google Play Store.">
     <meta name="keywords"
           content="mobile, mobile ui, mobile widgets, widget, widgets, mobile application, android, android widget, android widgets, android ui, ui">
     <meta name="author" content="">
-    <script>
-        /*
-		addEventListener("load", function () {
-			setTimeout(hideURLbar, 0);
-		}, false);
-
-		function hideURLbar() {
-			window.scrollTo(0, 1);
-        }
-        */
-	</script>
 
     <title><%= title %></title>
 
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
     <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="stylesheets/css/bootstrap.css">
-	<!-- Bootstrap-Core-CSS -->
-	<link rel="stylesheet" href="stylesheets/style1.css"> <!-- Resource style -->
-    <link rel="stylesheet" href="stylesheets/style.css" type="text/css" media="all" />
-	<!-- Style-CSS -->
-	<link rel="stylesheet" href="stylesheets/reset.css"> <!-- CSS reset -->
-
-	<link href="stylesheets/font-awesome.min.css" rel="stylesheet">
-	<!-- Font-Awesome-Icons-CSS -->
-	<!-- //Custom-Files -->
-
-	<!-- Web-Fonts -->
-	<link href="http://fonts.googleapis.com/css?family=Crimson+Text:400,400i,600,600i,700,700i" rel="stylesheet">
-	<link href="http://fonts.googleapis.com/css?family=Oxygen:300,400,700&amp;subset=latin-ext" rel="stylesheet">
-	<!-- //Web-Fonts -->
+    <link href="stylesheets/detail/styles.css" rel="stylesheet">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117332758-2"></script>
@@ -53,362 +30,173 @@
 
         gtag('config', 'UA-117332758-2');
     </script>
+    <!-- Custom js -->
+    <script src="/javascripts/test.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="/javascripts/js/selectize.js"></script>
+    <!-- <script src="/javascripts/js/main.js"></script> -->
 </head>
 
 <body>
-    <!-- main banner -->
-	<div class="main-top" id="home">
-        <!-- header -->
-        <header>
-            <div class="container-fluid">
-                <div class="header d-md-flex justify-content-between align-items-center py-3 px-xl-5 px-lg-3 px-2">
-                    <!-- logo -->
-                    <div id="logo">
-                        <h1><a href="/">Mobile UI Gallery</a></h1>
-                    </div>
-                    <!-- //logo -->
-                    <!-- nav -->
-                    <div class="nav_w3ls">
-                        <nav>
-                            <label for="drop" class="toggle">Menu</label>
-                            <input type="checkbox" id="drop" />
-                            <ul class="menu">
-                                <li><a href="/">Home</a></li>
-                                <li><a href="/about">About Us</a></li>
-                                <li><a href="/gallery">Gallery</a></li>
-                                <li><a href="/search">Services</a></li>
-                                <li><a href="/contact">Contact Us</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                    <!-- //nav -->
-                </div>
-            </div>
-        </header>
-        <!-- //header -->
-    
-        <!-- banner -->
-        <div class="banner_w3lspvt">
+    <header>
+        <!-- Fixed navbar -->
 
-        </div>
-        <!-- //banner -->
-    </div>
-	<!-- //main banner -->
+    </header>
 
-	<div class="test">
-	    <section class="cd-products-comparison-table">
-		    <!-- page details -->
-            <div class="breadcrumb">
-				<!-- /screenshot?color=Red+Yellow+Green+Blue+Cyan+Black+White+Lime+Magenta -->
-                <a href="#" class="back">Back</a>
-                <a href="#0" class="reset">Reset</a>
-                <a href="#0" class="filter">Compare</a>
-            </div>
-		    <!-- //page details -->
-		
-			<div class="cd-products-table">
-				<div class="features">
-					<div class="top-info">Developers</div>
-					<ul class="cd-features-list">
-						<li>Category</li>
-						<li>Content Rating</li>
-						<li>Installs</li>
-						<li>Color</li>
-						<li>Size</li>
-						<li>Test</li>
-						<li>Button</li>
-						<li>ImageButton</li>
-						<li>Switch</li>
-						<li>Spinner</li>
-						<li>SeekBar</li>
-					</ul>
-				</div> <!-- .features -->
-				
-				<div class="cd-products-wrapper">
-					<ul class="cd-products-columns">
-						<li class="product">
-							<div class="top-info">
-								<div class="check"></div>
-									<img src="img/fb.jpg" alt="product image">
-								<h3>Facebook</h3>
-							</div> <!-- .top-info -->
-		
-							<ul class="cd-features-list">
-								<li>$600</li>
-								<li class="rate"><span>5/5</span></li>
-								<li>1080p</li>
-								<li>LED</li>
-								<li>47.6 inches</li>
-								<li>800Hz</li>
-								<li>2015</li>
-								<li>mpeg4</li>
-								<li>1 Side</li>
-								<li>3 Port</li>
-								<li>1 Rear</li>
-							</ul>
-						</li> <!-- .product -->
-		
-						<li class="product">
-							<div class="top-info">
-								<div class="check"></div>
-								<img src="img/fb.jpg" alt="product image">
-								<h3>Facebook</h3>
-							</div> <!-- .top-info -->
-		
-							<ul class="cd-features-list">
-								<li>$600</li>
-								<li class="rate"><span>5/5</span></li>
-								<li>1080p</li>
-								<li>LED</li>
-								<li>47.6 inches</li>
-								<li>800Hz</li>
-								<li>2015</li>
-								<li>mpeg4</li>
-								<li>1 Side</li>
-								<li>3 Port</li>
-								<li>1 Rear</li>
-							</ul>
-						</li> <!-- .product -->
-		
-						<li class="product">
-							<div class="top-info">
-								<div class="check"></div>
-								<img src="img/fb.jpg" alt="product image">
-								<h3>Facebook</h3>
-							</div> <!-- .top-info -->
-		
-							<ul class="cd-features-list">
-								<li>$600</li>
-								<li class="rate"><span>5/5</span></li>
-								<li>1080p</li>
-								<li>LED</li>
-								<li>47.6 inches</li>
-								<li>800Hz</li>
-								<li>2015</li>
-								<li>mpeg4</li>
-								<li>1 Side</li>
-								<li>3 Port</li>
-								<li>1 Rear</li>
-							</ul>
-						</li> <!-- .product -->
-		
-						<li class="product">
-							<div class="top-info">
-								<div class="check"></div>
-								<img src="img/fb.jpg" alt="product image">
-								<h3>Facebook</h3>
-							</div> <!-- .top-info -->
-		
-							<ul class="cd-features-list">
-								<li>$600</li>
-								<li class="rate"><span>5/5</span></li>
-								<li>1080p</li>
-								<li>LED</li>
-								<li>47.6 inches</li>
-								<li>800Hz</li>
-								<li>2015</li>
-								<li>mpeg4</li>
-								<li>1 Side</li>
-								<li>3 Port</li>
-								<li>1 Rear</li>
-							</ul>
-						</li> <!-- .product -->
-		
-						<li class="product">
-							<div class="top-info">
-								<div class="check"></div>
-								<img src="img/fb.jpg" alt="product image">
-								<h3>Facebook</h3>
-							</div> <!-- .top-info -->
-		
-							<ul class="cd-features-list">
-								<li>$600</li>
-								<li class="rate"><span>5/5</span></li>
-								<li>1080p</li>
-								<li>LED</li>
-								<li>47.6 inches</li>
-								<li>800Hz</li>
-								<li>2015</li>
-								<li>mpeg4</li>
-								<li>1 Side</li>
-								<li>3 Port</li>
-								<li>1 Rear</li>
-							</ul>
-						</li> <!-- .product -->
-		
-						<li class="product">
-							<div class="top-info">
-								<div class="check"></div>
-								<img src="img/fb.jpg" alt="product image">
-								<h3>Facebook</h3>
-							</div> <!-- .top-info -->
-		
-							<ul class="cd-features-list">
-								<li>$600</li>
-								<li class="rate"><span>5/5</span></li>
-								<li>1080p</li>
-								<li>LED</li>
-								<li>47.6 inches</li>
-								<li>800Hz</li>
-								<li>2015</li>
-								<li>mpeg4</li>
-								<li>1 Side</li>
-								<li>3 Port</li>
-								<li>1 Rear</li>
-							</ul>
-						</li> <!-- .product -->
-		
-						<li class="product">
-							<div class="top-info">
-								<div class="check"></div>
-								<img src="img/fb.jpg" alt="product image">
-								<h3>Facebook</h3>
-							</div> <!-- .top-info -->
-		
-							<ul class="cd-features-list">
-								<li>$600</li>
-								<li class="rate"><span>5/5</span></li>
-								<li>1080p</li>
-								<li>LED</li>
-								<li>47.6 inches</li>
-								<li>800Hz</li>
-								<li>2015</li>
-								<li>mpeg4</li>
-								<li>1 Side</li>
-								<li>3 Port</li>
-								<li>1 Rear</li>
-							</ul>
-						</li> <!-- .product -->
-		
-						<li class="product">
-							<div class="top-info">
-								<div class="check"></div>
-								<img src="img/fb.jpg" alt="product image">
-								<h3>Facebook</h3>
-							</div> <!-- .top-info -->
-		
-							<ul class="cd-features-list">
-								<li>$600</li>
-								<li class="rate"><span>5/5</span></li>
-								<li>1080p</li>
-								<li>LED</li>
-								<li>47.6 inches</li>
-								<li>800Hz</li>
-								<li>2015</li>
-								<li>mpeg4</li>
-								<li>1 Side</li>
-								<li>3 Port</li>
-								<li>1 Rear</li>
-							</ul>
-						</li> <!-- .product -->
-					</ul> <!-- .cd-products-columns -->
-				</div> <!-- .cd-products-wrapper -->
-				
-				<ul class="cd-table-navigation">
-					<li><a href="#0" class="prev inactive">Prev</a></li>
-					<li><a href="#0" class="next">Next</a></li>
-				</ul>
-			</div> <!-- .cd-products-table -->
-		</section> <!-- .cd-products-comparison-table -->
-    </div>
+    <!-- Page content -->
+    <main role="main">
+		<form name="search" method="get" id="myform" action="/detail" class="panel-body">
+            <section class="demo plugin">
+                <div class="header">&quot;Search&quot; </div>
+                <div class="sandbox">
+                    <label for="input-tags3">Tags:</label>
+                    <input type="text" id="input-tags3" class="demo-default">
+                </div>
+                <script>
+                    $('#input-tags3').selectize({
+                        searchField: ['name'],
+						options: [
+							{email: 'brian@thirdroute.com', name: 'Brian Reavis'},
+							{email: 'nikola@tesla.com', name: 'Nikola Tesla'},
+							{email: 'someone@gmail.com'}
+                        ],
+                        render: {
+							item: function(item, escape) {
+								return '<div>' +
+									(item.name ? '<span class="name">' + escape(item.name) + '</span>' : '') +
+									(item.email ? '<span class="email">' + escape(item.email) + '</span>' : '') +
+								'</div>';
+							},
+							option: function(item, escape) {
+								return '<div>' +
+									'<span class="label">' + '123' + '</span>' +
+									(caption ? '<span class="caption">' + escape(caption) + '</span>' : '') +
+								'</div>';
+							}
+						},
+                        plugins: ['remove_button'],
+                        delimiter: ',',
+                        persist: false,
+                        create: function(input) {
+                            return {
+                                value: input,
+                                text: input
+                            }
+                        },
+                        maxOption:2,
+                    });
+                </script>
+            </section>
+			<button type="submit"class="btn btn-primary" id="send">Submit</button>
+		</form>
+    </main>
 
-    <!-- footer -->
-    <footer class="py-5">
-        <div class="container pt-xl-4">
-            <div class="row footer-top">
-                <div class="col-lg-4 col-md-6 footer-grid_section_1its">
-                    <h2 class="logo-2 mb-lg-4 mb-3">
-                        <a href="/" class="text-uppercase text-wh">Design Gallery</a>
-                    </h2>
-                    <!-- Map -->
-                    <div class="map-fo">
-                        <iframe src=""></iframe>
-                    </div>
-                    <!-- //Map -->
-                </div>
-                <div class="col-lg-2 col-md-6 footer-grid_section_1its mt-md-0 mt-4">
-                    <h3 class="footer-title text-uppercase text-wh mb-lg-4 mb-3">Links</h3>
-                    <ul class="list-unstyled">
-                        <li class="mb-3">
-                            <a href="/">Home</a>
-                        </li>
-                        <li class="mb-3">
-                            <a href="/about">About Us</a>
-                        </li>
-                        <li class="mb-3">
-                            <a href="/search">Search</a>
-                        </li>
-                        <li class="mb-3">
-                            <a href="/compare">Compare</a>
-                        </li>
-                        <li class="mb-3">
-                            <a href="/contact">Contact Us</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-lg-3 col-md-6 footer-grid_section_1its mt-lg-0 mt-4">
-                    <h3 class="footer-title text-uppercase text-wh mb-lg-4 mb-3">Contact Info</h3>
-                    <div class="contact-info">
-                        <div class="footer-style-w3ls mb-4">
-                            <h4 class="text-li mb-2">Phone</h4>
-                            <p>+1234567890</p>
-                        </div>
-                        <div class="footer-style-w3ls mb-4">
-                            <h4 class="text-li mb-2">Email </h4>
-                            <p><a href="mailto:u6063820@anu.edu.au">u6063820@anu.edu.au</a></p>
-                        </div>
-                        <div class="footer-style-w3ls mb-4">
-                            <h4 class="text-li mb-2">Location</h4>
-                            <p>The Australian National University</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 footer-grid_section_1its mt-lg-0 mt-4">
-                    <!-- social icons -->
-                    <div class="mobamuinfo_social_icons">
-                        <h3 class="footer-title text-uppercase text-wh mb-lg-4 mb-3">Social Info</h3>
-                        <p>We aim to build mobile ui gallery to help designers to bring some inspirations</p>
-                        <h4 class="sub-con-fo text-li my-4">Catch on Social</h4>
-                        <ul class="mobamuits_social_list list-unstyled">
-                            <li class="w3_mobamu_facebook">
-                                <a href="https://www.facebook.com/profile.php?id=100006350080957">
-                                    <span class="fa fa-facebook-f"></span>
-                                </a>
-                            </li>
-                            <li class="w3_mobamu_twitter">
-                                <a href="https://twitter.com/loveromance09">
-                                    <span class="fa fa-twitter"></span>
-                                </a>
-                            </li>
-                            <li class="w3_mobamu_dribble">
-                                <a href="#">
-                                    <span class="fa fa-dribbble"></span>
-                                </a>
-                            </li>
-                            <li class="w3_mobamu_google">
-                                <a href="#">
-                                    <span class="fa fa-google-plus"></span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- social icons -->
-                </div>
-            </div>
+    <!-- Footer -->
+    <footer class="py-3 bg-dark footer">
+        <div class="container">
+            <div class="text-center text-white">Copyright &copy; Mobile UI Gallery 2018</div>
         </div>
     </footer>
-    <!-- //footer -->
-    <!-- copyright -->
-    <div class="cpy-right text-center py-3">
-        <p>Copyright &copy; 2019. Mobile UI Gallery All rights reserved</p>
-    </div>
-	<!-- //copyright -->
 
-	<!-- jquery -->
-	<script src="javascripts/js/jquery.js"></script>
-	<!--jquery-ui.min.js-->
-	<script src="javascripts/js/jquery-ui.min.js"></script>
-    <script src="javascripts/main.js"></script> <!-- Resource jQuery -->
+<!-- Bootstrap core JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
+
+<script type="text/javascript">	
+/*
+	$(function() {
+        $('#input-tags3').keyup(function() {
+            var n=$(this).val();
+            if (n=='') { $('#search_list').hide(); return };
+            var input_list = n.split(" ");
+
+            const classnames = new Array("chronometer", "compoundbutton","progressbar", "checkbox", "button",
+                                  "radiobutton",  "ratingbar", "seekbar", "spinner", "switch", "togglebutton","imagebutton");
+            const colors = new Array("black","white","red","lime","yellow","green","cyan","blue","magenta");
+            
+            var classdic =  {},
+                colordic = {};
+            // initialize
+            for (var i=0;i<classnames.length;i++){
+                classname = classnames[i];
+                classdic[classname] = 0;
+            }
+            for (var i=0;i<colors.length;i++){
+                color = colors[i];
+                colordic[color] = 0;
+            }
+
+            var val;
+            for (var i=0;i<input_list.length;i++){
+                input = input_list[i].toLowerCase();
+                for (var j=0;j<classnames.length;j++){
+                    classname = classnames[j];
+                    val = 0;
+                    if (classname.indexOf(input)>=0){
+                        val = 0.45;
+                    }
+                    val += strSimilarity2Percent(input,classname)*0.55;
+                    if (classdic[classname] < val){
+                        classdic[classname] = val
+                    }
+                }
+                for (var j=0;j<colors.length;j++){
+                    color = colors[j];
+                    val = 0;
+                    if (color.indexOf(input)>=0){
+                        val = 0.45;
+                    }
+                    val += strSimilarity2Percent(input,color)*0.55;
+                    if (colordic[color] < val){
+                        colordic[color] = val
+                    }
+                }
+            }
+            var sorted_class = Object.keys(classdic).sort(function(a,b){ return classdic[a]-classdic[b]; }),
+                sorted_color = Object.keys(colordic).sort(function(a,b){ return colordic[a]-colordic[b]; });
+
+            let search_color = new Set();
+            let search_class = new Set();
+            for(var key in sorted_class){
+                if (classdic[sorted_class[key]]>0.6){
+                    search_class.add(sorted_class[key]);
+                }
+            }
+            for(var key in sorted_class){
+                if (colordic[sorted_color[key]]>0.6){
+                    search_color.add(sorted_color[key]);
+                }
+            }
+
+            //console.log(search_color);
+            //console.log(search_class);
+            
+            if(search_color.size!=0 || search_class.size!=0){
+                $("#search_list").empty().show();
+                var str = "";
+                var list = Array();
+                var suggest_list = combine(search_color, search_class);
+                //console.log(suggest_list)
+                for (var i=0;i<suggest_list.length;i++){
+                    suggestion = suggest_list[i];
+                    str += '<div class="click_work">'+ suggestion+'</div>'
+                }
+                $("#search_list").append(str);
+            }else{
+                $("#search_list").empty().show();
+            }
+            
+        });
+        //点击搜索数据复制给搜索框
+		$(document).on('click','.click_work',function(){
+            var word = $(this).text();
+			$('#search').val(word);
+			$('#search_list').hide();
+			// $('#texe').trigger('click');触发搜索事件
+		})
+    });
+*/
+</script>
 </body>
-
 </html>

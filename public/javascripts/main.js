@@ -231,16 +231,23 @@ jQuery(document).ready(function($){
 		this.productsWrapper.animate( {scrollLeft: scrollLeft}, 200 );
 	}
 
-
     let ajaxData = {
         developers: getUrlParameter('apps').split('+')
-    };
+	};
+	if (ajaxData.developers.includes('applockcheetah')){
+		// Find and remove item from an array
+		var ii = ajaxData.developers.indexOf("applockcheetah");
+		if(ii != -1) {
+			ajaxData.developers.splice(ii, 1);
+		}
+		ajaxData.developers.push('Cheetah Mobile (AppLock &amp; AntiVirus)')
+	}
     $.ajaxSettings.async = false;
-    $.getJSON('./data/test.json',function(result){
+    $.getJSON('./data/comparsion_widgets-2.json',function(result){
         for(let i = 0; i < result.length; i++){
             let p = result[i];
             for (let z = 0; z < ajaxData.developers.length; z++){
-                if (p['application_name']==decodeURIComponent(ajaxData.developers[z])){
+                if (p['Developer']==decodeURIComponent(ajaxData.developers[z])){
                     out.push(p);
                     break;
                 }
@@ -248,7 +255,44 @@ jQuery(document).ready(function($){
         }
 	});
 	console.log(out)
+	let html = '';
+    for(let i = 0; i < out.length; i++){
+		html += '<li class="product">'
+		html += '	<div class="top-info">'
+		html += '		<div class="check"></div>'
+		html += '		<img src="images/compare/small/'+out[i]['icons']+'" alt="">'
+		html += '		<h3>'+out[i]['Developer']+'</h3>'
+		html += '	</div> <!-- .top-info -->'
 
+		html += '	<ul class="cd-features-list">'
+		html += '		<li class="apps"><br>'
+		for(let j = 0; j < out[i]['apps'].length; j++){
+			html += out[i]['apps'][j]+'<br><br>'
+		}
+		html += '		</li>'
+		html += '		<li class="category"><br>'
+		for(let j = 0; j < out[i]['category'].length; j++){
+			html += out[i]['category'][j]+'<br><br>'
+		}
+		html += '		</li>'
+		html += '		<li class="rating">☆ '+out[i]['rating']+'</li>'
+		html += '		<li class="button"><div class="row">'
+		for(let j = 0; j < out[i]['widgets']['Button']['names'].length; j++){
+			html += '<div class="col-auto"><img src="images/Microsoft_Corporation/'+out[i]['widgets']['Button']['names'][j]+'.png"></div>'
+		}
+		html += '		</div><div class="row">'+123+'</div></li>'
+		html += '		<li>LED</li>'
+		html += '		<li>47.6 inches</li>'
+		html += '		<li>800Hz</li>'
+		html += '		<li>2015</li>'
+		html += '		<li>mpeg4</li>'
+		html += '		<li>1 Side</li>'
+		html += '		<li>3 Port</li>'
+		html += '		<li>1 Rear</li>'
+		html += '	</ul>'
+		html += '</li> <!-- .product -->'
+	}
+	$(".cd-products-columns").append(html);
 
 
 	
