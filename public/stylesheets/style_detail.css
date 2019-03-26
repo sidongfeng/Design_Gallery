@@ -642,6 +642,11 @@ No JS
 }
 
 .modal-title a{
-  color: rgb(59, 59, 173);
-  font-size: 20px;
+  color: rgb(44, 153, 204);
+  font-size: 15px;
 }
+
+.modal-title a:hover{
+  color: rgb(10, 30, 214);
+}
+

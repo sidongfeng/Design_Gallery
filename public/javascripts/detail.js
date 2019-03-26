@@ -1,7 +1,7 @@
 var out = Array();
 const _btnTypeArr = ["Button", "CheckBox", "Chronometer", "ImageButton", "ProgressBar", "RadioButton", "RatingBar", "SeekBar", "Spinner", "Switch", "ToggleButton"];
 const colors = {"Red":"#ff3030","Lime":"#ff9224", "Yellow":"#ffff6f","Green":"#53ff53","Blue":"#0080ff","Purple":"#be77ff","Black":"#00000f","White":"#ffffff"};
-
+var input_data_chart = {};
 jQuery(document).ready(function($){
 	function productsTable( element ) {
 		this.element = element;
@@ -343,8 +343,13 @@ jQuery(document).ready(function($){
 					for(let z = 0; z < temp2_order.length; z++){
 						html = modal_img(html,temp[temp2_order[z][0]])
 					}
+					html += '</div><br><br><hr>'
+					html += '<div class="row">'
+					html += '<div id="piechart_'+out[i]['Developer']+'_Button"></div>'
+					input_data_chart['piechart_'+out[i]['Developer']+'_Button'] = out[i]["widgets"]["Button"]["colors"]
 				}
-				html += '</div></li>'
+				html += '</div>'
+				html += '</li>'
 			}else{
 				html += '		<li class="'+class_name.toLowerCase()+'"><div class="row" style = "z-index:-1;">'
 				if (out[i]['widgets'][class_name]['names'].length == 0){
@@ -367,14 +372,20 @@ jQuery(document).ready(function($){
 					for(let z = 0; z < temp2_order.length; z++){
 						html = modal_img(html,temp[temp2_order[z][0]])
 					}
+					html += '</div><br><br><hr>'
+					html += '<div class="row">'
+					html += '<div id="piechart_'+out[i]['Developer']+'_'+class_name+'"></div>'
+					input_data_chart['piechart_'+out[i]['Developer']+'_'+class_name] = out[i]["widgets"][class_name]["colors"]
 				}
-				html += '</div></li>'
+				html += '</div>'
+				html += '</li>'
 			}
 		}
 		html += '	</ul>'
 		html += '</li> <!-- .product -->'
 	}
 	$(".cd-products-columns").append(html);
+
 
 	var comparisonTables = [];
 	$('.cd-products-comparison-table').each(function(){
@@ -555,4 +566,36 @@ jQuery(document).ready(function($){
 
 		return html
 	}
+
+	google.charts.load('current', {'packages':['corechart']});
+	google.charts.setOnLoadCallback(drawChart);
+	function drawChart() {
+		$.each(input_data_chart, function(k, v) {
+			var data = google.visualization.arrayToDataTable([
+				['Color', '%'],
+				['Black', v['Black']],
+				['Blue', v['Blue']],
+				['Cyan', v['Cyan']],
+				['Green', v['Green']],
+				['Lime', v['Lime']],
+				['Magenta', v['Magenta']],
+				['Red', v['Red']],
+				['White', v['White']],
+				['Yellow', v['Yellow']]
+			  ]);
+
+			var options = {'title':'Color', 
+			'width':280, 'height':170,
+			pieSliceText: 'none',
+			colors: ['#0d0e0e', '#6e8cd5', '#0fe7e7', '#26aa0c', 'rgb(243, 151, 14)','#bd32aa','#f56060','#fff','#dde669'],
+			pieSliceTextStyle: {
+					color: 'black'
+				},
+			is3D: true,
+			};
+			// Display the chart inside the <div> element with id="piechart"
+			var chart = new google.visualization.PieChart(document.getElementById(k));
+			chart.draw(data, options);
+		});
+	  }
 });

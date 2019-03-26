@@ -91,8 +91,8 @@
         </div>
         <!-- //banner -->
     </div>
-	<!-- //main banner -->
-
+    <!-- //main banner -->
+    
 	<div class="test">
 	    <section class="cd-products-comparison-table">
 		    <!-- page details -->
@@ -211,7 +211,7 @@
     <div class="cpy-right text-center py-3">
         <p>Copyright &copy; 2019. Mobile UI Gallery All rights reserved</p>
     </div>
-	<!-- //copyright -->
+    <!-- //copyright -->
 
 	<!-- jquery -->
 	<script src="javascripts/js/jquery.js"></script>
@@ -238,14 +238,14 @@
                             max = $(this).height();
                         }
                     });
-                    $('.button1').height(max);
+                    $('.button1').height(max+150);
                 }else{
                     $('li.'+class_name.toLowerCase()).each(function(){
                         if ($(this).height()>max){
                             max = $(this).height();
                         }
                     });
-                    $('.'+class_name.toLowerCase()).height(max);
+                    $('.'+class_name.toLowerCase()).height(max+150);
                 }
 
             }
@@ -258,6 +258,8 @@
 
         }
     </script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 </body>
 
 </html>
