@@ -218,6 +218,9 @@
 	<!--jquery-ui.min.js-->
 	<script src="javascripts/js/jquery-ui.min.js"></script>
     <script src="javascripts/detail.js"></script> <!-- Resource jQuery -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
     <script>
         $(window).on('load', function() {
             fixHeight()
@@ -225,7 +228,6 @@
     </script>
     <script>
         function fixHeight(){
-            console.log(123)
             const _btns = ["Button", "CheckBox", "Chronometer", "ImageButton", "ProgressBar", "RadioButton", "RatingBar", "SeekBar", "Spinner", "Switch", "ToggleButton"];
             for(let i = 0; i < _btns.length; i++){
                 var class_name = _btns[i];

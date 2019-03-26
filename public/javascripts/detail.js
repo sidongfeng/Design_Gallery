@@ -1,5 +1,7 @@
 var out = Array();
 const _btnTypeArr = ["Button", "CheckBox", "Chronometer", "ImageButton", "ProgressBar", "RadioButton", "RatingBar", "SeekBar", "Spinner", "Switch", "ToggleButton"];
+const colors = {"Red":"#ff3030","Lime":"#ff9224", "Yellow":"#ffff6f","Green":"#53ff53","Blue":"#0080ff","Purple":"#be77ff","Black":"#00000f","White":"#ffffff"};
+
 jQuery(document).ready(function($){
 	function productsTable( element ) {
 		this.element = element;
@@ -290,6 +292,12 @@ jQuery(document).ready(function($){
 
 	html = '';
     for(let i = 0; i < out.length; i++){
+		var temp = {};
+		for(let z = 0; z < _btnTypeArr.length; z++){
+			for(let j = 0; j < out[i]['widgets'][_btnTypeArr[z]]['widgets'].length; j++){
+				temp[out[i]['widgets'][_btnTypeArr[z]]['widgets'][j]['name']] = out[i]['widgets'][_btnTypeArr[z]]['widgets'][j];
+			}
+		}
 
 		html += '<li class="product">'
 		html += '	<div class="top-info"">'
@@ -318,8 +326,22 @@ jQuery(document).ready(function($){
 				if (out[i]['widgets']['Button']['names'].length == 0){
 					html += 'None';
 				}else{
+					var temp2 = {};
+					var temp2_order;
 					for(let z = 0; z < out[i]['widgets']['Button']['names'].length; z++){
-						html += '<div class="col-auto"><img src="images/detail/'+out[i]['Developer']+'/'+out[i]['widgets']['Button']['names'][z]+'.png" style="max-width:250px"></div>'
+						temp2[out[i]['widgets']['Button']['names'][z]] = temp[out[i]['widgets']['Button']['names'][z]]['dimensions']['width'];
+						// html = modal_img(html,temp[out[i]['widgets']['Button']['names'][z]])
+						//html += '<img src="images/detail/'+out[i]['Developer']+'/'+out[i]['widgets']['Button']['names'][z]+'.png" style="max-width:250px">'
+					}
+					temp2_order = Object.keys(temp2).map(function(key) {
+						return [key, temp2[key]];
+					  });
+					temp2_order.sort(function(first, second) {
+					return first[1] - second[1];
+					});
+					// console.log(temp2_order)
+					for(let z = 0; z < temp2_order.length; z++){
+						html = modal_img(html,temp[temp2_order[z][0]])
 					}
 				}
 				html += '</div></li>'
@@ -328,64 +350,31 @@ jQuery(document).ready(function($){
 				if (out[i]['widgets'][class_name]['names'].length == 0){
 					html += 'None';
 				}else{
+					var temp2 = {};
+					var temp2_order;
 					for(let z = 0; z < out[i]['widgets'][class_name]['names'].length; z++){
-						html += '<div class="col-auto"><img src="images/detail/'+out[i]['Developer']+'/'+out[i]['widgets'][class_name]['names'][z]+'.png" style="max-width:250px"></div>'
+						temp2[out[i]['widgets'][class_name]['names'][z]] = temp[out[i]['widgets'][class_name]['names'][z]]['dimensions']['width'];
+						// html = modal_img(html,temp[out[i]['widgets'][class_name]['names'][z]])
+						// <img src="images/detail/'+out[i]['Developer']+'/'+out[i]['widgets'][class_name]['names'][z]+'.png" style="max-width:250px">
+					}
+					temp2_order = Object.keys(temp2).map(function(key) {
+						return [key, temp2[key]];
+					  });
+					temp2_order.sort(function(first, second) {
+					return first[1] - second[1];
+					});
+					// console.log(temp2_order)
+					for(let z = 0; z < temp2_order.length; z++){
+						html = modal_img(html,temp[temp2_order[z][0]])
 					}
 				}
 				html += '</div></li>'
 			}
 		}
-
-		
-
-		// html += '		<li class="imagebutton"><div class="row">'
-		// for(let j = 0; j < out[i]['widgets']['ImageButton']['names'].length; j++){
-		// 	html += '<div class="col-auto"><img src="images/detail/'+out[i]['Developer']+'/'+out[i]['widgets']['ImageButton']['names'][j]+'.png"></div>'
-		// }
-		// html += '</div></li>'
-		// html += '		<li>47.6</li>'
-		// html += '		<li></li>'
-		// html += '		<li></li>'
-		// html += '		<li></li>'
-		// html += '		<li>1</li>'
-		// html += '		<li>3</li>'
-		// html += '		<li></li>'
 		html += '	</ul>'
-			html += '</li> <!-- .product -->'
+		html += '</li> <!-- .product -->'
 	}
 	$(".cd-products-columns").append(html);
-	// html += '	<ul class="cd-features-list">'
-	// html += '		<li class="apps"><br>'
-	// for(let j = 0; j < out[i]['apps'].length; j++){
-	// 	html += out[i]['apps'][j]+'<br><br>'
-	// }
-	// html += '		</li>'
-	// html += '		<li class="category"><br>'
-	// for(let j = 0; j < out[i]['category'].length; j++){
-	// 	html += out[i]['category'][j]+'<br><br>'
-	// }
-	// html += '		</li>'
-	// html += '		<li class="rating">☆ '+out[i]['rating']+'</li>'
-	// html += '		<li class="button"><div class="row">'
-	// for(let j = 0; j < out[i]['widgets']['Button']['names'].length; j++){
-	// 	html += '<div class="col-auto"><img src="images/detail/'+out[i]['Developer']+'/'+out[i]['widgets']['Button']['names'][j]+'.png"></div>'
-	// }
-	// html += '</div></li>'
-	// html += '		<li class="imagebutton"><div class="row">'
-	// for(let j = 0; j < out[i]['widgets']['ImageButton']['names'].length; j++){
-	// 	html += '<div class="col-auto"><img src="images/detail/'+out[i]['Developer']+'/'+out[i]['widgets']['ImageButton']['names'][j]+'.png"></div>'
-	// }
-	// html += '</div></li>'
-	// html += '		<li>47.6</li>'
-	// html += '		<li></li>'
-	// html += '		<li></li>'
-	// html += '		<li></li>'
-	// html += '		<li>1</li>'
-	// html += '		<li>3</li>'
-	// html += '		<li></li>'
-	// html += '	</ul>'
-
-	// Todo: ***************
 
 	var comparisonTables = [];
 	$('.cd-products-comparison-table').each(function(){
@@ -454,5 +443,116 @@ jQuery(document).ready(function($){
 			'-o-transform': 'translateX(' + value + 'px)',
 			'transform': 'translateX(' + value + 'px)'
 		});
+	}
+
+	function compare2(property){
+		return function(a,b){
+			var value1 = a[property];
+			var value2 = b[property];
+			return value2 - value1;
+		}
+	}
+
+	function modal_img(html,widget){
+		var colors_Array = [];
+		for (let i = 0; i < Object.keys(colors).length; i++){
+			if (widget['color'][Object.keys(colors)[i]]>0.1){
+				colors_Array.push({"c":Object.keys(colors)[i],"no":widget['color'][Object.keys(colors)[i]]});
+			}
+		}
+		colors_Array.sort(compare2('no'))
+		html += '<div id="'+ widget['name'] + '" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridModalLabel" style="display: none;" aria-hidden="true">'
+		html += '   <div class="modal-dialog modal-xl" role="document">'
+		html += '       <div class="modal-content">'
+		
+		html += '           <div class="modal-header">'
+		html += '               <h5 class="modal-title"><a href="' + widget['url'] + '">' + widget['application_name'] + '</a></h5>'
+		html += '               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>'
+		html += '           </div>'
+
+		html += '           <div class="modal-body">'
+		html += '               <div class="container-fluid">'
+		html += '                   <div class="row">'
+		html += '                       <div class="col-md-7" style="position:relative; zoom:0.5">'
+		html += '                           <img src="images/detail/' + widget['Developer'] +'/widgets_SC_2/'+widget['src'].split('/')[widget['src'].split('/').length-1]+ '" style=" cursor: hand;"/>'
+		html += '                       </div>'
+		html += '                       <div class="col-md-5">'
+		html += '                           <table class="table table-borderless">'
+		html += '                               <tbody>'
+		html += '                                   <tr>'
+		html += '                                       <th scope="row">Package:</th>'
+		html += '                                       <td style="word-break:break-all">' + widget['package_name'] + '</td>'
+		html += '                                   </tr>'
+		html += '                                   <tr>'
+		html += '                                       <th scope="row">Category:</th>'
+		html += '                                       <td>' + widget['category'] + '</td>'
+		html += '                                   </tr>'
+		html += '                                   <tr>'
+		html += '                                       <th scope="row">Text:</th>'
+		if(widget['text'] == 0){
+			html +=	'	    	<td>' + " " + '</td>';
+		}else{
+			html +=	'	    	<td>' + widget['text'] + '</td>';
+		}
+		html += '                                   </tr>'
+		html += '                                   <tr>'
+		// html += '                                       <th scope="row">Font:</th>'
+		// if(widget['font'] == ""){
+		// 	html +=	'	    	<td>' + " " + '</td>';
+		// }else{
+		// 	html +=	'	    	<td>' + widget['font'] + '</td>';
+		// }
+		// html += '                                   </tr>'
+		html += '                                   <tr>'
+		html += '                                       <th scope="row">Class:</th>'
+		html += '                                       <td>' + widget['widget_class'] + '</td>'
+		html += '                                   </tr>'
+		html += '                                   <tr>'
+		html += '                                       <th scope="row">Coordinates:</th>'
+		html += '                                       <td class="coords">[' + widget['coordinates']['from'] + '][' + widget['coordinates']['to'] + ']</td>'
+		html += '                                   </tr>'
+		html += '                                   <tr>'
+		html += '                                       <th scope="row">Size:</th>'
+		let btnSize = widget['dimensions']['width'] + 'x' + widget['dimensions']["height"];
+		html += '                                       <td class="widSize">' + btnSize + '</td>'
+		html += '                                   </tr>'
+		html += '                                   <tr>'
+		html += '                                       <th scope="row">Color:</th>'
+		html += '                                       <td>'
+		for (let z = 0; z < colors_Array.length; z++){
+			html += '                                       <div class="row">'+'<div class="circle" style="background-color:'+colors[colors_Array[z]['c']]+'"></div>'
+		}
+		html += '                                       </td>'
+		html += '                                   </tr>'
+		html += '                                   <tr>'
+		html += '                                       <th scope="row">Developer:</th>'
+		html += '                                       <td>' + widget['Developer']+ '</td>'
+		html += '                                   </tr>'
+		// html += '                                   <tr>'
+		// html += '                                       <th scope="row">Downloads:</th>'
+		// html += '                                       <td>' + widget['downloads'] + '</td>'
+		// html += '                                   </tr>'
+		html += '                                   <tr>'
+		html += '                                       <td align="center" colspan="2"><i>We only annotate the selected UI elements in the image.</i></td>'
+		html += '                                   </tr>'
+		html += '                               </tbody>'
+		html += '                           </table>'
+		html += '                       </div>'
+		html += '                   </div>'
+		html += '               </div>'
+		html += '           </div>'
+
+		html += '           <div class="modal-footer">'
+		html += '               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>'
+		html += '           </div>'
+		
+		html += '       </div>'
+		html += '   </div>'
+		html += '</div>'
+		html += '<div class="col-md-auto">'
+		html += '   <img data-toggle="modal" data-target="#'+widget['name'] + '" class="img-fluid pb-1" src="images/detail/'+widget['Developer']+'/' + widget['name'] + '.png" style="max-width:250px; cursor:pointer" />'
+		html += '</div>'
+
+		return html
 	}
 });
