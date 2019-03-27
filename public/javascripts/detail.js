@@ -1,6 +1,6 @@
 var out = Array();
 const _btnTypeArr = ["Button", "CheckBox", "Chronometer", "ImageButton", "ProgressBar", "RadioButton", "RatingBar", "SeekBar", "Spinner", "Switch", "ToggleButton"];
-const colors = {"Red":"#ff3030","Lime":"#ff9224", "Yellow":"#ffff6f","Green":"#53ff53","Blue":"#0080ff","Purple":"#be77ff","Black":"#00000f","White":"#ffffff"};
+const colors = {"Cyan":"rgb(145,255,255)","Red":"#ff3030","Lime":"#ff9224", "Yellow":"#ffff6f","Green":"#53ff53","Blue":"#0080ff","Magenta":"#be77ff","Black":"#00000f","White":"#ffffff"};
 var input_data_chart = {};
 jQuery(document).ready(function($){
 	function productsTable( element ) {
@@ -587,7 +587,7 @@ jQuery(document).ready(function($){
 			var options = {'title':'Color', 
 			'width':280, 'height':170,
 			pieSliceText: 'none',
-			colors: ['#0d0e0e', '#6e8cd5', '#0fe7e7', '#26aa0c', 'rgb(243, 151, 14)','#bd32aa','#f56060','#fff','#dde669'],
+			colors: ['#0d0e0e', '#6e8cd5', '#0fe7e7', '#26aa0c', 'rgb(243, 151, 14)','#bd32aa','rgb(194,24,7)','#fff','rgb(239,253,95)'],
 			pieSliceTextStyle: {
 					color: 'black'
 				},
