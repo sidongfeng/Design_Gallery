@@ -2771,12 +2771,13 @@ font-family: 'Poppins', sans-serif;
 --------------------------------------*/
 .service {
     position: relative;
-    padding: 50px 0 54px;
+    padding: 80px 0 0px;
+    padding-bottom: 20px;
+    height: 700px;
 }
 /* single-ststistics-box */
 .single-service-box {
     display: flex;
-    margin-bottom:30px;
 }
 /* single-ststistics-box */
 .service-content {
@@ -2794,7 +2795,7 @@ font-family: 'Poppins', sans-serif;
     font-weight: 500;
 }
 .service-content p{
-    color:#7f878f;
+    color:#aaa;
     font-size:14px;
     text-transform:inherit;
     font-family: 'Poppins', sans-serif;
@@ -2817,4 +2818,11 @@ font-family: 'Poppins', sans-serif;
             box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);  
     -moz-border-radius: 50%;      
     -webkit-border-radius: 50%;    
+}
+
+.gallery{
+    background: #f9f9f9;
+}
+.gallery-details{
+    margin-bottom:109px;
 }

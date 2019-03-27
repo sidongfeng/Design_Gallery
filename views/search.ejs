@@ -341,11 +341,46 @@
         </section><!--/.travel-box-->
 
     <!--travel-box end-->
-    
+
     <!--service start-->
     <section id="service" class="service">
         <div class="container">
-            <div class="service-counter text-center demo row">
+
+            <div class="text-center row">
+
+                <div class="col-md-6 col-sm-6">
+                    <div class="single-service-box">
+                        <div id="piechart_class"></div>
+                    </div><!--/.single-service-box-->
+                </div><!--/.col-->
+
+                <div class="col-md-6 col-sm-6">
+                    <div class="single-service-box">
+                        <div id="piechart_color"></div>
+                    </div><!--/.single-service-box-->
+                </div><!--/.col-->
+
+                <div class="col-md-6 col-sm-6">
+                    <div class="single-service-box">
+                        <div id="chart_height_width"></div>
+                    </div><!--/.single-service-box-->
+                </div><!--/.col-->
+
+                <div class="col-md-6 col-sm-6">
+                    <div class="single-service-box">
+                        <div id="chart_cat"></div>
+                    </div><!--/.single-service-box-->
+                </div><!--/.col-->
+
+            </div><!--/.statistics-counter-->	
+        </div><!--/.container-->
+    </section><!--/.service-->
+    <!--service end-->
+    
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <hr>
+            <div class="gallery-details text-center demo row">
             </div>
         </div>
     </section>
@@ -443,6 +478,7 @@
     <!-- //copyright -->
 
     <!-- jquery -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="javascripts/js/jquery.js"></script>
     <!--jquery-ui.min.js-->
     <script src="javascripts/js/jquery-ui.min.js"></script>
@@ -459,14 +495,24 @@
     <script>
         $(function(){
             if (document.URL.split("&").length>5){
-                $("html,body").animate({scrollTop:$("#service").offset().top})
-                let widgets = loadImages();
-                showImages(widgets,200);
+                $("html,body").animate({scrollTop:$("#piechart_class").offset().top})
                 console.log('loading images...');
+                let widgets = loadImages();
+                // showImages(widgets,30);
+                var all_widget = true;
                 $(window).on("scroll",function(){
-                    if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.1){
+                    if($(window).scrollTop() + $(window).height() +1000 >= $(document).height()){
                     //当最短的ul的高度比窗口滚出去的高度+浏览器高度大时加载新图片
-                        showImages(widgets,30);
+                        // if (widgets.length>20000 && all_widget){
+                        //     showImages(widgets,180);
+                        //     all_widget = false;
+                        // }else if (widgets.length>15000 && all_widget){
+                        //     showImages(widgets,100);
+                        //     all_widget = false;
+                        // }else{
+                        //     showImages(widgets,85);
+                        // }
+                        showImages(widgets,100);
                     }
                 })
             }

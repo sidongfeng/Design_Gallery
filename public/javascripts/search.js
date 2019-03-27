@@ -4,7 +4,11 @@ var out_widgets_2 = Array(); // filtered widgets
 var out_widgets_3 = Array(); // filtered widgets
 var out_widgets_4 = Array(); // filtered widgets
 var out_widgets_5 = Array(); // filtered widgets
-const colors = {"Red":"#ff3030","Lime":"#ff9224", "Yellow":"#ffff6f","Green":"#53ff53","Blue":"#0080ff","Purple":"#be77ff","Black":"#00000f","White":"#ffffff"};
+var pie_info = {};
+const colors = {"Cyan":"rgb(145,255,255)","Red":"#ff3030","Lime":"#ff9224", "Yellow":"#ffff6f","Green":"#53ff53","Blue":"#0080ff","Magenta":"#be77ff","Black":"#00000f","White":"#ffffff"};
+const btns = ["Button", "CheckBox", "Chronometer", "ImageButton", "ProgressBar", "RadioButton", "RatingBar", "SeekBar", "Spinner", "Switch", "ToggleButton"];
+const cats = ["EDUCATION", "LIFESTYLE", "ENTERTAINMENT", "MUSIC_AND_AUDIO", "TOOLS", "PERSONALIZATION", "TRAVEL_AND_LOCAL", "NEWS_AND_MAGAZINES", "BOOKS_AND_REFERENCE", "BUSINESS", "FINANCE", "GAME_CASUAL", "SPORTS", "GAME_PUZZLE", "PRODUCTIVITY", "PHOTOGRAPHY", "HEALTH_AND_FITNESS", "TRANSPORTATION", "COMMUNICATION", "GAME_EDUCATIONAL", "SOCIAL", "MEDIA_AND_VIDEO", "SHOPPING", "GAME_ARCADE", "GAME_SIMULATION", "GAME_ACTION", "MEDICAL", "GAME_CARD", "WEATHER", "GAME_RACING", "GAME_BOARD", "GAME_SPORTS", "GAME_CASINO", "GAME_WORD", "GAME_TRIVIA", "GAME_ADVENTURE", "GAME_STRATEGY", "GAME_ROLE_PLAYING", "GAME_MUSIC", "LIBRARIES_AND_DEMO", "COMICS",
+"MAPS_AND_NAVIGATION","VIDEO_PLAYERS_AND_EDITORS","FOOD_AND_DRINK","DATING","EVENTS","AUTO_AND_VEHICLES","ART_AND_DESIGN","PARENTING","HOUSE_AND_HOME","BEAUTY"];
 
 function getUrlParameter(sParam) {
     let sPageURL = decodeURIComponent(window.location.search.substring(1)),
@@ -95,6 +99,155 @@ function loadImages() { //loadSearchPage
             out_widgets.sort(compare('dimensions','height'));   
         }
     })
+
+    // initializing pie info
+    pie_info = {'category':{},'class_distribution':{},'color':{"Red":0, "Yellow":0, "Green":0, "Blue":0, "Cyan":0, "Black":0, "White":0, "Lime":0, "Magenta":0},'dimensions':[],'no':out_widgets.length-1}
+    for(let i = 0; i < btns.length; i++){
+        pie_info['class_distribution'][btns[i]] = 0;
+    }
+    for(let i = 0; i < cats.length; i++){
+        pie_info['category'][cats[i]] = 0;
+    }
+    // console.log(pie_info)
+
+    for(let i = 0; i < out_widgets.length; i++){
+        var widget = out_widgets[i];
+        if (widget['color']==0){
+            console.log('error color')
+            pie_info['no'] -= 1;
+        }else{
+            for (let j = 0; j < Object.keys(colors).length; j++){
+                pie_info['color'][Object.keys(colors)[j]] += widget['color'][Object.keys(colors)[j]];
+            }
+            pie_info['class_distribution'][widget['widget_class']] += 1;
+        }
+        pie_info['dimensions'].push([widget['dimensions']['height'],widget['dimensions']['width']]);
+        pie_info['category'][widget['category']] += 1;
+    }
+    for (let j = 0; j < Object.keys(colors).length; j++){
+        pie_info['color'][Object.keys(colors)[j]] = parseFloat((pie_info['color'][Object.keys(colors)[j]]/ pie_info['no']).toFixed(2));
+    }
+    console.log(pie_info)
+
+    // drawing pie chart 
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Colors', '%'],
+            ['Black', pie_info['color']['Black']],
+            ['Blue', pie_info['color']['Blue']],
+            ['Cyan', pie_info['color']['Cyan']],
+            ['Green', pie_info['color']['Green']],
+            ['Lime', pie_info['color']['Lime']],
+            ['Magenta', pie_info['color']['Magenta']],
+            ['Red', pie_info['color']['Red']],
+            ['White', pie_info['color']['White']],
+            ['Yellow', pie_info['color']['Yellow']]
+        ]);
+
+        var options = {'title':'Colors', 
+        'width':600, 'height':300,
+        pieSliceText: 'none',
+        colors: ['#0d0e0e', '#6e8cd5', '#0fe7e7', '#26aa0c', 'rgb(243, 151, 14)','#bd32aa','rgb(194,24,7)','#fff','rgb(239,253,95)'],
+        pieSliceTextStyle: {
+                color: 'black'
+            },
+        pieHole: 0.4,
+        };
+        // Display the chart inside the <div> element with id="piechart"
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_color'));
+        chart.draw(data, options);
+    }
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart2);
+    function drawChart2() {
+        var data = google.visualization.arrayToDataTable([
+            ['Classes', '%'],
+            ['Button', pie_info['class_distribution']['Button']],
+            ['CheckBox', pie_info['class_distribution']['CheckBox']],
+            ['Chronometer', pie_info['class_distribution']['Chronometer']],
+            ['ImageButton', pie_info['class_distribution']['ImageButton']],
+            ['ProgressBar', pie_info['class_distribution']['ProgressBar']],
+            ['RadioButton', pie_info['class_distribution']['RadioButton']],
+            ['RatingBar', pie_info['class_distribution']['RatingBar']],
+            ['SeekBar', pie_info['class_distribution']['SeekBar']],
+            ['Spinner', pie_info['class_distribution']['Spinner']],
+            ['Switch', pie_info['class_distribution']['Switch']],
+            ['ToggleButton', pie_info['class_distribution']['ToggleButton']]
+        ]);
+
+        var options = {'title':'Classes', 
+        'width':600, 'height':300,
+        pieSliceText: 'none',
+        colors: ['red', 'orange', 'yellow', 'green', 'blue', 'purple', 'pink', 'brown', 'gray', 'black','white'],
+        // colors: ['#0d0e0e', '#6e8cd5', '#0fe7e7', '#26aa0c', 'rgb(243, 151, 14)','#bd32aa','rgb(194,24,7)','#fff','rgb(239,253,95)'],
+        pieSliceTextStyle: {
+            color: 'black'
+        },
+        pieHole: 0.4,
+        };
+        // Display the chart inside the <div> element with id="piechart"
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_class'));
+        chart.draw(data, options);
+    }
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart3);
+    function drawChart3() {
+        var hwtmp = [['Height', 'Width']]
+        for (let j = 0; j < pie_info['dimensions'].length; j++){
+            hwtmp.push(pie_info['dimensions'][j])
+        }
+        var data = google.visualization.arrayToDataTable(hwtmp);
+
+        var options = {
+            title: 'Height vs. Width comparison',
+            hAxis: {title: 'Height', minValue: 0, maxValue: 1300},
+            vAxis: {title: 'Width', minValue: 0, maxValue: 810},
+            legend: 'none',
+            width:600, height:300,
+            colors: ['red'],
+            pointSize: 3,
+            hAxis:{gridlines:{color:"white"}},
+            vAxis:{gridlines:{color:"white"}},
+        };
+
+        var chart = new google.visualization.ScatterChart(document.getElementById('chart_height_width'));
+
+        chart.draw(data, options);
+    }
+    google.charts.load('current', {'packages':['bar']});
+    google.charts.setOnLoadCallback(drawChart4);
+    function drawChart4() {
+        var cattmp = [['Category', 'Amount']];
+        var cattmp2 = Object.keys(pie_info['category']).map(function(key) {
+            return [key, pie_info['category'][key]];
+          });
+        cattmp2.sort(function(first, second) {
+        return second[1] - first[1];
+        });
+        for (let j = 0; j < 7; j++){
+            cattmp.push(cattmp2[j]);
+        }
+        var data = new google.visualization.arrayToDataTable(cattmp);
+
+        var options = {
+            title: 'Category',
+            width:600, height:300,
+            legend: { position: 'none' },
+            bars: 'horizontal', // Required for Material Bar Charts.
+            hAxis:{gridlines:{count:2}},
+            // axes: {
+            // x: {
+            //     0: { side: 'bottom', label: 'Amount'} // Top x-axis.
+            // }
+            // },
+            bar: {groupWidth: "10%"},
+        };
+
+        var chart = new google.visualization.BarChart(document.getElementById('chart_cat'));
+        chart.draw(data, options);
+    };
     return out_widgets
 }
 function showImages(widgets, no){

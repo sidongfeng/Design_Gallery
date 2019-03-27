@@ -561,7 +561,7 @@ jQuery(document).ready(function($){
 		html += '   </div>'
 		html += '</div>'
 		html += '<div class="col-md-auto">'
-		html += '   <img data-toggle="modal" data-target="#'+widget['name'] + '" class="img-fluid pb-1" src="images/detail/'+widget['Developer']+'/' + widget['name'] + '.png" style="max-width:250px; cursor:pointer" />'
+		html += '   <img data-toggle="modal" data-target="#'+widget['name'] + '" class="img-fluid pb-1" src="images/detail/'+widget['Developer']+'/' + widget['name'] + '.png" style="max-width:250px; max-height:300px;cursor:pointer" />'
 		html += '</div>'
 
 		return html
