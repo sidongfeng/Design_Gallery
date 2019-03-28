@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="stylesheets/css/jquery-ui.min.css" />
     <!-- //Custom-Files -->
     <!-- Bootstrap-Core-CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="stylesheets/style_search.css" type="text/css" media="all" />
 
     <!-- Web-Fonts -->
@@ -345,9 +346,14 @@
     <!--service start-->
     <section id="service" class="service">
         <div class="container">
-
+            <div class='spinner' style="padding-top: 15rem;">
+                <div class="d-flex justify-content-center">
+                    <div class="spinner-border text-primary" id='myspinner' style="width: 3rem; height: 3rem;" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </div>
             <div class="text-center row">
-
                 <div class="col-md-6 col-sm-6">
                     <div class="single-service-box">
                         <div id="piechart_class"></div>
@@ -495,11 +501,10 @@
     <script>
         $(function(){
             if (document.URL.split("&").length>5){
-                $("html,body").animate({scrollTop:$("#piechart_class").offset().top})
+                $("html,body").animate({scrollTop:$(".spinner").offset().top})
                 console.log('loading images...');
                 let widgets = loadImages();
                 // showImages(widgets,30);
-                var all_widget = true;
                 $(window).on("scroll",function(){
                     if($(window).scrollTop() + $(window).height() +1000 >= $(document).height()){
                     //当最短的ul的高度比窗口滚出去的高度+浏览器高度大时加载新图片

@@ -593,7 +593,6 @@ jQuery(document).ready(function($){
 				},
 			is3D: true,
 			};
-			// Display the chart inside the <div> element with id="piechart"
 			var chart = new google.visualization.PieChart(document.getElementById(k));
 			chart.draw(data, options);
 		});

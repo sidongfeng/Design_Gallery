@@ -5,6 +5,7 @@ var out_widgets_3 = Array(); // filtered widgets
 var out_widgets_4 = Array(); // filtered widgets
 var out_widgets_5 = Array(); // filtered widgets
 var pie_info = {};
+var all_widgets = {};
 const colors = {"Cyan":"rgb(145,255,255)","Red":"#ff3030","Lime":"#ff9224", "Yellow":"#ffff6f","Green":"#53ff53","Blue":"#0080ff","Magenta":"#be77ff","Black":"#00000f","White":"#ffffff"};
 const btns = ["Button", "CheckBox", "Chronometer", "ImageButton", "ProgressBar", "RadioButton", "RatingBar", "SeekBar", "Spinner", "Switch", "ToggleButton"];
 const cats = ["EDUCATION", "LIFESTYLE", "ENTERTAINMENT", "MUSIC_AND_AUDIO", "TOOLS", "PERSONALIZATION", "TRAVEL_AND_LOCAL", "NEWS_AND_MAGAZINES", "BOOKS_AND_REFERENCE", "BUSINESS", "FINANCE", "GAME_CASUAL", "SPORTS", "GAME_PUZZLE", "PRODUCTIVITY", "PHOTOGRAPHY", "HEALTH_AND_FITNESS", "TRANSPORTATION", "COMMUNICATION", "GAME_EDUCATIONAL", "SOCIAL", "MEDIA_AND_VIDEO", "SHOPPING", "GAME_ARCADE", "GAME_SIMULATION", "GAME_ACTION", "MEDICAL", "GAME_CARD", "WEATHER", "GAME_RACING", "GAME_BOARD", "GAME_SPORTS", "GAME_CASINO", "GAME_WORD", "GAME_TRIVIA", "GAME_ADVENTURE", "GAME_STRATEGY", "GAME_ROLE_PLAYING", "GAME_MUSIC", "LIBRARIES_AND_DEMO", "COMICS",
@@ -60,9 +61,10 @@ function loadImages() { //loadSearchPage
         height: getHeightArray()
     };
     $.ajaxSettings.async = false;
-    $.getJSON('./data/widgets.json',function(result){
+    $.getJSON('./data/widgets2.json',function(result){
         for (let i = 0; i < result.length; i++) {
             let widget = result[i];
+            all_widgets[widget['name']] = widget;
             if ((ajaxData.btnType=='All' || ajaxData.btnType==widget['widget_class']) &&
                 (ajaxData.category=='All' || ajaxData.category==widget['category']) &&
                 (ajaxData.text=='' ||  ajaxData.text.toLowerCase() == widget['text'].toLowerCase() || widget['syns'].includes(ajaxData.text.toLowerCase())) &&
@@ -155,7 +157,6 @@ function loadImages() { //loadSearchPage
             },
         pieHole: 0.4,
         };
-        // Display the chart inside the <div> element with id="piechart"
         var chart = new google.visualization.PieChart(document.getElementById('piechart_color'));
         chart.draw(data, options);
     }
@@ -187,7 +188,6 @@ function loadImages() { //loadSearchPage
         },
         pieHole: 0.4,
         };
-        // Display the chart inside the <div> element with id="piechart"
         var chart = new google.visualization.PieChart(document.getElementById('piechart_class'));
         chart.draw(data, options);
     }
@@ -213,7 +213,6 @@ function loadImages() { //loadSearchPage
         };
 
         var chart = new google.visualization.ScatterChart(document.getElementById('chart_height_width'));
-
         chart.draw(data, options);
     }
     google.charts.load('current', {'packages':['bar']});
@@ -247,6 +246,7 @@ function loadImages() { //loadSearchPage
 
         var chart = new google.visualization.BarChart(document.getElementById('chart_cat'));
         chart.draw(data, options);
+        $(".spinner").remove();
     };
     return out_widgets
 }
@@ -341,11 +341,11 @@ function showImages(widgets, no){
             html += '                                   </tr>'
             html += '                                   <tr>'
             html += '                                       <th scope="row">Color:</th>'
-            html += '                                       <td>'
+            html += '                                       <td><div class="d-flex justify-content-center">'
             for (let z = 0; z < colors_Array.length; z++){
                 html += '                                       <div class="row">'+'<div class="circle" style="background-color:'+colors[colors_Array[z]['c']]+'"></div>'
             }
-            html += '                                       </td>'
+            html += '                                       </div></td>'
             html += '                                   </tr>'
             html += '                                   <tr>'
             html += '                                       <th scope="row">Developer:</th>'
@@ -354,6 +354,23 @@ function showImages(widgets, no){
             html += '                                   <tr>'
             html += '                                       <th scope="row">Downloads:</th>'
             html += '                                       <td>' + widget['downloads'] + '</td>'
+            html += '                                   </tr>'
+            html += '                                   <tr>'
+            html += '                                       <th scope="row">Similar:</th>'
+            html += '                                       <td><div class="row">'
+            if (typeof(widget['sims']) == "undefined"){
+                html += '1'
+            }else{
+                for (let z = 0; z < widget['sims'].length; z++){
+                    var sim_widget = all_widgets[widget['sims'][z]];
+                    console.log(sim_widget)
+                    // html = modal_img(html,sim_widget)
+                    html += '<div class="col-md-auto">'
+                    html += '   <img class="img-fluid pb-1" src="https://storage.googleapis.com/ui-collection/Mywidgets/' + sim_widget['name'] + '.png" />'
+                    html += '</div>'
+                }
+            }
+            html += '                                       </div></td>'
             html += '                                   </tr>'
             html += '                                   <tr>'
             html += '                                       <td align="center" colspan="2"><i>We only annotate the selected UI elements in theimage.</i></td>'

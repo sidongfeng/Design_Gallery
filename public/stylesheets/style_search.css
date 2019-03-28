@@ -2804,7 +2804,7 @@ font-family: 'Poppins', sans-serif;
 
 @media (min-width: 768px) {
     .modal-xl {
-        width: 85%;
+        width: 100%;
         max-width:1200px;
     }
 }
