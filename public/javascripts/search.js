@@ -207,14 +207,14 @@ function loadImages() { //loadSearchPage
 
         var options = {
             title: 'Height vs. Width comparison',
-            hAxis: {title: 'Height', minValue: 0, maxValue: 1300},
-            vAxis: {title: 'Width', minValue: 0, maxValue: 810},
+            hAxis: {title: 'Height', minValue: 0, maxValue: 1300,viewWindow:{min:0,max:1300}},
+            vAxis: {title: 'Width', minValue: 0, maxValue: 810,viewWindow:{min:0,max:810}},
             legend: 'none',
             width:600, height:300,
             colors: ['red'],
             pointSize: 3,
-            hAxis:{gridlines:{color:"white"}},
-            vAxis:{gridlines:{color:"white"}},
+            hAxis:{gridlines:{color:"white"},ticks:[0,500,1000,1500]},
+            vAxis:{gridlines:{color:"white"},ticks:[0,200,400,600,800]},
         };
 
         var chart = new google.visualization.ScatterChart(document.getElementById('chart_height_width'));
