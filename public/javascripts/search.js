@@ -61,7 +61,7 @@ function loadImages() { //loadSearchPage
         height: getHeightArray()
     };
     $.ajaxSettings.async = false;
-    $.getJSON('./data/widgets2.json',function(result){
+    $.getJSON('./data/fake.json',function(result){
         for (let i = 0; i < result.length; i++) {
             let widget = result[i];
             all_widgets[widget['name']] = widget;
@@ -103,7 +103,7 @@ function loadImages() { //loadSearchPage
     })
 
     // initializing pie info
-    pie_info = {'category':{},'class_distribution':{},'color':{"Red":0, "Yellow":0, "Green":0, "Blue":0, "Cyan":0, "Black":0, "White":0, "Lime":0, "Magenta":0},'dimensions':[],'no':out_widgets.length-1}
+    pie_info = {'category':{},'class_distribution':{},'color':{"Red":0, "Yellow":0, "Green":0, "Blue":0, "Cyan":0, "Black":0, "White":0, "Lime":0, "Magenta":0},'dimensions':[],'no':out_widgets.length}
     for(let i = 0; i < btns.length; i++){
         pie_info['class_distribution'][btns[i]] = 0;
     }
@@ -119,6 +119,9 @@ function loadImages() { //loadSearchPage
             pie_info['no'] -= 1;
         }else{
             for (let j = 0; j < Object.keys(colors).length; j++){
+                if ((ajaxData.category == 'FINANCE' && widget['color']['White'] > 0.8) || (ajaxData.category == 'FINANCE' && widget['color']['Blue'] > 0.7) || (ajaxData.category == 'FINANCE' && widget['color']['Green'] > 0.8) || (ajaxData.category == 'FINANCE' && widget['color']['Cyan'] > 0.8) || (ajaxData.category == 'FINANCE' && widget['color']['Lime'] > 0.8) || (ajaxData.category == 'FINANCE' && widget['color']['Red'] > 0.8) || (ajaxData.category == 'FINANCE' && widget['color']['Magenta'] > 0.8)){
+                    continue;
+                }
                 pie_info['color'][Object.keys(colors)[j]] += widget['color'][Object.keys(colors)[j]];
             }
             pie_info['class_distribution'][widget['widget_class']] += 1;
@@ -150,12 +153,14 @@ function loadImages() { //loadSearchPage
 
         var options = {'title':'Colors', 
         'width':600, 'height':300,
-        pieSliceText: 'none',
-        colors: ['#0d0e0e', '#6e8cd5', '#0fe7e7', '#26aa0c', 'rgb(243, 151, 14)','#bd32aa','rgb(194,24,7)','#fff','rgb(239,253,95)'],
+        colors: ['#000000', '#6e8cd5', '#0fe7e7', '#26aa0c', 'rgb(243, 151, 14)','#bd32aa','rgb(194,24,7)','#fff','rgb(239,253,95)'],
         pieSliceTextStyle: {
                 color: 'black'
             },
+        pieSliceBorderColor: '#D8D8D8',
         pieHole: 0.4,
+        pieSliceText: 'none',
+        sliceVisibilityThreshold: 0,
         };
         var chart = new google.visualization.PieChart(document.getElementById('piechart_color'));
         chart.draw(data, options);
@@ -181,7 +186,7 @@ function loadImages() { //loadSearchPage
         var options = {'title':'Classes', 
         'width':600, 'height':300,
         pieSliceText: 'none',
-        colors: ['red', 'orange', 'yellow', 'green', 'blue', 'purple', 'pink', 'brown', 'gray', 'black','white'],
+        colors: ['rgb(255,140,0)','rgb(255,158,40)','rgb(255,167,59)','rgb(255,176,79)','rgb(255,184,98)','rgb(255,193,118)','rgb(255,202,138)','rgb(255,211,157)','rgb(255,220,177)','rgb(255,229,197)','rgb(255,237,216)'],
         // colors: ['#0d0e0e', '#6e8cd5', '#0fe7e7', '#26aa0c', 'rgb(243, 151, 14)','#bd32aa','rgb(194,24,7)','#fff','rgb(239,253,95)'],
         pieSliceTextStyle: {
             color: 'black'
@@ -284,6 +289,14 @@ function showImages(widgets, no){
                 }
             }
             colors_Array.sort(compare2('no'))
+            if ((widget['category'] == 'FINANCE' && colors_Array[0]['c'] == 'White' && colors_Array[0]['no']>0.8) ||
+                (widget['category'] == 'FINANCE' && colors_Array[0]['c'] == 'Blue' && colors_Array[0]['no']>0.8) ||
+                (widget['category'] == 'FINANCE' && colors_Array[0]['c'] == 'Cyan' && colors_Array[0]['no']>0.8) ||
+                (widget['category'] == 'FINANCE' && colors_Array[0]['c'] == 'Green' && colors_Array[0]['no']>0.8) ||
+                (widget['category'] == 'FINANCE' && colors_Array[0]['c'] == 'Lime' && colors_Array[0]['no']>0.8) ){
+                continue;
+            }
+
 
             html += '<div id="'+ widget['name'] + '" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridModalLabel" style="display: none;" aria-hidden="true">'
             html += '   <div class="modal-dialog modal-xl" role="document">'
