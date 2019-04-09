@@ -372,7 +372,7 @@ function showImages(widgets, no){
             html += '                                       <th scope="row">Similar:</th>'
             html += '                                       <td><div class="row">'
             if (typeof(widget['sims']) == "undefined"){
-                html += '1'
+                html += 'None'
             }else{
                 for (let z = 0; z < widget['sims'].length; z++){
                     var sim_widget = all_widgets[widget['sims'][z]];
