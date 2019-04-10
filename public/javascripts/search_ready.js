@@ -26,31 +26,31 @@ $(document).ready(function(){
 
     // 1. Scroll To Top 
 
-		$(window).on('scroll',function () {
+    $(window).on('scroll',function () {
 
-			if ($(this).scrollTop() > 600) {
+        if ($(this).scrollTop() > 600) {
 
-				$('.return-to-top').fadeIn();
+            $('.return-to-top').fadeIn();
 
-			} else {
+        } else {
 
-				$('.return-to-top').fadeOut();
+            $('.return-to-top').fadeOut();
 
-			}
+        }
 
-		});
+    });
 
-		$('.return-to-top').on('click',function(){
+    $('.return-to-top').on('click',function(){
 
-				$('html, body').animate({
+            $('html, body').animate({
 
-				scrollTop: 0
+            scrollTop: 0
 
-			}, 1500);
+        }, 200);
 
-			return false;
+        return false;
 
-		});
+    });
 
     // 2. range js
         var h_array;
