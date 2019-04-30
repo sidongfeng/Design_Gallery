@@ -252,6 +252,7 @@ function loadImages() { //loadSearchPage
         var chart = new google.visualization.BarChart(document.getElementById('chart_cat'));
         chart.draw(data, options);
         $(".spinner").remove();
+        $(".service").css('height','700px')
     };
     return out_widgets
 }
