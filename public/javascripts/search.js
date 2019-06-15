@@ -370,6 +370,10 @@ function showImages(widgets, no){
             html += '                                       <td>' + widget['downloads'] + '</td>'
             html += '                                   </tr>'
             html += '                                   <tr>'
+            html += '                                       <th scope="row">Date:</th>'
+            html += '                                       <td>' + widget['date'] + '</td>'
+            html += '                                   </tr>'
+            html += '                                   <tr>'
             html += '                                       <th scope="row">Similar:</th>'
             html += '                                       <td><div class="row">'
             if (typeof(widget['sims']) == "undefined"){
