@@ -266,7 +266,7 @@ function showImages(widgets, no){
             output = widgets.length;
         }
         //console.log(widgets)
-
+        
         let html = '';
         for(let j = 0; j < output; j++){
             let widget = widgets.pop();
@@ -298,13 +298,14 @@ function showImages(widgets, no){
                 continue;
             }
 
-
+            
             html += '<div id="'+ widget['name'] + '" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridModalLabel" style="display: none;" aria-hidden="true">'
             html += '   <div class="modal-dialog modal-xl" role="document">'
             html += '       <div class="modal-content">'
             
             html += '           <div class="modal-header">'
             html += '               <h5 class="modal-title"><a href="' + widget['url'] + '">' + widget['application_name'] + '</a></h5>'
+            html += '               <div class="share-button share-button-top relative"></div>' 
             html += '               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>'
             html += '           </div>'
 
