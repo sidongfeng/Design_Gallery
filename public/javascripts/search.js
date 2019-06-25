@@ -85,7 +85,7 @@ function loadImages() { //loadSearchPage
                     }else if (widget['color'][ajaxData.color] >= 0.3 && widget['color'][ajaxData.color] < 0.4){
                         out_widgets_5.push(widget);
                     }else{
-                        var ii = 1;
+                        var string='Do nothing';
                     }
                 }
             }
@@ -114,6 +114,13 @@ function loadImages() { //loadSearchPage
 
     for(let i = 0; i < out_widgets.length; i++){
         var widget = out_widgets[i];
+        if (ajaxData.category == 'SOCIAL' && ajaxData.btnType=='Button'){          
+            if (widget['dimensions']['width']<250 || widget['dimensions']['height'] > 100){
+                if (Math.random() < 0.9){
+                    continue;
+                }
+            }
+        }
         if (widget['color']==0){
             console.log('error color')
             pie_info['no'] -= 1;

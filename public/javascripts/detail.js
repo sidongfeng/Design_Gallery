@@ -479,6 +479,7 @@ jQuery(document).ready(function($){
 		
 		html += '           <div class="modal-header">'
 		html += '               <h5 class="modal-title"><a href="' + widget['url'] + '">' + widget['application_name'] + '</a></h5>'
+		// html += '               <div class="share-button share-button-top relative"></div>' 
 		html += '               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>'
 		html += '           </div>'
 
