@@ -17,9 +17,17 @@ require('./models/company');
 require('./models/new_widget');
 
 
-
+const homeRouter = require('./routes/home');
+//const indexRouter = require('./routes/index');
 const searchRouter = require('./routes/search');
-
+const aboutRouter = require('./routes/about');
+const contactRouter = require('./routes/contact');
+const detailRouter = require('./routes/detail');  // test
+const compareRouter = require('./routes/compare');
+const seemoreRouter = require('./routes/seemore');
+//const galleryRouter = require('./routes/gallery');
+//const screenshotRouter = require('./routes/screenshot');
+const testRouter = require('./routes/test');
 const app = express();
 
 
@@ -35,9 +43,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(__dirname + '/public/images/favicon.ico'));
 
 //app.use('/', indexRouter);
-
+app.use('/',homeRouter);
 app.use('/search', searchRouter);
-
+app.use('/about', aboutRouter);
+app.use('/contact', contactRouter);
+app.use('/detail', detailRouter);
+app.use('/compare',compareRouter);
+app.use('/seemore',seemoreRouter);
+//app.use('/gallery',galleryRouter);
+//app.use('/screenshot',screenshotRouter);
+app.use('/test',testRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
