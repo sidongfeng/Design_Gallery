@@ -8,17 +8,6 @@
     <meta name="keywords"
           content="mobile, mobile ui, mobile widgets, widget, widgets, mobile application, android, android widget, android widgets, android ui, ui">
     <meta name="author" content="">
-    <script>
-        /*
-        addEventListener("load", function () {
-            setTimeout(hideURLbar, 0);
-        }, false);
-
-        function hideURLbar() {
-            window.scrollTo(0, 1);
-        }
-        */
-    </script>
 
     <title><%= title %></title>
 
@@ -28,8 +17,7 @@
     <!-- Style-CSS -->
     <link href="stylesheets/font-awesome.min.css" rel="stylesheet">
     <!-- Font-Awesome-Icons-CSS -->
-    <!-- range css-->
-    <link rel="stylesheet" href="stylesheets/css/jquery-ui.min.css" />
+
     <!-- //Custom-Files -->
     <!-- Bootstrap-Core-CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -53,39 +41,6 @@
 </head>
 
 <body>
-    <!-- main banner -->
-	<div class="main-top" id="home">
-        <!-- header -->
-        <header>
-            <div class="container-fluid">
-                <div class="header d-md-flex justify-content-between align-items-center py-3 px-xl-5 px-lg-3 px-2">
-                    <!-- logo -->
-                    <div id="logo">
-                        <h1><a href="/">Mobile UI Gallery</a></h1>
-                    </div>
-                    <!-- //logo -->
-                    <!-- nav -->
-                    <div class="nav_w3ls">
-                        <nav>
-                            <label for="drop" class="toggle">Menu</label>
-                            <input type="checkbox" id="drop" />
-                            <ul class="menu">
-                                <li><a href="/">Home</a></li>
-                                <li><a href="/test">About Us</a></li>
-                                <li><a href="/search">Search</a></li>
-                                <li><a href="/compare?color=Red+Yellow+Green+Blue+Cyan+Black+White+Lime+Magenta">Compare</a></li>
-                                <!-- <li><a href="/contact">Contact Us</a></li> -->
-                            </ul>
-                        </nav>
-                    </div>
-                    <!-- //nav -->
-                </div>
-            </div>
-        </header>
-        <!-- //header -->
-
-    </div>
-    <!-- //main banner -->
     <div class="boxx">
     <!--about-us start -->
     <section id="home" class="about-us">
@@ -95,8 +50,8 @@
                     <div class="col-sm-12">
                         <div class="single-about-us">
                             <div class="about-us-txt">
-                                <h2>
-                                    Explore the Beauty of Mobile UI Design
+                                <h2 style="color:#685757;">
+                                    Explore the Beauty of Gribbble
                                 </h2>
                                 <div class="about-btn">
                                     <a href="#myform">
@@ -129,9 +84,16 @@
                             <div id="desc-tabs" class="desc-tabs">
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li role="presentation" class="active">
-                                        <a href="#searchs" aria-controls="searchs" role="tab" data-toggle="tab">
-                                            <i class="fa fa-search"></i>
-                                            Search
+                                        <a href="#searchs1" aria-controls="searchs1" role="tab" data-toggle="tab">
+                                            <i class="fa fa-envira"></i>
+                                            Gallery
+                                        </a>
+                                    </li>
+
+                                    <li role="presentation">
+                                        <a href="#searchs2" aria-controls="searchs2" role="tab" data-toggle="tab">
+                                            <i class="fa fa-dribbble"></i>
+                                            Dribbble
                                         </a>
                                     </li>
                                 </ul>
@@ -139,195 +101,69 @@
                                 <!-- Tab panes -->
                                 <div class="tab-content">
                 
-                                    <div role="tabpanel" class="tab-pane active in" id="searchs">
+                                    <div role="tabpanel" class="tab-pane active in" id="searchs1">
                                         <form name="search" method="get" id="myform" action="/search" class="panel-body">
                                             <div class="tab-para">
         
                                                 <div class="row">
-                                                    <div class="col-lg-3 col-md-4 col-sm-12">
-                                                        <div class="single-tab-select-box">
-                                                            <h2>Widget Class</h2>
-                                                            <!-- Widget Class -->
-                                                            <fieldset>
-                                                                <div class="travel-select-icon">
-                                                                    <select class="form-control" id="btnType" name="btnType">
-                                                                        <% if (!btnTypeArr.includes(query.btnType)) { %>
-                                                                        <option selected value="All">All</option>
-                                                                        <% } else { %>
-                                                                        <option value="All">All</option>
-                                                                        <% }
-                                                                        for (i = 0; i < btnTypeArr.length; i++) {
-                                                                            if (btnTypeArr[i] === 'All') {
-                                                                                continue;
-                                                                            }
-                                                                        if (query.btnType === btnTypeArr[i]) { %>
-                                                                        <option selected> <%= btnTypeArr[i] %></option>
-                                                                        <% }else { %>
-                                                                        <option> <%= btnTypeArr[i] %></option>
-                                                                        <% }
-                                                                        } %>
-                                                                    </select>
-                                                                </div><!-- /.travel-select-icon -->
-                                                            </fieldset>
-                                                            <!-- //Widget Class -->
-                                                        </div><!--/.single-tab-select-box-->
+                                                    <div class="col-lg-3 col-md-3 col-sm-1">
                                                     </div><!--/.col-->
-                                                
-        
-                                                    <div class="col-lg-2 col-md-1 col-sm-4">
+                                                    <div class="col-lg-5 col-md-5 col-sm-12" style="margin-top: 50px;">
                                                         <div class="single-tab-select-box">
-                                                            <h2>Color</h2>
-                                                            <fieldset>
-                                                                <div class="travel-select-icon">
-                                                                    <select class="form-control" id="color" name="color">
-                                                                        <% if (!colArr.includes(query.color)) { %>
-                                                                            <option selected value="All">All</option>
-                                                                            <% } else { %>
-                                                                            <option value="All">All</option>
-                                                                            <% }
-                                                                            for (var i = 0; i < colArr.length; i++) {
-                                                                                if (colArr[i] === 'All') {
-                                                                                    continue;
-                                                                                }
-                                                                            if (query.color === colArr[i]) { %>
-                                                                            <option selected> <%= colArr[i] %></option>
-                                                                            <% }else { %>
-                                                                            <option> <%= colArr[i] %></option>
-                                                                            <% }
-                                                                            } %>
-                                                                    </select><!-- /.select-->
-                                                                </div><!-- /.travel-select-icon -->
-                                                            </fieldset>
-                                                        </div><!--/.single-tab-select-box-->
-                                                    </div><!--/.col-->
-
-                                                    <div class="col-lg-4 col-md-3 col-sm-10">
-                                                        <div class="single-tab-select-box">
-                                                            <h2>Category</h2>
-                                                            <fieldset>
-                                                                <div class="travel-select-icon">
-                                                                    <select class="form-control" id="category" name="category">
-                                                                        <% if (!catArr.includes(query.category)) { %>
-                                                                        <option selected value="All">All</option>
-                                                                        <% } else { %>
-                                                                        <option value="All">All</option>
-                                                                        <% }
-                                                                        for (var i = 0; i < catArr.length; i++) {
-                                                                            if (catArr[i] === 'All') {
-                                                                                continue;
-                                                                            }
-                                                                        if (query.category === catArr[i]) { %>
-                                                                        <option selected> <%= catArr[i] %></option>
-                                                                        <% }else { %>
-                                                                        <option> <%= catArr[i] %></option>
-                                                                        <% }
-                                                                        } %>
-                                                                    </select><!-- /.select-->
-                                                                </div><!-- /.travel-select-icon -->
-                                                            </fieldset>
-                                                        </div><!--/.single-tab-select-box-->
-                                                    </div><!--/.col-->
-
-                                                    <div class="col-lg-5 col-md-4 col-sm-12">
-                                                        <div class="single-tab-select-box">
-                                                            <h2>Sorting</h2>
-                                                            <fieldset>
-                                                                <div class="travel-select-icon">
-                                                                    <select class="form-control" id="sortType" name="sortType">
-                                                                        <% if (!((query.sortType) in sortTypeDict)) { %>
-                                                                        <option selected value="appDownloads"> <%= sortTypeDict['appDownloads'] %></option>
-                                                                        <% } else { %>
-                                                                        <option value="appDownloads"> <%= sortTypeDict['appDownloads'] %></option>
-                                                                        <% } for (const [key, value] of Object.entries(sortTypeDict)) {
-                                                                            if (key === 'appDownloads') {
-                                                                                continue;
-                                                                            }
-                                                                        if (query.sortType === key) { %>
-                                                                        <option selected value="<%= key %>"><%= value %></option>
-                                                                        <% }else { %>
-                                                                        <option value="<%= key %>"><%= value %></option>
-                                                                        <% }
-                                                                        } %>
-                                                                    </select><!-- /.select-->
-                                                                </div><!-- /.travel-select-icon -->
-                                                            </fieldset>
-                                                        </div><!--/.single-tab-select-box-->
-                                                    </div><!--/.col-->
-
-                                                    <div class="col-lg-4 col-md-4 col-sm-12">
-                                                        <div class="single-tab-select-box">
-                                                            <h2>Text</h2>
+                                                            <h2>Gallery Search</h2>
                                                             <fieldset>
                                                                 <div>
-                                                                    <input class="form-control boxx_input_text" id="text" name="text" placeholder="KeyWord"><!-- /.select-->
+                                                                    <input style="display:none;" id="mode" name="mode" value="gallery">
+                                                                    <input class="form-control boxx_input_text" id="text" name="text" placeholder="KeyWords">
                                                                 </div><!-- /.travel-select-icon -->
                                                             </fieldset>
                                                         </div><!--/.single-tab-select-box-->
                                                     </div><!--/.col-->
-                                                </div><!--/.row-->
 
-                                                <div class="row">
-                                                    <div class="col-sm-5">
-                                                        <div class="travel-budget">
-                                                            <div class="row">
-                                                                <div class="col-md-3 col-sm-4">
-                                                                    <h3>Height: </h3>
-                                                                </div><!--/.col-->
-                                                                <div class="co-md-9 col-sm-8">
-                                                                    <div class="travel-filter">
-                                                                        <div class="info_widget">
-                                                                            <div class="price_filter">
-                                                                                
-                                                                                <div id="slider-range"></div><!--/.slider-range-->
-
-                                                                                <div class="price_slider_amount">
-                                                                                    <input type="text" id="height-slider" name="height"  placeholder="Add Your Height" />
-                                                                                </div><!--/.price_slider_amount-->
-                                                                            </div><!--/.price-filter-->
-                                                                        </div><!--/.info_widget-->
-                                                                    </div><!--/.travel-filter-->
-                                                                </div><!--/.col-->
-                                                            </div><!--/.row-->
-                                                        </div><!--/.travel-budget-->
-
-                                                        <div class="travel-budget">
-                                                            <div class="row">
-                                                                <div class="col-md-3 col-sm-4">
-                                                                    <h3>Width: </h3>
-                                                                </div><!--/.col-->
-                                                                <div class="co-md-9 col-sm-8">
-                                                                    <div class="travel-filter">
-                                                                        <div class="info_widget">
-                                                                            <div class="price_filter">
-                                                                                
-                                                                                <div id="slider-range-1"></div><!--/.slider-range-1-->
-    
-                                                                                <div class="price_slider_amount">
-                                                                                    <input type="text" id="width-slider" name="width" placeholder="Add Your Width" />
-                                                                                </div><!--/.price_slider_amount-->
-                                                                            </div><!--/.price-filter-->
-                                                                        </div><!--/.info_widget-->
-                                                                    </div><!--/.travel-filter-->
-                                                                </div><!--/.col-->
-                                                            </div><!--/.row-->
-                                                        </div><!--/.travel-budget-->
-                                                    </div><!--/.col-->
-                                                
-                                                
-                                                    <div class="col-sm-7">
-                                                        <div class="about-btn travel-mrt-0 pull-right">
+                                                    <div class="col-sm-3">
+                                                        <div class="about-btn travel-mrt-0 pull-right" style="margin-top: 60px;">
                                                             <button  class="about-view travel-btn">
                                                                 search	
                                                             </button><!--/.travel-btn-->
                                                         </div><!--/.about-btn-->
                                                     </div><!--/.col-->
-
                                                 </div><!--/.row-->
-        
                                             </div><!--/.tab-para-->
                                         </form>
                                     </div><!--/.tabpannel-->
+
+
+                                    <div role="tabpanel" class="tab-pane fade in" id="searchs2">
+                                        <form name="search" method="get" id="myform" action="/search" class="panel-body">
+                                            <div class="tab-para">
         
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-3 col-sm-1">
+                                                    </div><!--/.col-->
+                                                    <div class="col-lg-5 col-md-5 col-sm-12" style="margin-top: 50px;">
+                                                        <div class="single-tab-select-box">
+                                                            <h2>Dribbble Search</h2>
+                                                            <fieldset>
+                                                                <div>
+                                                                    <input style="display:none;" id="mode" name="mode" value="dribbble">
+                                                                    <input class="form-control boxx_input_text" id="text" name="text" placeholder="KeyWords">
+                                                                </div><!-- /.travel-select-icon -->
+                                                            </fieldset>
+                                                        </div><!--/.single-tab-select-box-->
+                                                    </div><!--/.col-->
+
+                                                    <div class="col-sm-3">
+                                                        <div class="about-btn travel-mrt-0 pull-right" style="margin-top: 60px;">
+                                                            <button  class="about-view travel-btn">
+                                                                search	
+                                                            </button><!--/.travel-btn-->
+                                                        </div><!--/.about-btn-->
+                                                    </div><!--/.col-->
+                                                </div><!--/.row-->
+                                            </div><!--/.tab-para-->
+                                        </form>
+                                    </div><!--/.tabpannel-->
+
                                 </div><!--/.tab content-->
                             </div><!--/.desc-tabs-->
                         </div><!--/.single-travel-box-->
@@ -350,32 +186,6 @@
                     </div>
                 </div>
             </div>
-            <div class="text-center row">
-                <div class="col-md-6 col-sm-6">
-                    <div class="single-service-box">
-                        <div id="piechart_class"></div>
-                    </div><!--/.single-service-box-->
-                </div><!--/.col-->
-
-                <div class="col-md-6 col-sm-6">
-                    <div class="single-service-box">
-                        <div id="piechart_color"></div>
-                    </div><!--/.single-service-box-->
-                </div><!--/.col-->
-
-                <div class="col-md-6 col-sm-6">
-                    <div class="single-service-box">
-                        <div id="chart_height_width"></div>
-                    </div><!--/.single-service-box-->
-                </div><!--/.col-->
-
-                <div class="col-md-6 col-sm-6">
-                    <div class="single-service-box">
-                        <div id="chart_cat"></div>
-                    </div><!--/.single-service-box-->
-                </div><!--/.col-->
-
-            </div><!--/.statistics-counter-->	
         </div><!--/.container-->
     </section><!--/.service-->
     <!--service end-->
@@ -397,84 +207,11 @@
     <footer class="py-5">
         <div class="container pt-xl-4">
             <div class="row footer-top">
-                <div class="col-lg-4 col-md-6 footer-grid_section_1its">
-                    <h2 class="logo-2 mb-lg-4 mb-3">
-                        <a href="/" class="text-uppercase text-wh">Design Gallery</a>
-                    </h2>
-                    <!-- Map -->
-                    <div class="map-fo">
-                        <iframe src=""></iframe>
-                    </div>
-                    <!-- //Map -->
-                </div>
-                <div class="col-lg-4 col-md-4 footer-grid_section_1its mt-md-0 mt-4">
-                    <h3 class="footer-title text-uppercase text-wh mb-lg-4 mb-3">Links</h3>
-                    <ul class="list-unstyled">
-                        <li class="mb-3">
-                            <a href="/">Home</a>
-                        </li>
-                        <li class="mb-3">
-                            <a href="/about">About Us</a>
-                        </li>
-                        <li class="mb-3">
-                            <a href="/search">Search</a>
-                        </li>
-                        <li class="mb-3">
-                            <a href="/compare?color=Red+Yellow+Green+Blue+Cyan+Black+White+Lime+Magenta">Compare</a>
-                        </li>
-                        <!-- <li class="mb-3">
-                            <a href="/contact">Contact Us</a>
-                        </li> -->
-                    </ul>
-                </div>
-                <!-- <div class="col-lg-3 col-md-6 footer-grid_section_1its mt-lg-0 mt-4">
-                    <h3 class="footer-title text-uppercase text-wh mb-lg-4 mb-3">Contact Info</h3>
-                    <div class="contact-info">
-                        <div class="footer-style-w3ls mb-4">
-                            <h4 class="text-li mb-2">Email </h4>
-                            <p><a href="mailto:u6063820@anu.edu.au">u6063820@anu.edu.au</a></p>
-                        </div>
-                        <div class="footer-style-w3ls mb-4">
-                            <h4 class="text-li mb-2">Location</h4>
-                            <p>The Australian National University</p>
-                        </div>
-                    </div>
-                </div> -->
-                <div class="col-lg-4 col-md-4 footer-grid_section_1its mt-lg-0 mt-4">
-                    <!-- social icons -->
-                    <div class="mobamuinfo_social_icons">
-                        <h3 class="footer-title text-uppercase text-wh mb-lg-4 mb-3">Social Info</h3>
-                        <p>The new ways of design sharing and knowledge discovery, enables through advanced search, summarization and comparison of real-application GUI designs, beyond the content sharing of GUI design artwork.</p>
-                        <!-- <h4 class="sub-con-fo text-li my-4">Catch on Social</h4> -->
-                        <!-- <ul class="mobamuits_social_list list-unstyled">
-                            <li class="w3_mobamu_facebook">
-                                <a href="https://www.facebook.com/profile.php?id=100006350080957">
-                                    <span class="fa fa-facebook-f"></span>
-                                </a>
-                            </li>
-                            <li class="w3_mobamu_twitter">
-                                <a href="https://twitter.com/loveromance09">
-                                    <span class="fa fa-twitter"></span>
-                                </a>
-                            </li>
-                            <li class="w3_mobamu_dribble">
-                                <a href="https://dribbble.com/loveromance09">
-                                    <span class="fa fa-dribbble"></span>
-                                </a>
-                            </li>
-                        </ul> -->
-                    </div>
-                    <!-- social icons -->
-                </div>
             </div>
         </div>
     </footer>
     <!-- //footer -->
-    <!-- copyright -->
-    <div class="cpy-right text-center py-3">
-        <p>Copyright &copy; 2019. Mobile UI Gallery All rights reserved</p>
-    </div>
-    <!-- //copyright -->
+
     <div id="scroll-Top">
         <i class="fa fa-angle-double-up return-to-top" id="scroll-top" data-toggle="tooltip" data-placement="top" title="" data-original-title="Back to Top" aria-hidden="true"></i>
     </div><!--/.scroll-Top-->
@@ -491,42 +228,23 @@
             crossorigin="anonymous"></script>
 
     <!--Custom JS-->
-    <script src="javascripts/search_ready.js"></script>
     <script src="javascripts/search.js"></script>
 
     <script>
         $(function(){
-
             // load
-            if (document.URL.split("&").length>5){
+            let url = document.URL;
+            let text = getUrlParameter('text')
+            if (text != "" && text !== undefined){
                 $("#gallery").show();
                 $(".service_inside").show();
                 $("html,body").animate({scrollTop:$(".spinner").offset().top-100})
                 console.log('loading images...');
-                let widgets = loadImages();
+                let imgs = loadImages();
                 // showImages(widgets,30);
                 $(window).on("scroll",function(){
                     if($(window).scrollTop() + $(window).height() +1000 >= $(document).height()){
-                    //当最短的ul的高度比窗口滚出去的高度+浏览器高度大时加载新图片
-                        // if (widgets.length>20000 && all_widget){
-                        //     showImages(widgets,180);
-                        //     all_widget = false;
-                        // }else if (widgets.length>15000 && all_widget){
-                        //     showImages(widgets,100);
-                        //     all_widget = false;
-                        // }else{
-                        //     showImages(widgets,85);
-                        // }
-                        showImages(widgets,100);
-                        // share button
-                        $('.share-button-top').share({
-                            title: 'Share Button',
-                            app_id: '395341394433384',
-                            background: 'rgba(255,255,255,.0)',
-                            color: '#3B2B45',
-                            flyout: 'top center',
-                            url: 'mui-collection.herokuapp.com',
-                        });
+                        showImages(imgs,30);
                     }
                 })
             }else{
