@@ -389,7 +389,7 @@ function showImages(widgets, no){
             }else{
                 for (let z = 0; z < widget['sims'].length; z++){
                     var sim_widget = all_widgets[widget['sims'][z]];
-                    console.log(sim_widget)
+                    // console.log(sim_widget)
                     // html = modal_img(html,sim_widget)
                     html += '<div class="col-md-auto">'
                     html += '   <img class="img-fluid pb-1" src="https://storage.googleapis.com/ui-collection/Mywidgets/' + sim_widget['name'] + '.png" />'
