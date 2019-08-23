@@ -292,7 +292,7 @@ function showImages(imgs, no, ajaxData){
                 for(let z = 0; z < Math.min(split['c'][tag].length,32); z++){
                     // html += '<div class="col-sm-4">'
                     let id = split['c'][tag][z];
-                    let src = "./images/dataset/"+id.toString()+".png";
+                    let src = "https://storage.googleapis.com/ui-collection/Semantic/"+id.toString()+".png";
                     let dribbble_src = "https://www.dribbble.com/shots/"+id
                     html = generate_html(html,id,src,dribbble_src)
                     // html += '</div>'
