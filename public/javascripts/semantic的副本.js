@@ -144,9 +144,8 @@ function loadImages() { //loadSearchPage
             let origin_tags = img['origin'].split('+');
             let normalize_tags = img['normalize'].split('+');
             let predict_tags = img['predict'].split('+')
-            let title = img['title'].split('+')
 
-            current_tags = normalize_tags.concat(predict_tags).concat(title)
+            current_tags = normalize_tags.concat(predict_tags)
             img_dict[id] = img
             
             // gallery method: all -> all-1 -> ... -> 1
