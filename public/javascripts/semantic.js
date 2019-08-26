@@ -76,11 +76,14 @@ function normalize(listofString){
     var result = [];
     for (i = 0; i < listofString.length; i++) {
         string = listofString[i]
+        b = false
         Object.keys(category).forEach(function(key) {
             if (category[key].indexOf(string) > -1){
                 result.push(key)
+                b = true
             }
         });
+        if (!b){result.push(string)}
     }
     return result
 }
