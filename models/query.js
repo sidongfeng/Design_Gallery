@@ -3,7 +3,8 @@ const Schema = mongoose.Schema;
 
 const querySchema = new Schema({
     _id: Schema.Types.ObjectId,
-    query: String
+    query: String,
+    ip: String
 },{ collection: "query" });
 
 
