@@ -14,7 +14,7 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 require('./models/widget');
 require('./models/company');
-require('./models/new_widget');
+require('./models/query');
 
 
 const homeRouter = require('./routes/home');
