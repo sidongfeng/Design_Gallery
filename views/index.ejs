@@ -3,132 +3,207 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Mobile UI Gallery, a repository of widgets taken from Google Play Store.">
+    <meta name="description"
+          content="Mobile UI Gallery. A gallery has a total of 68,702 widgets used by Android developers, and are gleaned from the Google Play Store (mui-collection.herokuapp.com)">
     <meta name="keywords"
           content="mobile, mobile ui, mobile widgets, widget, widgets, mobile application, android, android widget, android widgets, android ui, ui">
     <meta name="author" content="">
 
-    <title><%= title %></title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Index</title>
 
     <!-- Custom styles for this template -->
-    <link href="stylesheets/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="stylesheets/css/bootstrap.css">
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117332758-2"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
+    <!-- Style-CSS -->
+    <link href="stylesheets/font-awesome.min.css" rel="stylesheet">
+    <!-- Font-Awesome-Icons-CSS -->
 
-        function gtag() {
-            dataLayer.push(arguments);
-        }
+    <!-- //Custom-Files -->
+    <!-- Bootstrap-Core-CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-        gtag('js', new Date());
+    <!-- //Custom-Files -->
+    <!-- Bootstrap-Core-CSS -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/tuodong.css" />
 
-        gtag('config', 'UA-117332758-2');
-    </script>
+    <!-- Web-Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Crimson+Text:400,400i,600,600i,700,700i" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Oxygen:300,400,700&amp;subset=latin-ext" rel="stylesheet">
+    <!-- //Web-Fonts -->
 </head>
+
 <body>
+    <!-- <button class="mouseoveropen">指向弹出</button> -->
 
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top navbar-fixed-top">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/">Mobile UI Gallery</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <!--<li class="nav-item active">
-                    <a class="nav-link" href="/"">Home
-                    <span class="sr-only">(current)</span>
-                    </a>
-                </li>-->
-                 <li class="nav-item active">
-                    <a class="nav-link" href="/">Home
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="
-                    /search?btnType=RadioButton&color=All&category=All&sortType=appDownloads&text=&width=0%3B800&height=0%3B1280&page=1">Search
-                    </a>
-                </li>
-                 <li class="nav-item">
-                    <a class="nav-link" href="/compare?btnType=Button&color=All&category=All&DeveloperOneName=AI_Factory_Limited&DeveloperTwoName=GIOSIS_PTE._LTD.&sortType=appDownloads&text=&width=0%3B800&height=0%3B1280&page=1">Compare</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/about">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/contact">Contact</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
-<!-- Page Content -->
-<div class="container-fluid">
-    <h2 class="my-4 text-center text-lg-left">A gallery made for Android developers</h2>
-    <div>A collection of 32,569 UI components coming from different applications and screenshots from Google Play Store.
-        In our repository, we make it simple for developers to use it by providing details of the application screenshot
-        as
-        well as a <b>red-box</b> of where the widget is located at. Duplicate or very similar UI components in the
-        screenshots are excluded for the diversity of design kit. We have several examples of such widgets listed
-        below.<br><br>
-        <p>To search for more widgets or particular classes, please click on the search button below:</p>
-    </div>
-    <br>
-    <div class="text-center">
-        <button type="button" class="btn-lg btn-primary" onclick="location.href='/search?btnType=RadioButton&color=All&category=All&sortType=appDownloads&text=&width=0%3B800&height=0%3B1280&page=1'">Search</button>
-    </div>
-
-    <hr/>
-
-    <% for (let j = 0; j < chosenArr.length; j++) { %>
-    <h3 class="my-4 text-center text-lg-left"><%= chosenArr[j] %></h3>
-    <section class="image-grid">
-
-        <% for(let i = 0; i < widgets[chosenArr[j]].length; i++) {
-            var btnSize = widgets[chosenArr[j]][i].dimensions['width'] + 'x' + widgets[chosenArr[j]][i].dimensions['height']; %>
-        <span class="anchor" id="#expand-jump-<%= 10 * (j - 1) + i %>"></span>
-        <article class="image__cell is-collapsed">
-            <div class="image--basic" style="height:100px">
-                <a href="#expand-jump-<%= 10 * (j - 1) + i %>">
-                    <img class="basic__img"
-                         src="https://storage.googleapis.com/ui-collection-gcs/widgets/<%= widgets[chosenArr[j]][i].widget_class + '/' + widgets[chosenArr[j]][i].name + '.jpeg' %>"
-                         style="max-height:100px;"/>
-                </a>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="d-flex justify-content-center col-12">
+                    <h1><br></h1>
+                </div>
             </div>
+            <div class="row">
+                <div class="left col-4">
+                    <div class="list">
+                        <h2>Types</h2>
+                        <ul class="type">
+                            <li data-type="1" class="active">Button</li>
+                            <li data-type="2">Image</li>
+                            <li data-type="3">Input</li>
+                            <li data-type="4">Custom</li>
+                        </ul>
+                    </div>
+                    <div class="pic">
+                        <h2>Components</h2>
+                        <ul id="button" class="on"></ul>
+                        <ul id="img"></ul>
+                        <ul id="input"></ul>
+                        <ul >
+                            <li class="addimg">
+                                <form enctype="multipart/form-data" name="form1" class="add">
+                                    <a class="btn_addPic" href="javascript:void(0);"><span><em>+</em>Add Image</span><input id="f" class="filePrew" type="file" name="f" onchange="change()" title="support jpg, jpeg, png format，less than 5mb" tabIndex="3" size="3"  /> </a>
+                                    <!-- <img id="preview" alt="" name="pic" /> -->
+                                </form>     
+                            </li>
+                        </ul>
+                        <div style="clear:both;"></div>
+                    </div>
+                    <!-- <div class="wallcolor">
+                        <h2>Color</h2>
+                        <table class="boxbg">
+                            <tbody>
+                            <tr>
+                                <td bgcolor="#000000"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div> -->
+                </div> <!-- left end -->
+
+                <div class="right col-8">
+                    <div class="my-custom-scrollbar ">
+                        <div class="row">
+                            <div class="box col-lg-6 col-lg-offset-3 text-center">
+                            <!-- <div id="objects">
+                                <div id="draggable_img_123" class="position-absolute" style="top: 0px; left: 0px;">
+                                    <a data-toggle="tooltip" data-placement="right" title="123">
+                                        <img src="images/clip/img/0.png" id="draggable_img_123header">
+                                    </a>
+                                </div>
+                            </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- right end -->
+
+            </div> <!-- row end --> 
+        </div> <!-- room end -->
+
+    <!-- jquery -->
+    <script src="javascripts/js/jquery.js"></script>
+    <!--jquery-ui.min.js-->
+    <script src="javascripts/js/jquery-ui.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <!--Custom JS-->
+    <script src="javascripts/index.js"></script>
+
+    <script>
+        var myCustomScrollbar = document.querySelector('.my-custom-scrollbar');
+        var ps = new PerfectScrollbar(myCustomScrollbar);
+        var scrollbarY = myCustomScrollbar.querySelector('.ps.ps--active-y>.ps__scrollbar-y-rail');
+        myCustomScrollbar.onscroll = function() {
+        scrollbarY.style.cssText = `top: ${this.scrollTop}px!important; height: 400px; right: ${-this.scrollLeft}px`;
+        }
+    </script>
+
+    <script type="text/javascript" language=JavaScript charset="UTF-8">
+        window.onload = function () {
+            scale = 0.5;
+            // initial scale
+            resize(scale);
+            // draggable and resizable
+            set_drag(scale);
+            $('.image').resizable({
+                handles: "all",
+                resize: function( event, ui ) {
+                    var clientHeight = this.clientHeight;
+                    var clientWidth = this.clientWidth;
+                    var new_text = $(this.parentNode).attr('data-original-title');
+                    new_text = new_text.split(':')[0]+": "+clientWidth+"x"+clientHeight;
+                    $(this.parentNode).attr('data-original-title',new_text);
+                }
+            });
+
+            // attach keyDown event
+            document.addEventListener("keydown", keyDownHandler, false);
+            document.getElementsByClassName("pic")[0].addEventListener("click", dragandresize);
+        };
+        function keyDownHandler(e) {
+            var keyCode = e.keyCode;
+            var myNode = document.getElementsByClassName("active1");
+            // if DELETE or BACKSPACE
+            if (keyCode == 8 || keyCode == 46) {
+                console.log("remove nodes: "+myNode)
+                while(myNode.length > 0){
+                    document.getElementsByClassName("box")[0].removeChild(myNode[0].parentNode.parentNode.parentNode);
+                };
+            }else if (keyCode == 187){
+                scale += 0.1;
+                resize(scale);
+                set_drag(scale)
+            }else if (keyCode == 189){
+                scale -= 0.1;
+                resize(scale);
+                set_drag(scale)
+            };
+        };
+        function dragandresize() {
+            set_drag(scale)
+            $('.image').resizable();
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip()
+            });
+            // custom height width tooltip title update
+            lastNode = document.getElementsByClassName("box")[0].lastChild;
+            if (lastNode.id.split('_')[1]=='custom'){
+                height = lastNode.lastChild.getElementsByTagName('img')[0].height;
+                width = lastNode.lastChild.getElementsByTagName('img')[0].width;
+                $(lastNode.lastChild).attr('data-original-title','custom: '+width+'x'+height);
+            }
+            // [document.getElementsByClassName("box").length-1];
+        };
+        function resize(scale){
+            document.getElementsByClassName("box")[0].style.transform = "scale("+scale+")"
+        }
+        function set_drag(s){
+            var click = {x: 0,y: 0}
+            $('.draggable').draggable({start: function(event) {
+                click.x = event.clientX;
+                click.y = event.clientY;
+            },
+            drag: function(event, ui) {
+                var zoom = s;
+                var original = ui.originalPosition;
+                ui.position = {
+                    left: (event.clientX - click.x + original.left) / zoom,
+                    top:  (event.clientY - click.y + original.top ) / zoom
+                };
+            }});
+        }
+    </script>
+<!-- 
+    <script>
+        $(document).ready(function() {
+            /* triggered when stop resizing an object */
             
-            
-        </article>
-        <% } %>
-    </section>
-    <br>
-    <% } %>
+        });
+    </script> -->
 
-</div>
-<!-- /.container -->
-<br>
-<footer class="py-5 bg-dark">
-    <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Mobile UI Gallery 2018</p>
-    </div>
-</footer>
 
-<!-- Bootstrap core JavaScript -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-
-<script>
-  
-</script>
 </body>
 </html>

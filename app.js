@@ -18,7 +18,7 @@ require('./models/query');
 
 
 const homeRouter = require('./routes/home');
-//const indexRouter = require('./routes/index');
+const indexRouter = require('./routes/index');
 const searchRouter = require('./routes/search');
 const aboutRouter = require('./routes/about');
 const contactRouter = require('./routes/contact');
@@ -42,7 +42,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(__dirname + '/public/images/favicon.ico'));
 
-//app.use('/', indexRouter);
+app.use('/index', indexRouter);
 app.use('/',homeRouter);
 app.use('/search', searchRouter);
 app.use('/about', aboutRouter);
