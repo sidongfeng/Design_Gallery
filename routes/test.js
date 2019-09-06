@@ -27,6 +27,14 @@ router.get('/', function (req, res, next) {
         });
     });
 
+    let date_ob = new Date();
+    let date = ("0" + date_ob.getDate()).slice(-2);
+    let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+    let year = date_ob.getFullYear();
+    let hours = date_ob.getHours();
+    let minutes = date_ob.getMinutes();
+    let seconds = date_ob.getSeconds();
+
     const mongoDB = 'mongodb://tony970412:qq649114807@ds243212.mlab.com:43212/mygallery';
     const mongoose = require('mongoose');
     mongoose.connect(mongoDB);
@@ -35,7 +43,8 @@ router.get('/', function (req, res, next) {
     const test = new Template({
         myRef: mongoose.Types.ObjectId,
         query: q,
-        ip: ip
+        ip: ip,
+        time: year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds
     });
     db.collection('query').save(test, function(error, record){
         if (error) throw error;
@@ -48,6 +57,7 @@ router.get('/', function (req, res, next) {
     //     if (err) throw err; 
     // }) 
     console.log("query: "+q+" ip: "+ip)
+    console.log(year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds);
     res.render('test', {title: 'Mobile UI Gallery - Test'});
 });
 

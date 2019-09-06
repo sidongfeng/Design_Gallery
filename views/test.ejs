@@ -51,12 +51,21 @@
                         <div class="single-about-us">
                             <div class="about-us-txt">
                                 <h3 style="color:#ffffff;">
-                                    We provide <u><strong> Gallery</strong></u> and <u><strong> Dribbble</strong></u> search.
+                                    <u><strong> Mainly Query:</strong></u>
                                 </h3>
                                 <br>
-                                <h3 style="color:#ffffff;">
-                                    We further provide <u><strong>multi categories split</strong></u> on results.
-                                </h3>
+                                <h4 style="color:#ffffff;">
+                                    <ul class="list-group pl-5">
+                                        <li style="list-style-type:square">
+                                            Iphone Blue Checkout
+                                            <!-- <span class="badge badge-primary badge-pill">286</span> -->
+                                        </li>
+                                        <li style="list-style-type:square">Ios Trip List</li>
+                                        <li style="list-style-type:square">Black Finance Chart</li>
+                                        <li style="list-style-type:square">Website Music List</li>
+                                        <!-- <li style="list-style-type:square">Web Signup Form</li> -->
+                                    </ul>
+                                </h4>
                                 <div class="about-btn">
                                     <a href="./pdf/use_case.pdf" target="_blank">
                                         <button  class="about-view">
@@ -136,16 +145,43 @@
                                                                     <label class="form-check-label" for="inlineCheckbox5">layout</label>
                                                                 </div>
                                                             </fieldset>
-                                                            <fieldset>
+                                                            <fieldset class="pb-3">
                                                                 <div class="row">
-                                                                <div class="ml-3 mr-3">Open new window for dribbble result</div>
-                                                                <!-- Rounded switch -->
-                                                                <label class="switch">
-                                                                    <input type="checkbox" id="two_result" name="two_result">
-                                                                    <span class="slider round"></span>
-                                                                </label>
+                                                                    <div class="ml-3 mr-3">
+                                                                        <a class="dribbble1" href="https://dribbble.com/search?q=ui" target="_blank">Link to Dribbble result</a>
+                                                                    </div>
+                                                                    <div class="ml-3 mr-3">
+                                                                        <a class="dribbble2" href="" target="_blank">Link to local dribbble result</a>
+                                                                    </div>
                                                                 </div>
                                                             </fieldset>
+                                                            <div class="row">
+                                                                <div class="col-lg-3 col-md-3 col-sm-1">
+                                                                    Example:
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                    <a href="/test?mode=gallery&text=ios+food+list">demo: ios food list</a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                                    <a href="/test?mode=gallery&text=iphone+blue+checkout">1. iphone blue checkout</a>
+                                                                </div>
+                                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                                    <a href="/test?mode=gallery&text=ios+trip+list">2. ios trip list</a>
+                                                                </div>
+                                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                                    <a href="/test?mode=gallery&text=black+finance+chart">3. black finance chart</a>
+                                                                </div>
+                                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                                    <a href="/test?mode=gallery&text=website+music+list">4. website music list</a>
+                                                                </div>
+                                                                <!-- <div class="col-lg-8 col-md-8 col-sm-8">
+                                                                    <a href="/test?mode=gallery&text=iphone+ecommerce+checkout">5. iphone ecommerce checkout</a>
+                                                                </div> -->
+                                                            </div>
                                                         </div><!--/.single-tab-select-box-->
                                                     </div><!--/.col-->
 
@@ -312,11 +348,9 @@
         $(function(){
             // load
             let url = document.URL;
-            let text = getUrlParameter('text')
-            let two_result = getUrlParameter('two_result')
-            if (two_result == 'on'){
-                window.open("https://dribbble.com/search?q=ui+"+text)
-            }
+            let text = getUrlParameter('text')==undefined ? "" : getUrlParameter('text');
+            document.getElementsByClassName("dribbble1")[0].href = "https://dribbble.com/search?q=ui+"+text
+            document.getElementsByClassName("dribbble2")[0].href = document.URL.replace('gallery','local_Dribbble')
 
             if (text != "" && text !== undefined){
                 $("#gallery").show();

@@ -6,15 +6,15 @@ const dict = {"platform": ['mobile','website'],
                     "screen_function" : ['profile','signup','checkout','landing'],
                     "screen_layout" : ['chart','grid','form','list','dashboard']};
 
-yellow = ["yellow", "orange", "gold"]
-red = ["red"]
-blue = ["blue", "light blue","dark blue"]
+yellow = ["yellow", "orange", "gold","golden"]
+red = ["red","Maroon"]
+blue = ["blue", "light blue","dark blue","darkblue","sky blue","azure","sky","indigo"]
 green = ["green", "darkgreen","aquamarine"]
-white = ["white"]
-black = ["black", "dark"]
-pink = ["pink"]
-brown = ["brown"]
-grey = ["grey"]
+white = ["white","clean", "snow", "light white clean minimal theme", "black white", "#ffffff", "light mode"]
+black = ["black", "dark","dark mode", "dark ui", "black dark theme blur", "night mode"]
+pink = ["pink","rose", "blush", "coral"]
+brown = ["brown","sandy", "chocolate", "sepia"]
+grey = ["grey","silver", "darkGray", "dull", "gray"]
 music = ["music", "music player", "musicplayer", "music_player","music-player","music players","musicplayers","music_players","apple_music", "apple music","apple-music","playlist", "music app","musicapp","music_app", "music application","music_applications", "music applications","music player app","music player ui"]
 ecommerce = ["ecommerce","e commerce", "e-commerce", "commerce", " e_commerce", "e-shop","online_store","ikea", "eshop", "online_shop","adidas", "nike","footwear", "clothing", "clothes","webshop"]
 food = ["salad","bakery", "steak", "cake","recipe","recipes","food","foods", "dessert", "juice","drink", "food_app","food app","food application", "foodapp","food_application","restaurant"]
@@ -30,11 +30,11 @@ medical = [ "medical", "healthcare", "hospital", "pharmacy", "medicine"]
 book = ["magazine", "magazines", "reading", "bookstore", "digitalreading", "digital reading", "digital_reading", "digital bookstroe", "digital_bookstroe","digitalbookstroe", "book","books"]
 landing = ["landing page", "landing pages","landingpage","landingpages","landing_pages","landing_page","landing"]
 checkout = [ "check_out", "check out", "checkout", "payment"]
-signup = ["sign up","signup","sign_up","login","log in","log_in"]
+signup = ["sign up","signup","sign_up","login","log in","log_in","register"]
 profile = ["profile"]
 search = ["search", "searching"]
 dashboard = ["dashboard"]
-list = ["list"]
+list = ["list","listing", "paylist", "todolist", "playlsit", "dropdown", "watchlist", "task list", "tracklist", "empty list", "project list", "wishlist", "shop list", "order list", "waitlist", "shopping list", "to-do list"]
 form = ["form"]
 grid = ["grid"]
 chart = ["chart"]
@@ -107,7 +107,9 @@ function shuffle(array) {
 function loadImages() { //loadSearchPage
     let ajaxData = {
         mode: getUrlParameter('mode'),
-        text: getUrlParameter('text').toLowerCase().split('+'),
+        text: getUrlParameter('text').toLowerCase().split('+').filter(function (el) {
+            return el != "";
+        }),
         platform : getUrlParameter('platform')=='1',
         color : getUrlParameter('color')=='1',
         app : getUrlParameter('app')=='1',
@@ -228,20 +230,30 @@ function loadImages() { //loadSearchPage
             }
         }
     })
-
+    
     $(".spinner").remove();
 
     for (let i = 0; i < Object.keys(return_imgs).length; i++) {return_imgs[i] = shuffle(return_imgs[i]);}
     result = return_imgs[Object.keys(return_imgs).length-1]
-    // // return all the images
-    // for (let i = Object.keys(return_imgs).length-2; i >= 0; i--) {
-    //     result = result.concat(return_imgs[i]);
-    // }
-    // return result.slice(0, 30);
+
     console.log("get "+return_imgs[Object.keys(return_imgs).length-1].length.toString()+" images");
+    html = ""
+    html += '<div class="container">'
+    html += '   <div class="row">'
+    html += '       <h1 class="pb-5">'
+    if ((ajaxData.platform||ajaxData.color||ajaxData.app||ajaxData.screen_function||ajaxData.screen_layout)==false){
+        html += ajaxData.mode+' - '+ajaxData.text.join(' ')+': '+result.length.toString()+' images'
+    }else{
+        html += ajaxData.mode+' - '+ajaxData.text.join(' ')
+    }
+    html += '       </h1>'
+    html += '   </div>'
+    html += '</div>'
+    $(".demo").append(html);
     return [result,ajaxData]
 }
 function showImages(imgs, no, ajaxData){
+    
     if ((ajaxData.platform||ajaxData.color||ajaxData.app||ajaxData.screen_function||ajaxData.screen_layout)==false){
         if (imgs.length != 0){
             let output;
@@ -288,7 +300,7 @@ function showImages(imgs, no, ajaxData){
                 thtml += '<a class="btn btn-success m-2 p-2" href="#'+tag+'">'+tag+"</a>"
 
                 html += '<div class="row" id="'+tag+'"><div class="col-sm-12"><hr /><h1>'
-                html += tag
+                html += tag+': '+split['c'][tag].length+' images'
                 html += '</h1><hr /></div></div>'
                 html += '<div class="row">'
                 split['c'][tag] = shuffle(split['c'][tag])
@@ -319,7 +331,7 @@ function showImages(imgs, no, ajaxData){
                 thtml += '<a class="btn btn-success m-2 p-2" href="#'+tag+'">'+tag+"</a>"
 
                 html += '<div class="row" id="'+tag+'"><div class="col-lg-12"><hr /><h1>'
-                html += tag
+                html += tag+': '+split['a'][tag].length+' images'
                 html += '</h1><hr /></div></div><div class="row">'
                 for(let z = 0; z < Math.min(split['a'][tag].length,32); z++){
                     let id = split['a'][tag][z];
@@ -346,7 +358,7 @@ function showImages(imgs, no, ajaxData){
                 thtml += '<a class="btn btn-success m-2 p-2" href="#'+tag+'">'+tag+"</a>"
 
                 html += '<div class="row" id="'+tag+'"><div class="col-lg-12"><hr /><h1>'
-                html += tag
+                html += tag+': '+split['sf'][tag].length+' images'
                 html += '</h1><hr /></div></div><div class="row">'
                 for(let z = 0; z < Math.min(split['sf'][tag].length,32); z++){
                     let id = split['sf'][tag][z];
@@ -373,7 +385,7 @@ function showImages(imgs, no, ajaxData){
                 thtml += '<a class="btn btn-success m-2 p-2" href="#'+tag+'">'+tag+"</a>"
 
                 html += '<div class="row" id="'+tag+'"><div class="col-sm-12"><hr /><h1>'
-                html += tag
+                html += tag+': '+split['sl'][tag].length+' images'
                 html += '</h1><hr /></div></div><div class="row">'
                 for(let z = 0; z < Math.min(split['sl'][tag].length,32); z++){
                     let id = split['sl'][tag][z];
@@ -400,7 +412,7 @@ function showImages(imgs, no, ajaxData){
                 thtml += '<a class="btn btn-success m-2 p-2" href="#'+tag+'">'+tag+"</a>"
 
                 html += '<div class="row" id="'+tag+'"><div class="col-lg-12"><hr /><h1>'
-                html += tag
+                html += tag+': '+split['p'][tag].length+' images'
                 html += '</h1><hr /></div></div><div class="row">'
                 for(let z = 0; z < Math.min(split['p'][tag].length,32); z++){
                     let id = split['p'][tag][z];
@@ -428,7 +440,8 @@ function showImages(imgs, no, ajaxData){
 
 
 function generate_html(html,id){
-    let src = "https://storage.googleapis.com/ui-collection/Semantic/"+id+".png";
+    // let src = "https://storage.googleapis.com/ui-collection/Semantic/"+id+".png";
+    let src = "./images/dribbble_crawl_dataset/"+id+".png";
     let dribbble_src = "https://www.dribbble.com/shots/"+id
     let origin = img_dict[id]['origin'].split("+")
     let predict = img_dict[id]['predict'].split("+")

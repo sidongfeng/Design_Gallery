@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const querySchema = new Schema({
     _id: Schema.Types.ObjectId,
     query: String,
-    ip: String
+    ip: String,
+    time: String
 },{ collection: "query" });
 
 
