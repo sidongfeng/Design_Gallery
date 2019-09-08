@@ -116,7 +116,6 @@ function loadImages() { //loadSearchPage
         screen_function : getUrlParameter('screen_function')=='1',
         screen_layout : getUrlParameter('screen_layout')=='1',
     };
-    $.ajaxSettings.async = false;
     structure=false;
     if (ajaxData.platform|| ajaxData.color||ajaxData.app||ajaxData.screen_function||ajaxData.screen_layout){
         structure=true;
@@ -124,117 +123,69 @@ function loadImages() { //loadSearchPage
 
     var return_imgs = {};
     for (let i = 0; i < ajaxData.text.length+1; i++) {return_imgs[i] = [];}
+    if (ajaxData.mode=="gallery"){
+        var search_text = normalize(ajaxData.text);
+    }else{
+        var search_text = ajaxData.text;
+    }
+    $.ajaxSettings.async = false;
     $.getJSON('./data/semantic.json',function(result){
-        if (ajaxData.platform){
-            for(let j = 0; j < dict['platform'].length; j++){split["p"][dict['platform'][j]]=[]}
-        }
-        if (ajaxData.color){
-            for(let j = 0; j < dict['color'].length; j++){split["c"][dict['color'][j]]=[]}
-        }
-        if (ajaxData.app){
-            for(let j = 0; j < dict['app'].length; j++){split["a"][dict['app'][j]]=[]}
-        }
-        if (ajaxData.screen_function){
-            for(let j = 0; j < dict['screen_function'].length; j++){split["sf"][dict['screen_function'][j]]=[]}
-        }
-        if (ajaxData.screen_layout){
-            for(let j = 0; j < dict['screen_layout'].length; j++){split["sl"][dict['screen_layout'][j]]=[]}
-        }
+        if (ajaxData.platform){for(let j = 0; j < dict['platform'].length; j++){split["p"][dict['platform'][j]]=[]}}
+        if (ajaxData.color){for(let j = 0; j < dict['color'].length; j++){split["c"][dict['color'][j]]=[]}}
+        if (ajaxData.app){for(let j = 0; j < dict['app'].length; j++){split["a"][dict['app'][j]]=[]}}
+        if (ajaxData.screen_function){for(let j = 0; j < dict['screen_function'].length; j++){split["sf"][dict['screen_function'][j]]=[]}}
+        if (ajaxData.screen_layout){for(let j = 0; j < dict['screen_layout'].length; j++){split["sl"][dict['screen_layout'][j]]=[]}}
         for (let i = 0; i < result.length; i++) {
             let img = result[i];
             let id = img["id"]
-            let origin_tags = img['origin'].split('+');
-            let normalize_tags = img['normalize'].split('+');
-            let predict_tags = img['predict'].split('+')
-            let title = img['title'].split('+')
-
-            current_tags = normalize_tags.concat(predict_tags).concat(title)
+            let origin_tags = img['origin'];
+            let normalize_tags = Object.keys(img["normalise"]);
+            // let predict_tags = img['new']
+            var title = img['title'].toLowerCase().split(' ');
+            normalize_tags_plus = [];
+            $.each(normalize_tags.concat(title), function(i, el){
+                if($.inArray(el, normalize_tags_plus) === -1) normalize_tags_plus.push(el);
+            });
+            origin_tags_plus = [];
+            $.each(origin_tags.concat(title), function(i, el){
+                if($.inArray(el, origin_tags_plus) === -1) origin_tags_plus.push(el);
+            });
             img_dict[id] = img
             
-            // gallery method: all -> all-1 -> ... -> 1
-            // dribbble method: all
             if (ajaxData.mode=="gallery"){
-                var normalized_text = normalize(ajaxData.text)
-
-                intersection_no = normalized_text.filter(value => -1 !== current_tags.indexOf(value)).length;
+                intersection_no = search_text.filter(value => -1 !== normalize_tags_plus.indexOf(value)).length;
                 if (intersection_no==ajaxData.text.length){
-                    return_imgs[intersection_no].push(id)
-                    
-                    if (ajaxData.platform){
-                        for(let j = 0; j < dict['platform'].length; j++){
-                            let tag = dict['platform'][j]
-                            if (current_tags.indexOf(tag)>-1){split["p"][tag].push(id)}
-                        }
-                    }
-                    if (ajaxData.color){
-                        for(let j = 0; j < dict['color'].length; j++){
-                            let tag = dict['color'][j]
-                            if (current_tags.indexOf(tag)>-1){split["c"][tag].push(id)}
-                        }
-                    }
-                    if (ajaxData.app){
-                        for(let j = 0; j < dict['app'].length; j++){
-                            let tag = dict['app'][j]
-                            if (current_tags.indexOf(tag)>-1){split["a"][tag].push(id)}
-                        }
-                    }
-                    if (ajaxData.screen_function){
-                        for(let j = 0; j < dict['screen_function'].length; j++){
-                            let tag = dict['screen_function'][j]
-                            if (current_tags.indexOf(tag)>-1){split["sf"][tag].push(id)}
-                        }
-                    }
-                    if (ajaxData.screen_layout){
-                        for(let j = 0; j < dict['screen_layout'].length; j++){
-                            let tag = dict['screen_layout'][j]
-                            if (current_tags.indexOf(tag)>-1){split["sl"][tag].push(id)}
-                        }
-                    }
+                    mark = 0
+                    for (let j = 0; j < ajaxData.text.length; j++) {mark += (img["normalise"][ajaxData.text[j]]==undefined ? 0.5 : img["normalise"][ajaxData.text[j]]);}
+                    return_imgs[intersection_no].push(Array(id,mark));
+                    if (ajaxData.platform){for(let j = 0; j < dict['platform'].length; j++){if (normalize_tags_plus.indexOf(dict['platform'][j])>-1){split["p"][dict['platform'][j]].push(id)}}}
+                    if (ajaxData.color){for(let j = 0; j < dict['color'].length; j++){if (normalize_tags_plus.indexOf(dict['color'][j])>-1){split["c"][dict['color'][j]].push(id)}}}
+                    if (ajaxData.app){for(let j = 0; j < dict['app'].length; j++){if (normalize_tags_plus.indexOf(dict['app'][j])>-1){split["a"][dict['app'][j]].push(id)}}}
+                    if (ajaxData.screen_function){for(let j = 0; j < dict['screen_function'].length; j++){if (normalize_tags_plus.indexOf(dict['screen_function'][j])>-1){split["sf"][dict['screen_function'][j]].push(id)}}}
+                    if (ajaxData.screen_layout){for(let j = 0; j < dict['screen_layout'].length; j++){if (normalize_tags_plus.indexOf(dict['screen_layout'][j])>-1){split["sl"][dict['screen_layout'][j]].push(id)}}}
                 }
             }else{
-                intersection_no = ajaxData.text.filter(value => -1 !== origin_tags.indexOf(value)).length;
+                intersection_no = ajaxData.text.filter(value => -1 !== origin_tags_plus.indexOf(value)).length;
                 if (intersection_no==ajaxData.text.length){
-                    return_imgs[intersection_no].push(id)
-
-                    if (ajaxData.platform){
-                        for(let j = 0; j < dict['platform'].length; j++){
-                            let tag = dict['platform'][j]
-                            if (origin_tags.indexOf(tag)>-1){split["p"][tag].push(id);}
-                        }
-                    }
-                    if (ajaxData.color){
-                        for(let j = 0; j < dict['color'].length; j++){
-                            let tag = dict['color'][j]
-                            if (origin_tags.indexOf(tag)>-1){split["c"][tag].push(id)}
-                        }
-                    }
-                    if (ajaxData.app){
-                        for(let j = 0; j < dict['app'].length; j++){
-                            let tag = dict['app'][j]
-                            if (origin_tags.indexOf(tag)>-1){split["a"][tag].push(id)}
-                        }
-                    }
-                    if (ajaxData.screen_function){
-                        for(let j = 0; j < dict['screen_function'].length; j++){
-                            let tag = dict['screen_function'][j]
-                            if (origin_tags.indexOf(tag)>-1){split["sf"][tag].push(id)}
-                        }
-                    }
-                    if (ajaxData.screen_layout){
-                        for(let j = 0; j < dict['screen_layout'].length; j++){
-                            let tag = dict['screen_layout'][j]
-                            if (origin_tags.indexOf(tag)>-1){split["sl"][tag].push(id)}
-                        }
-                    }
+                    return_imgs[intersection_no].push(Array(id,ajaxData.text.length));
+                    if (ajaxData.platform){for(let j = 0; j < dict['platform'].length; j++){if (origin_tags_plus.indexOf(dict['platform'][j])>-1){split["p"][dict['platform'][j]].push(id);}}}
+                    if (ajaxData.color){for(let j = 0; j < dict['color'].length; j++){if (origin_tags_plus.indexOf(dict['color'][j])>-1){split["c"][dict['color'][j]].push(id)}}}
+                    if (ajaxData.app){for(let j = 0; j < dict['app'].length; j++){if (origin_tags_plus.indexOf(dict['app'][j])>-1){split["a"][dict['app'][j]].push(id)}}}
+                    if (ajaxData.screen_function){for(let j = 0; j < dict['screen_function'].length; j++){if (origin_tags_plus.indexOf(dict['screen_function'][j])>-1){split["sf"][dict['screen_function'][j]].push(id)}}}
+                    if (ajaxData.screen_layout){for(let j = 0; j < dict['screen_layout'].length; j++){if (origin_tags_plus.indexOf(dict['screen_layout'][j])>-1){split["sl"][dict['screen_layout'][j]].push(id)}}}
                 }
             }
         }
     })
-    
+    $.ajaxSettings.async = true;
     $(".spinner").remove();
 
-    for (let i = 0; i < Object.keys(return_imgs).length; i++) {return_imgs[i] = shuffle(return_imgs[i]);}
-    result = return_imgs[Object.keys(return_imgs).length-1]
+    // for (let i = 0; i < Object.keys(return_imgs).length; i++) {return_imgs[i] = shuffle(return_imgs[i]);}
+    result = return_imgs[Object.keys(return_imgs).length-1];
+    result.sort(function(a, b){return b[1]-a[1]});
+    R = []
+    for (let i = 0; i < result.length; i++) {R.push(result[i][0]);}
+    result = R;
 
     console.log("get "+return_imgs[Object.keys(return_imgs).length-1].length.toString()+" images");
     html = ""
@@ -257,11 +208,7 @@ function showImages(imgs, no, ajaxData){
     if ((ajaxData.platform||ajaxData.color||ajaxData.app||ajaxData.screen_function||ajaxData.screen_layout)==false){
         if (imgs.length != 0){
             let output;
-            if (imgs.length>no){
-                output = no;
-            }else{
-                output = imgs.length;
-            }
+            if (imgs.length>no){output = no;}else{output = imgs.length;}
             
             let html = '';
             for(let j = 0; j < output; j++){
@@ -443,8 +390,8 @@ function generate_html(html,id){
     // let src = "https://storage.googleapis.com/ui-collection/Semantic/"+id+".png";
     let src = "./images/dribbble_crawl_dataset/"+id+".png";
     let dribbble_src = "https://www.dribbble.com/shots/"+id
-    let origin = img_dict[id]['origin'].split("+")
-    let predict = img_dict[id]['predict'].split("+")
+    let origin = img_dict[id]['origin']
+    let news = img_dict[id]['new']
     let title = img_dict[id]['title']
     let by = img_dict[id]['by']
     let by_href = img_dict[id]['by_href']
@@ -497,8 +444,8 @@ function generate_html(html,id){
     html += '                                   <tr>'
     html += '                                       <th scope="row"><svg xmlns="http://www.w3.org/2000/svg" style="width:20px;" enable-background="new 0 0 24 24" viewBox="0 0 24 24" role="img" class="icon "><path d="m21.818 0h-7.644c-.574 0-1.125.226-1.534.629l-12.001 11.823c-.852.853-.852 2.234 0 3.087l7.823 7.823c.852.852 2.234.852 3.087 0l11.822-12.002c.403-.409.629-.96.629-1.534v-7.644c0-1.205-.977-2.182-2.182-2.182zm-3.818 8c-1.104 0-2-.896-2-2s.896-2 2-2 2 .896 2 2-.895 2-2 2z"></path></svg> Predict</th>'
     html += '                                       <td>'
-    for(let i = 0; i < predict.length; i++){
-        html +=	'	    	                            <p class="d-inline-block" style="margin-right: 15px">' + predict[i] + '</p>';
+    for(let i = 0; i < news.length; i++){
+        html +=	'	    	                            <p class="d-inline-block" style="margin-right: 15px">' + news[i] + '</p>';
     }
     html += '                                       </td>'
     html += '                                   </tr>'
