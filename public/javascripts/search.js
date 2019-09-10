@@ -277,6 +277,7 @@ function showImages(widgets, no){
         let html = '';
         for(let j = 0; j < output; j++){
             let widget = widgets.pop();
+            console.log(widget)
 
             let _left = parseInt(widget['coordinates']['from'][0])+10;
             let _top = parseInt(widget['coordinates']['from'][1])-5;
@@ -315,7 +316,7 @@ function showImages(widgets, no){
             html += '               <div class="container-fluid">'
             html += '                   <div class="row">'
             html += '                       <div class="col-md-7" style="position:relative; zoom:0.5">'
-            // html += '                           <img src="https://storage.googleapis.com/ui-collection/' + urlAdd + '" style=" cursor: hand;"/>'
+            html += '                           <img src="./images/BIG_DATA/screenshots/' + widget['src'] + '" style=" cursor: hand;"/>'
             // html += '                           <img src="https://storage.googleapis.com/ui-collection/' + urlAdd + '" style=" cursor: hand;"/>'
             html += '                       </div>'
             html += '                       <div class="col-md-5">'
