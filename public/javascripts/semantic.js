@@ -213,14 +213,6 @@ function showImages(imgs, no, ajaxData){
             let html = '';
             for(let j = 0; j < output; j++){
                 let id = imgs.shift();
-                // let src = "https://storage.googleapis.com/ui-collection/Semantic/"+id.toString()+".png";
-                // let dribbble_src = "https://www.dribbble.com/shots/"+id
-                // var tags;
-                // if (getUrlParameter('mode')=="gallery"){
-                //     tags = [...new Set(img_dict[id][1])]
-                // }else{
-                //     tags = [...new Set(img_dict[id][0])]
-                // }
                 html = generate_html(html,id)
             }
     
@@ -388,7 +380,7 @@ function showImages(imgs, no, ajaxData){
 
 function generate_html(html,id){
     // let src = "https://storage.googleapis.com/ui-collection/Semantic/"+id+".png";
-    let src = "./images/dribbble_crawl_dataset/"+id+".png";
+    let src = "./images/BIG_DATA/Dribbble_Data/"+id+".png";
     let dribbble_src = "https://www.dribbble.com/shots/"+id
     let origin = img_dict[id]['origin']
     let news = img_dict[id]['new']

@@ -272,12 +272,10 @@ function showImages(widgets, no){
         }else{
             output = widgets.length;
         }
-        //console.log(widgets)
         
         let html = '';
         for(let j = 0; j < output; j++){
             let widget = widgets.pop();
-            console.log(widget)
 
             let _left = parseInt(widget['coordinates']['from'][0])+10;
             let _top = parseInt(widget['coordinates']['from'][1])-5;
@@ -300,7 +298,6 @@ function showImages(widgets, no){
                 (widget['category'] == 'FINANCE' && colors_Array[0]['c'] == 'Lime' && colors_Array[0]['no']>0.8) ){
                 continue;
             }
-
             
             html += '<div id="'+ widget['name'] + '" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridModalLabel" style="display: none;" aria-hidden="true">'
             html += '   <div class="modal-dialog modal-xl" role="document">'
@@ -381,16 +378,16 @@ function showImages(widgets, no){
             html += '                                   <tr>'
             html += '                                       <th scope="row">Similar:</th>'
             html += '                                       <td><div class="row">'
-            if (widget['sims']==null){
-                html += 'None'
-            }else{
-                for (let z = 0; z < widget['sims'].length; z++){
-                    html += '<div class="col-md-auto">'
-                    html += '   <img class="img-fluid pb-1" src="./images/BIG_DATA/all_widgets/' + widget['sims'][z] + '.png" />'
-                    // html += '   <img class="img-fluid pb-1" src="https://storage.googleapis.com/ui-collection/Mywidgets/' + sim_widget['name'] + '.png" />'
-                    html += '</div>'
-                }
-            }
+            // if (widget['sims']==null){
+            //     html += 'None'
+            // }else{
+            //     for (let z = 0; z < widget['sims'].length; z++){
+            //         html += '<div class="col-md-auto">'
+            //         html += '   <img class="img-fluid pb-1" src="./images/BIG_DATA/all_widgets/' + widget['sims'][z] + '.png" />'
+            //         // html += '   <img class="img-fluid pb-1" src="https://storage.googleapis.com/ui-collection/Mywidgets/' + sim_widget['name'] + '.png" />'
+            //         html += '</div>'
+            //     }
+            // }
             html += '                                       </div></td>'
             html += '                                   </tr>'
             html += '                                   <tr>'
