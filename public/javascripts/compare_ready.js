@@ -108,9 +108,9 @@ $(document).ready(function(){
         html += '           <div class="shadow"></div>'
         html += '           <div class="carousel">'
         html += '               <ul class="carousel-container">'
-        for(let j = 0; j < 4; j++){
-            var src = d['uis'][j];
-            html += '                   <li><img src="https://storage.googleapis.com/ui-collection/MyCompare/ '+src+'.png" alt="" /></li>'
+        for(let j = 0; j < d['uis'].length; j++){
+            html += '                   <li><img src="./images/compare/company/'+d['uis'][j]+'.png" alt="" /></li>'
+            // html += '                   <li><img src="https://storage.googleapis.com/ui-collection/MyCompare/ '+src+'.png" alt="" /></li>'
         };
         html += '               </ul>'
         html += '               <div class="arrows-perspective">'

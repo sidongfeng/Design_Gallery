@@ -249,7 +249,7 @@ jQuery(document).ready(function($){
 		ajaxData.developers.push('Cheetah Mobile (AppLock &amp; AntiVirus)')
 	}
     $.ajaxSettings.async = false;
-    $.getJSON('./data/comparsion_widgets-3.json',function(result){
+    $.getJSON('./data/comparsion.json',function(result){
 		console.log(result)
         for(let i = 0; i < result.length; i++){
             let p = result[i];
