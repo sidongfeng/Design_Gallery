@@ -61,7 +61,7 @@ function loadImages() { //loadSearchPage
         height: getHeightArray()
     };
     $.ajaxSettings.async = false;
-    $.getJSON('./data/fake.json',function(result){
+    $.getJSON('./data/widgets.json',function(result){
         for (let i = 0; i < result.length; i++) {
             let widget = result[i];
             all_widgets[widget['name']] = widget;
@@ -278,11 +278,6 @@ function showImages(widgets, no){
         for(let j = 0; j < output; j++){
             let widget = widgets.pop();
 
-            let screenSrc = widget['src'].split('/'); //获取urlAdd & similarAdd
-            var urlAdd = '', similarAdd = '';
-            urlAdd = screenSrc[3] + '/' + screenSrc[4];
-            similarAdd = screenSrc[4];
-
             let _left = parseInt(widget['coordinates']['from'][0])+10;
             let _top = parseInt(widget['coordinates']['from'][1])-5;
             let _width = parseInt(widget['dimensions']['width'])+10;
@@ -320,7 +315,8 @@ function showImages(widgets, no){
             html += '               <div class="container-fluid">'
             html += '                   <div class="row">'
             html += '                       <div class="col-md-7" style="position:relative; zoom:0.5">'
-            html += '                           <img src="https://storage.googleapis.com/ui-collection/' + urlAdd + '" style=" cursor: hand;"/>'
+            // html += '                           <img src="https://storage.googleapis.com/ui-collection/' + urlAdd + '" style=" cursor: hand;"/>'
+            // html += '                           <img src="https://storage.googleapis.com/ui-collection/' + urlAdd + '" style=" cursor: hand;"/>'
             html += '                       </div>'
             html += '                       <div class="col-md-5">'
             html += '                           <table class="table table-borderless">'
@@ -384,15 +380,12 @@ function showImages(widgets, no){
             html += '                                   <tr>'
             html += '                                       <th scope="row">Similar:</th>'
             html += '                                       <td><div class="row">'
-            if (typeof(widget['sims']) == "undefined"){
+            if (widget['sims']==null){
                 html += 'None'
             }else{
                 for (let z = 0; z < widget['sims'].length; z++){
-                    var sim_widget = all_widgets[widget['sims'][z]];
-                    // console.log(sim_widget)
-                    // html = modal_img(html,sim_widget)
                     html += '<div class="col-md-auto">'
-                    html += '   <img class="img-fluid pb-1" src="./images/search/all_widgets/' + sim_widget['name'] + '.png" />'
+                    html += '   <img class="img-fluid pb-1" src="./images/BIG_DATA/all_widgets/' + widget['sims'][z] + '.png" />'
                     // html += '   <img class="img-fluid pb-1" src="https://storage.googleapis.com/ui-collection/Mywidgets/' + sim_widget['name'] + '.png" />'
                     html += '</div>'
                 }
@@ -417,7 +410,7 @@ function showImages(widgets, no){
             html += '   </div>'
             html += '</div>'
             html += '<div class="col-md-auto">'
-            html += '   <img data-toggle="modal" data-target="#'+widget['name'] + '" class="img-fluid pb-1" src="./images/search/all_widgets/' + widget['name'] + '.png" style="max-height:100px; cursor:pointer" />'
+            html += '   <img data-toggle="modal" data-target="#'+widget['name'] + '" class="img-fluid pb-1" src="./images/BIG_DATA/all_widgets/' + widget['name'] + '.png" style="max-height:100px; cursor:pointer" />'
             // html += '   <img data-toggle="modal" data-target="#'+widget['name'] + '" class="img-fluid pb-1" src="https://storage.googleapis.com/ui-collection/Mywidgets/' + widget['name'] + '.png" style="max-height:100px; cursor:pointer" />'
             html += '</div>'
         }
