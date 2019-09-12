@@ -128,7 +128,8 @@ function loadImages() { //loadSearchPage
     }else{
         var search_text = ajaxData.text;
     }
-    $.ajaxSettings.async = false;
+    // $.ajaxSettings.async = false;
+    var dtd = $.Deferred();
     $.getJSON('./data/semantic.json',function(result){
         if (ajaxData.platform){for(let j = 0; j < dict['platform'].length; j++){split["p"][dict['platform'][j]]=[]}}
         if (ajaxData.color){for(let j = 0; j < dict['color'].length; j++){split["c"][dict['color'][j]]=[]}}
@@ -176,32 +177,42 @@ function loadImages() { //loadSearchPage
                 }
             }
         }
-    })
-    $.ajaxSettings.async = true;
-    $(".spinner").remove();
+    }).done(function(res){
+        $(".spinner").remove();
 
-    // for (let i = 0; i < Object.keys(return_imgs).length; i++) {return_imgs[i] = shuffle(return_imgs[i]);}
-    result = return_imgs[Object.keys(return_imgs).length-1];
-    result.sort(function(a, b){return b[1]-a[1]});
-    R = []
-    for (let i = 0; i < result.length; i++) {R.push(result[i][0]);}
-    result = R;
-
-    console.log("get "+return_imgs[Object.keys(return_imgs).length-1].length.toString()+" images");
-    html = ""
-    html += '<div class="container">'
-    html += '   <div class="row">'
-    html += '       <h1 class="pb-5">'
-    if ((ajaxData.platform||ajaxData.color||ajaxData.app||ajaxData.screen_function||ajaxData.screen_layout)==false){
-        html += ajaxData.mode+' - '+ajaxData.text.join(' ')+': '+result.length.toString()+' images'
-    }else{
-        html += ajaxData.mode+' - '+ajaxData.text.join(' ')
-    }
-    html += '       </h1>'
-    html += '   </div>'
-    html += '</div>'
-    $(".demo").append(html);
-    return [result,ajaxData]
+        // for (let i = 0; i < Object.keys(return_imgs).length; i++) {return_imgs[i] = shuffle(return_imgs[i]);}
+        result = return_imgs[Object.keys(return_imgs).length-1];
+        result.sort(function(a, b){return b[1]-a[1]});
+        R = []
+        for (let i = 0; i < result.length; i++) {R.push(result[i][0]);}
+        result = R;
+    
+        console.log("get "+return_imgs[Object.keys(return_imgs).length-1].length.toString()+" images");
+        html = ""
+        html += '<div class="container">'
+        html += '   <div class="row">'
+        html += '       <h1 class="pb-5">'
+        if ((ajaxData.platform||ajaxData.color||ajaxData.app||ajaxData.screen_function||ajaxData.screen_layout)==false){
+            html += ajaxData.mode+' - '+ajaxData.text.join(' ')+': '+result.length.toString()+' images'
+        }else{
+            html += ajaxData.mode+' - '+ajaxData.text.join(' ')
+        }
+        html += '       </h1>'
+        html += '   </div>'
+        html += '</div>'
+        $(".demo").append(html);
+        // lazy loading images
+        $(window).on("scroll",function(){
+            if($(window).scrollTop() + $(window).height() +1000 >= $(document).height()){
+                showImages(result,30,ajaxData);
+            }
+        })
+        // return [result,ajaxData]
+        // dtd.resolve(res);
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+        dtd.reject(jqXHR, textStatus, errorThrown);
+    });
+    
 }
 function showImages(imgs, no, ajaxData){
     

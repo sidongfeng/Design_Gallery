@@ -357,15 +357,15 @@
                 $(".service_inside").show();
                 $("html,body").animate({scrollTop:$(".spinner").offset().top-100})
                 // $(".service_inside").append(thmtl);
-                let a = loadImages();
-                let imgs = a[0];
-                let ajaxData = a[1];
-                // showImages(widgets,30);
-                $(window).on("scroll",function(){
-                    if($(window).scrollTop() + $(window).height() +1000 >= $(document).height()){
-                        showImages(imgs,30,ajaxData);
-                    }
-                })
+                loadImages();
+                // let imgs = a[0];
+                // let ajaxData = a[1];
+                // // showImages(widgets,30);
+                // $(window).on("scroll",function(){
+                //     if($(window).scrollTop() + $(window).height() +1000 >= $(document).height()){
+                //         showImages(imgs,30,ajaxData);
+                //     }
+                // })
             }else{
                 $(".service_inside").hide();
                 $("#gallery").hide();
