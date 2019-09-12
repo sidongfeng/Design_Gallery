@@ -380,7 +380,8 @@ function showImages(imgs, no, ajaxData){
 
 function generate_html(html,id){
     // let src = "https://storage.googleapis.com/ui-collection/Semantic/"+id+".png";
-    let src = "./images/BIG_DATA/Dribbble_Data/"+id+".png";
+    // let src = "./images/BIG_DATA/Dribbble_Data/"+id+".png";
+    let src = img_dict[id]['src']
     let dribbble_src = "https://www.dribbble.com/shots/"+id
     let origin = img_dict[id]['origin']
     let news = img_dict[id]['new']
