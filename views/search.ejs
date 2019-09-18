@@ -134,11 +134,17 @@
                                             Search
                                         </a>
                                     </li>
+                                    <li role="presentation">
+                                        <a href="#upload" aria-controls="upload" role="tab" data-toggle="tab">
+                                            <i class="fa fa-upload"></i>
+                                            Upload
+                                        </a>
+                                    </li>
                                 </ul>
                                 
                                 <!-- Tab panes -->
                                 <div class="tab-content">
-                
+                                    <!-- Normal multi-faced search -->
                                     <div role="tabpanel" class="tab-pane active in" id="searchs">
                                         <form name="search" method="get" id="myform" action="/search" class="panel-body">
                                             <div class="tab-para">
@@ -327,7 +333,30 @@
                                             </div><!--/.tab-para-->
                                         </form>
                                     </div><!--/.tabpannel-->
-        
+                                    <!-- Upload search -->
+                                    <div role="tabpanel" class="tab-pane fade in" id="upload">
+                                        <form name="search" method="POST" id="myform" action="/search" class="panel-body" enctype="multipart/form-data"> 
+                                            <div class="tab-para">
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-3 col-sm-1">
+                                                    </div><!--/.col-->
+                                                    <div class="col-lg-5 col-md-5 col-sm-12">
+                                                        <label for="fileUpload" class="file-upload btn btn-primary btn-block rounded-pill shadow"><i class="fa fa-upload mr-2"></i>Browse for file ...
+                                                            <input id="fileUpload" type="file" name="myImage">
+                                                        </label>
+                                                    </div><!--/.col-->
+                                                    <div class="col-sm-3">
+                                                        <div class="about-btn travel-mrt-0 pull-right">
+                                                            <button  class="about-view travel-btn">
+                                                                search	
+                                                            </button><!--/.travel-btn-->
+                                                        </div><!--/.about-btn-->
+                                                    </div><!--/.col-->
+                                                </div><!--/.row-->
+                                            </div><!--/.tab-para-->
+                                        </form>
+                                    </div><!--/.tabpannel-->
+
                                 </div><!--/.tab content-->
                             </div><!--/.desc-tabs-->
                         </div><!--/.single-travel-box-->
@@ -383,7 +412,23 @@
     <section id="gallery" class="gallery">
         <div class="container">
             <hr>
+            <% if(typeof file != 'undefined') { %>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h3>Search similar widgets</h3>
+                        <img style="max-height:100px;" src="./uploads/<%= file %>" />
+                        <hr>
+                    </div>
+                    <div class="col-lg-12 float-left">
+                        <h3>similar widgets</h3>
+                    </div>
+                </div>
+            <% }
+            %>
             <div class="gallery-details text-center demo row">
+                <% if(typeof file != 'undefined') { %>
+                <% }
+                %>
             </div>
         </div>
     </section>
@@ -496,7 +541,6 @@
 
     <script>
         $(function(){
-
             // load
             if (document.URL.split("&").length>5){
                 $("#gallery").show();
@@ -530,8 +574,9 @@
                     }
                 })
             }else{
+                
                 $(".service_inside").hide();
-                $("#gallery").hide();
+                // $("#gallery").hide();
             }
         });
     </script>
