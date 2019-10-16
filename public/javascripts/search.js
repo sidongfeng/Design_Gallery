@@ -67,7 +67,7 @@ function loadImages() { //loadSearchPage
             all_widgets[widget['name']] = widget;
             if ((ajaxData.btnType=='All' || ajaxData.btnType==widget['widget_class']) &&
                 (ajaxData.category=='All' || ajaxData.category==widget['category']) &&
-                (ajaxData.text=='' ||  ajaxData.text.toLowerCase() == widget['text'].toLowerCase() || widget['syns'].includes(ajaxData.text.toLowerCase())) &&
+                (ajaxData.text=='' ||  ajaxData.text.toLowerCase() == widget['text'].toLowerCase()) &&
                 (parseInt(ajaxData.width[0]) <= widget['dimensions']['width'] && parseInt(ajaxData.width[1]) >= widget['dimensions']['width']) &&
                 (parseInt(ajaxData.height[0]) <= widget['dimensions']['height'] && parseInt(ajaxData.height[1]) >= widget['dimensions']['height'])
             ){
@@ -313,7 +313,7 @@ function showImages(widgets, no){
             html += '               <div class="container-fluid">'
             html += '                   <div class="row">'
             html += '                       <div class="col-md-7" style="position:relative; zoom:0.5">'
-            html += '                           <img src="./images/BIG_DATA/screenshots/' + widget['src'] + '" style=" cursor: hand;"/>'
+            html += '                           <img src="./images/BIG_DATA/screenshots/' + widget['screenshot'] + '" style=" cursor: hand;"/>'
             // html += '                           <img src="https://storage.googleapis.com/ui-collection/' + urlAdd + '" style=" cursor: hand;"/>'
             html += '                       </div>'
             html += '                       <div class="col-md-5">'
@@ -378,16 +378,12 @@ function showImages(widgets, no){
             html += '                                   <tr>'
             html += '                                       <th scope="row">Similar:</th>'
             html += '                                       <td><div class="row">'
-            // if (widget['sims']==null){
-            //     html += 'None'
-            // }else{
-            //     for (let z = 0; z < widget['sims'].length; z++){
-            //         html += '<div class="col-md-auto">'
-            //         html += '   <img class="img-fluid pb-1" src="./images/BIG_DATA/all_widgets/' + widget['sims'][z] + '.png" />'
-            //         // html += '   <img class="img-fluid pb-1" src="https://storage.googleapis.com/ui-collection/Mywidgets/' + sim_widget['name'] + '.png" />'
-            //         html += '</div>'
-            //     }
-            // }
+            for (let z = 0; z < widget['sims'].length; z++){
+                html += '<div class="col-md-auto">'
+                html += '   <img class="img-fluid pb-1" src="./images/BIG_DATA/all_widgets/' + widget['sims'][z] + '.png" />'
+                // html += '   <img class="img-fluid pb-1" src="https://storage.googleapis.com/ui-collection/Mywidgets/' + sim_widget['name'] + '.png" />'
+                html += '</div>'
+            }
             html += '                                       </div></td>'
             html += '                                   </tr>'
             html += '                                   <tr>'
