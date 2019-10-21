@@ -380,8 +380,8 @@ function showImages(widgets, no){
             html += '                                       <td><div class="row">'
             for (let z = 0; z < widget['sims'].length; z++){
                 html += '<div class="col-md-auto">'
-                html += '   <img class="img-fluid pb-1" src="./images/BIG_DATA/all_widgets/' + widget['sims'][z] + '.png" />'
-                // html += '   <img class="img-fluid pb-1" src="https://storage.googleapis.com/ui-collection/Mywidgets/' + sim_widget['name'] + '.png" />'
+                // html += '   <img class="img-fluid pb-1" src="./images/BIG_DATA/all_widgets/' + widget['sims'][z] + '.png" />'
+                html += '   <img class="img-fluid pb-1" src="https://storage.cloud.google.com/gallerydc/widgets/' + widget['sims'][z] + '.png" />'
                 html += '</div>'
             }
             html += '                                       </div></td>'
@@ -405,7 +405,7 @@ function showImages(widgets, no){
             html += '</div>'
             html += '<div class="col-md-auto">'
             html += '   <img data-toggle="modal" data-target="#'+widget['name'] + '" class="img-fluid pb-1" src="./images/BIG_DATA/all_widgets/' + widget['name'] + '.png" style="max-height:100px; cursor:pointer" />'
-            // html += '   <img data-toggle="modal" data-target="#'+widget['name'] + '" class="img-fluid pb-1" src="https://storage.googleapis.com/ui-collection/Mywidgets/' + widget['name'] + '.png" style="max-height:100px; cursor:pointer" />'
+            // html += '   <img data-toggle="modal" data-target="#'+widget['name'] + '" class="img-fluid pb-1" src="https://storage.cloud.google.com/gallerydc/widgets/' + widget['name'] + '.png" style="max-height:100px; cursor:pointer" />'
             html += '</div>'
         }
 
