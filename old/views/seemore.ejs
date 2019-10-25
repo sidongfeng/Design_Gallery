@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description"
+          content="Mobile UI Gallery. This is the screenshot page showing widgets that are taken from the same screenshot.">
+    <meta name="keywords"
+          content="mobile, mobile ui, mobile widgets, widget, widgets, mobile application, android, android widget, android widgets, android ui, ui">
+    <meta name="author" content="">
+
+    <title><%= title %></title>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="https://mui-collection.herokuapp.com/stylesheets/style.css" rel="stylesheet">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117332758-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-117332758-2');
+    </script>
+
+
+</head>
+<body>
+
+        <header>
+            <!-- Fixed navbar -->
+            <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+                <div class="container">
+                    <a class="navbar-brand" href="/">Mobile UI Gallery</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="#navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/search?btnType=RadioButton&color=All&category=All&sortType=appDownloads&text=&width=0%3B800&height=0%3B1280&page=1">Search</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/compare?btnType=Button&color=All&category=All&DeveloperOneName=AI_Factory_Limited&DeveloperTwoName=GIOSIS_PTE._LTD.&sortType=appDownloads&text=&width=0%3B800&height=0%3B1280&page=1">Compare</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/about">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/contact">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div> 
+            </nav>
+        </header>
+        <div class="color-palette js-palette"><div class="unlocked"><div class="js-palette-color" data-hex="#DAF7A6" data-rgb="218, 247, 166" data-hsl="81, 33%, 81%" style="background-color: rgb(218, 247, 166);"></div><span data-hex="#DAF7A6" class="color-lock js-lock"></span><h4>#DAF7A6</h4></div><div class="unlocked"><div class="js-palette-color" data-hex="#FFC300" data-rgb="255, 195, 0" data-hsl="46, 100%, 50%" style="background-color: rgb(255, 195, 0);"></div><span data-hex="#FFC300" class="color-lock js-lock"></span><h4>#FFC300</h4></div><div class="unlocked"><div class="js-palette-color" data-hex="#FF5733" data-rgb="255, 87, 51" data-hsl="11, 80%, 60%" style="background-color: rgb(255, 87, 51);"></div><span data-hex="#FF5733" class="color-lock js-lock"></span><h4>#FF5733</h4></div><div class="unlocked"><div class="js-palette-color" data-hex="#C70039" data-rgb="199, 0, 57" data-hsl="343, 100%, 39%" style="background-color: rgb(199, 0, 57);"></div><span data-hex="#C70039" class="color-lock js-lock"></span><h4>#C70039</h4></div><div class="unlocked"><div class="js-palette-color" data-hex="#900C3F" data-rgb="144, 12, 63" data-hsl="337, 92%, 31%" style="background-color: rgb(144, 12, 63);"></div><span data-hex="#900C3F" class="color-lock js-lock"></span><h4>#900C3F</h4></div><div class="unlocked"><div class="js-palette-color" data-hex="#581845" data-rgb="88, 24, 69" data-hsl="318, 73%, 22%" style="background-color: rgb(88, 24, 69);"></div><span data-hex="#581845" class="color-lock js-lock"></span><h4>#581845</h4></div></div>
+
+
+    <!-- Page content -->
+    <main role="main" class="container">
+        <h2 class="my-4 text-center text-lg-left">Widget Compare</h2>
+        <hr>
+        <div class="row">
+            <div class="col-md-6">
+                <button type="button" class="btn btn-danger btn-block" onclick="location.href='/compare?btnType=Button&color=All&category=All&DeveloperOneName=AI_Factory_Limited&DeveloperTwoName=GIOSIS_PTE._LTD.&sortType=appDownloads&text=&width=0%3B800&height=0%3B1280&page=1'">
+                    Compare
+                </button>
+            </div>
+            <div class="col-md-6">
+                <button type="button" class="btn btn-primary btn-block" onclick="location.href='/search?btnType=RadioButton&color=All&category=All&sortType=appDownloads&text=&width=0%3B800&height=0%3B1280&page=1'">
+                    Search
+                </button>
+            </div>
+        </div>
+        <hr>
+        <div class="seemore-container" style="overflow:hidden;"></div>
+    </main>
+    <!-- Footer -->
+    <footer class="py-3 bg-dark footer">
+        <div class="container">
+            <div class="text-center text-white">Copyright &copy; Mobile UI Gallery 2018</div>
+        </div>
+    </footer>
+
+
+
+
+</body>
+</html>

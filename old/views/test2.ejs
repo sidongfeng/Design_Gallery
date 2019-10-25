@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description"
+          content="Mobile UI Gallery. A gallery has a total of 68,702 widgets used by Android developers, and are gleaned from the Google Play Store (mui-collection.herokuapp.com)">
+    <meta name="keywords"
+          content="mobile, mobile ui, mobile widgets, widget, widgets, mobile application, android, android widget, android widgets, android ui, ui">
+    <meta name="author" content="">
+
+    <title><%= title %></title>
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="stylesheets/css/bootstrap.css">
+
+    <!-- Style-CSS -->
+    <link href="stylesheets/font-awesome.min.css" rel="stylesheet">
+    <!-- Font-Awesome-Icons-CSS -->
+
+    <!-- //Custom-Files -->
+    <!-- Bootstrap-Core-CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="stylesheets/style_semantic.css" type="text/css" media="all" />
+
+    <!-- Web-Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Crimson+Text:400,400i,600,600i,700,700i" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Oxygen:300,400,700&amp;subset=latin-ext" rel="stylesheet">
+    <!-- //Web-Fonts -->
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-138212394-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-138212394-1');
+    </script>
+    
+</head>
+
+<body>
+    <div class="boxx">
+    <!--about-us start -->
+    <section id="home" class="about-us">
+        <div class="container">
+            <div class="about-us-content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="single-about-us">
+                            <div class="about-us-txt">
+                                <h3 style="color:#ffffff;">
+                                    We provide <u><strong> Gallery</strong></u> and <u><strong> Dribbble</strong></u> search.
+                                </h3>
+                                <br>
+                                <h3 style="color:#ffffff;">
+                                    We further provide <u><strong>multi categories split</strong></u> on results.
+                                </h3>
+                                <div class="about-btn">
+                                    <a href="./pdf/use_case.pdf" target="_blank">
+                                        <button  class="about-view">
+                                            Manual Script
+                                        </button>
+                                    </a>
+                                </div><!--/.about-btn-->
+                            </div><!--/.about-us-txt-->
+                        </div><!--/.single-about-us-->
+                    </div><!--/.col-->
+                    <div class="col-sm-0">
+                        <div class="single-about-us">
+                            
+                        </div><!--/.single-about-us-->
+                    </div><!--/.col-->
+                </div><!--/.row-->
+            </div><!--/.about-us-content-->
+        </div><!--/.container-->
+    
+    </section><!--/.about-us-->
+    <!--about-us end -->
+
+    <!--travel-box start-->
+        <section class="travel-box">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="single-travel-boxes">
+                            <div id="desc-tabs" class="desc-tabs">
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active">
+                                        <a href="#searchs1" aria-controls="searchs1" role="tab" data-toggle="tab">
+                                            <i class="fa fa-envira"></i>
+                                            Gallery
+                                        </a>
+                                    </li>
+
+                                    <li role="presentation">
+                                        <a href="#searchs2" aria-controls="searchs2" role="tab" data-toggle="tab">
+                                            <i class="fa fa-dribbble"></i>
+                                            Dribbble
+                                        </a>
+                                    </li>
+                                </ul>
+                                
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                
+                                    <div role="tabpanel" class="tab-pane active in" id="searchs1">
+                                        <form name="search" method="get" id="myform" action="/test" class="panel-body">
+                                            <div class="tab-para">
+        
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-3 col-sm-1">
+                                                    </div><!--/.col-->
+                                                    <div class="col-lg-5 col-md-5 col-sm-12" style="margin-top: 50px;">
+                                                        <div class="single-tab-select-box">
+                                                            <h2>Gallery Search</h2>
+                                                            <fieldset>
+                                                                <div>
+                                                                    <input style="display:none;" id="mode" name="mode" value="gallery">
+                                                                    <input class="form-control boxx_input_text" id="text" name="text" placeholder="KeyWords">
+                                                                </div><!-- /.travel-select-icon -->
+                                                            </fieldset>
+                                                            <fieldset>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="platform" value="1">
+                                                                    <label class="form-check-label" for="inlineCheckbox1">platform</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="color" value="1">
+                                                                    <label class="form-check-label" for="inlineCheckbox2">color</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" name="app" value="1">
+                                                                    <label class="form-check-label" for="inlineCheckbox3">app</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox4" name="screen_function" value="1">
+                                                                    <label class="form-check-label" for="inlineCheckbox4">screen_function</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox5" name="screen_layout" value="1">
+                                                                    <label class="form-check-label" for="inlineCheckbox5">screen_layout</label>
+                                                                </div>
+                                                            </fieldset>
+                                                        </div><!--/.single-tab-select-box-->
+                                                    </div><!--/.col-->
+
+                                                    <div class="col-sm-3">
+                                                        <div class="about-btn travel-mrt-0 pull-right" style="margin-top: 60px;">
+                                                            <button  class="about-view travel-btn">
+                                                                search	
+                                                            </button><!--/.travel-btn-->
+                                                        </div><!--/.about-btn-->
+                                                    </div><!--/.col-->
+                                                </div><!--/.row-->
+                                            </div><!--/.tab-para-->
+                                        </form>
+                                    </div><!--/.tabpannel-->
+
+
+                                    <div role="tabpanel" class="tab-pane fade in" id="searchs2">
+                                        <form name="search" method="get" id="myform" action="/test" class="panel-body">
+                                            <div class="tab-para">
+        
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-3 col-sm-1">
+                                                    </div><!--/.col-->
+                                                    <div class="col-lg-5 col-md-5 col-sm-12" style="margin-top: 50px;">
+                                                        <div class="single-tab-select-box">
+                                                            <h2>Dribbble Search</h2>
+                                                            <fieldset>
+                                                                <div>
+                                                                    <input style="display:none;" id="mode" name="mode" value="dribbble">
+                                                                    <input class="form-control boxx_input_text" id="text" name="text" placeholder="KeyWords">
+                                                                </div><!-- /.travel-select-icon -->
+                                                            </fieldset>
+                                                            <fieldset>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="platform" value="1">
+                                                                    <label class="form-check-label" for="inlineCheckbox1">platform</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="color" value="1">
+                                                                    <label class="form-check-label" for="inlineCheckbox2">color</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" name="app" value="1">
+                                                                    <label class="form-check-label" for="inlineCheckbox3">app</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox4" name="screen_function" value="1">
+                                                                    <label class="form-check-label" for="inlineCheckbox4">screen_function</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox5" name="screen_layout" value="1">
+                                                                    <label class="form-check-label" for="inlineCheckbox5">screen_layout</label>
+                                                                </div>
+                                                            </fieldset>
+                                                        </div><!--/.single-tab-select-box-->
+                                                    </div><!--/.col-->
+
+                                                    <div class="col-sm-3">
+                                                        <div class="about-btn travel-mrt-0 pull-right" style="margin-top: 60px;">
+                                                            <button  class="about-view travel-btn">
+                                                                search	
+                                                            </button><!--/.travel-btn-->
+                                                        </div><!--/.about-btn-->
+                                                    </div><!--/.col-->
+                                                </div><!--/.row-->
+                                            </div><!--/.tab-para-->
+                                        </form>
+                                    </div><!--/.tabpannel-->
+
+                                </div><!--/.tab content-->
+                            </div><!--/.desc-tabs-->
+                        </div><!--/.single-travel-box-->
+                    </div><!--/.col-->
+                </div><!--/.row-->
+            </div><!--/.container-->
+        
+        </section><!--/.travel-box-->
+
+    <!--travel-box end-->
+
+    <!--service start-->
+    <section id="service" class="service">
+        <div class="container service_inside">
+            <!-- <div class='spinner' style="padding-top: 15rem;"> -->
+            <div class='spinner'>
+                <div class="d-flex justify-content-center">
+                    <div class="spinner-border text-primary" id='myspinner' style="width: 3rem; height: 3rem;" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div><!--/.container-->
+    </section><!--/.service-->
+    <!--service end-->
+
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <hr>
+            <div class="gallery-details text-center demo row">
+            </div>
+        </div>
+    </section>
+
+    </div>
+    <div class="row mb-10">
+        <div id="endPage" class="loader" style="display:none;margin: 0 auto;"></div>
+    </div>
+
+    <!-- footer -->
+    <footer class="py-5">
+        <div class="container pt-xl-4">
+            <div class="row footer-top">
+                <div class="col-lg-3 col-md-6 footer-grid_section_1its">
+                    <h2 class="logo-2 mb-lg-4 mb-3">
+                        <a href="/" class="text-uppercase text-wh">Design D.C.</a>
+                    </h2>
+                    <!-- Map -->
+                    <div class="map-fo">
+                        <iframe src=""></iframe>
+                    </div>
+                    <!-- //Map -->
+                </div>
+                <div class="col-lg-3 col-md-3 footer-grid_section_1its mt-md-0 mt-4">
+                    <h3 class="footer-title text-uppercase text-wh mb-lg-4 mb-3">Links</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-3">
+                            <a href="/">Home</a>
+                        </li>
+                        <li class="mb-3">
+                            <a href="/about">About Us</a>
+                        </li>
+                        <li class="mb-3">
+                            <a href="/search">Search</a>
+                        </li>
+                        <li class="mb-3">
+                            <a href="/compare?color=Red+Yellow+Green+Blue+Cyan+Black+White+Lime+Magenta">Compare</a>
+                        </li>
+                        <li class="mb-3">
+                            <a href="/contact">Contact Us</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-3 footer-grid_section_1its mt-lg-0 mt-4">
+                    <h3 class="footer-title text-uppercase text-wh mb-lg-4 mb-3">Contact Info</h3>
+                    <div class="contact-info">
+                        <div class="footer-style-w3ls mb-4">
+                            <h4 class="text-li mb-2">Email </h4>
+                            <p><a href="mailto:u6063820@anu.edu.au">u6063820@anu.edu.au</a></p>
+                        </div>
+                        <div class="footer-style-w3ls mb-4">
+                            <h4 class="text-li mb-2">Location</h4>
+                            <p>The Australian National University</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 footer-grid_section_1its mt-lg-0 mt-4">
+                    <!-- social icons -->
+                    <div class="mobamuinfo_social_icons">
+                        <h3 class="footer-title text-uppercase text-wh mb-lg-4 mb-3">Social Info</h3>
+                        <p>The new ways of design sharing and knowledge discovery, enables through advanced search, summarization and comparison of real-application GUI designs, beyond the content sharing of GUI design artwork.</p>
+                        <h4 class="sub-con-fo text-li my-4">Catch on Social</h4>
+                        <ul class="mobamuits_social_list list-unstyled">
+                            <li class="w3_mobamu_facebook">
+                                <a href="https://www.facebook.com/profile.php?id=100006350080957">
+                                    <span class="fa fa-facebook-f"></span>
+                                </a>
+                            </li>
+                            <li class="w3_mobamu_twitter">
+                                <a href="https://twitter.com/loveromance09">
+                                    <span class="fa fa-twitter"></span>
+                                </a>
+                            </li>
+                            <li class="w3_mobamu_dribble">
+                                <a href="https://dribbble.com/loveromance09">
+                                    <span class="fa fa-dribbble"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- social icons -->
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- //footer -->
+    <!-- copyright -->
+    <div class="cpy-right text-center py-3">
+        <p>Copyright &copy; 2019. Mobile Design D.C. All rights reserved</p>
+    </div>
+    <!-- //copyright -->
+
+    <!-- footer -->
+    <!-- <footer class="py-5">
+        <div class="container pt-xl-4">
+            <div class="row footer-top">
+            </div>
+        </div>
+    </footer> -->
+    <!-- //footer -->
+
+    <div id="scroll-Top">
+        <i class="fa fa-angle-double-up return-to-top" id="scroll-top" data-toggle="tooltip" data-placement="top" title="" data-original-title="Back to Top" aria-hidden="true"></i>
+    </div><!--/.scroll-Top-->
+
+    <!-- jquery -->
+    <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
+    <script src="javascripts/js/jquery.js"></script>
+    <!--jquery-ui.min.js-->
+    <script src="javascripts/js/jquery-ui.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.2.0/js/ion.rangeSlider.min.js"></script> -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <!--Custom JS-->
+    <script src="javascripts/semantic.js"></script>
+
+    <script>
+        $(function(){
+            // load
+            let url = document.URL;
+            let text = getUrlParameter('text')
+            if (text != "" && text !== undefined){
+                $("#gallery").show();
+                $(".service_inside").show();
+                $("html,body").animate({scrollTop:$(".spinner").offset().top-100})
+                console.log('loading images...');
+                let a = loadImages();
+                let imgs = a[0];
+                let ajaxData = a[1];
+                // showImages(widgets,30);
+                $(window).on("scroll",function(){
+                    if($(window).scrollTop() + $(window).height() +1000 >= $(document).height()){
+                        showImages(imgs,30,ajaxData);
+                    }
+                })
+            }else{
+                $(".service_inside").hide();
+                $("#gallery").hide();
+            }
+        });
+    </script>
+
+</body>
+</html>
