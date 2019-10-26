@@ -385,7 +385,7 @@ function showImages(widgets, no){
             for (let z = 0; z < widget['sims'].length; z++){
                 html += '<div class="col-md-auto">'
                 // html += '   <img class="img-fluid pb-1" src="./images/BIG_DATA/all_widgets/' + widget['sims'][z] + '.png" />'
-                html += '   <img class="img-fluid pb-1" src="https://storage.cloud.google.com/gallerydc/widgets/' + widget['sims'][z] + '.png" />'
+                html += '   <img class="img-fluid pb-1" src="https://storage.googleapis.com/gallerydc/widgets/' + widget['sims'][z] + '.png" />'
                 html += '</div>'
             }
             html += '                                       </div></td>'

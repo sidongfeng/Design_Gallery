@@ -5,7 +5,7 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('ui-collection:server');
+var debug = require('debug')('keen-topic-256303:server');
 var http = require('http');
 
 /**
