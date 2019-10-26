@@ -315,7 +315,7 @@ function showImages(widgets, no){
             html += '                       <div class="col-md-7" >'
             html += '                           <div class="screen">'
             // html += '                               <img src="./images/BIG_DATA/screenshots/' + widget['screenshot'] + '" style="width:400px; cursor: hand;"/>'
-            html += '                               <img src="https://storage.cloud.google.com/gallerydc/screenshots/' + widget['screenshot'] + '" style="width:400px; cursor: hand;"/>'
+            html += '                               <img src="https://storage.googleapis.com/gallerydc/screenshots/' + widget['screenshot'] + '" style="width:400px; cursor: hand;"/>'
             // html += '<div class="text-block border-box" style="width:68px;height:89px"></div>'
             // html += '                           <img src="https://storage.googleapis.com/ui-collection/' + urlAdd + '" style=" cursor: hand;"/>'
             html += '                           </div>'
@@ -409,7 +409,7 @@ function showImages(widgets, no){
             html += '</div>'
             html += '<div class="col-md-auto">'
             // html += '   <img data-toggle="modal" data-target="#'+widget['name'] + '" class="img-fluid pb-1" src="./images/BIG_DATA/all_widgets/' + widget['name'] + '.png" style="max-height:100px; cursor:pointer" />'
-            html += '   <img data-toggle="modal" data-target="#'+widget['name'] + '" class="img-fluid pb-1" src="https://storage.cloud.google.com/gallerydc/widgets/' + widget['name'] + '.png" style="max-height:100px; cursor:pointer" />'
+            html += '   <img data-toggle="modal" data-target="#'+widget['name'] + '" class="img-fluid pb-1" src="https://storage.googleapis.com/gallerydc/widgets/' + widget['name'] + '.png" style="max-height:100px; cursor:pointer" />'
             html += '</div>'
         }
 
