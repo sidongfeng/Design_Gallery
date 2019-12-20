@@ -102,44 +102,54 @@ function loadImages() { //loadSearchPage
         }
     })
 
-    // initializing pie info
-    pie_info = {'category':{},'class_distribution':{},'color':{"Red":0, "Yellow":0, "Green":0, "Blue":0, "Cyan":0, "Black":0, "White":0, "Lime":0, "Magenta":0},'dimensions':[],'no':out_widgets.length}
-    for(let i = 0; i < btns.length; i++){
-        pie_info['class_distribution'][btns[i]] = 0;
-    }
-    for(let i = 0; i < cats.length; i++){
-        pie_info['category'][cats[i]] = 0;
-    }
-    // console.log(pie_info)
+    
 
-    for(let i = 0; i < out_widgets.length; i++){
-        var widget = out_widgets[i];
-        if (ajaxData.category == 'SOCIAL' && ajaxData.btnType=='Button'){          
-            if (widget['dimensions']['width']<250 || widget['dimensions']['height'] > 100){
-                if (Math.random() < 0.9){
-                    continue;
+    if (ajaxData.text!='' || parseInt(ajaxData.width[0]) != 0 || parseInt(ajaxData.width[1]) != 800 || parseInt(ajaxData.height[0]) != 0 || parseInt(ajaxData.height[1]) != 1280 || (ajaxData.category == 'SOCIAL' && ajaxData.btnType=='Button')){
+        // initializing pie info
+        pie_info = {'cat_dis':{},'class_dis':{},'color_dis':{"Red":0, "Yellow":0, "Green":0, "Blue":0, "Cyan":0, "Black":0, "White":0, "Lime":0, "Magenta":0},'hw_dis':[],'no':out_widgets.length}
+        for(let i = 0; i < btns.length; i++){
+            pie_info['class_dis'][btns[i]] = 0;
+        }
+        for(let i = 0; i < cats.length; i++){
+            pie_info['cat_dis'][cats[i]] = 0;
+        }
+        // console.log(pie_info)
+
+        for(let i = 0; i < out_widgets.length; i++){
+            var widget = out_widgets[i];
+            if (ajaxData.category == 'SOCIAL' && ajaxData.btnType=='Button'){          
+                if (widget['dimensions']['width']<250 || widget['dimensions']['height'] > 100){
+                    if (Math.random() < 0.9){
+                        continue;
+                    }
                 }
             }
-        }
-        if (widget['color']==0){
-            console.log('error color')
-            pie_info['no'] -= 1;
-        }else{
-            for (let j = 0; j < Object.keys(colors).length; j++){
-                if ((ajaxData.category == 'FINANCE' && widget['color']['White'] > 0.8) || (ajaxData.category == 'FINANCE' && widget['color']['Blue'] > 0.7) || (ajaxData.category == 'FINANCE' && widget['color']['Green'] > 0.8) || (ajaxData.category == 'FINANCE' && widget['color']['Cyan'] > 0.8) || (ajaxData.category == 'FINANCE' && widget['color']['Lime'] > 0.8) || (ajaxData.category == 'FINANCE' && widget['color']['Red'] > 0.8) || (ajaxData.category == 'FINANCE' && widget['color']['Magenta'] > 0.8)){
-                    continue;
+            if (widget['color']==0){
+                console.log('error color')
+                pie_info['no'] -= 1;
+            }else{
+                for (let j = 0; j < Object.keys(colors).length; j++){
+                    if ((ajaxData.category == 'FINANCE' && widget['color']['White'] > 0.8) || (ajaxData.category == 'FINANCE' && widget['color']['Blue'] > 0.7) || (ajaxData.category == 'FINANCE' && widget['color']['Green'] > 0.8) || (ajaxData.category == 'FINANCE' && widget['color']['Cyan'] > 0.8) || (ajaxData.category == 'FINANCE' && widget['color']['Lime'] > 0.8) || (ajaxData.category == 'FINANCE' && widget['color']['Red'] > 0.8) || (ajaxData.category == 'FINANCE' && widget['color']['Magenta'] > 0.8)){
+                        continue;
+                    }
+                    pie_info['color_dis'][Object.keys(colors)[j]] += widget['color'][Object.keys(colors)[j]];
                 }
-                pie_info['color'][Object.keys(colors)[j]] += widget['color'][Object.keys(colors)[j]];
+                pie_info['class_dis'][widget['widget_class']] += 1;
             }
-            pie_info['class_distribution'][widget['widget_class']] += 1;
+            pie_info['hw_dis'].push([widget['dimensions']['height'],widget['dimensions']['width']]);
+            pie_info['cat_dis'][widget['category']] += 1;
         }
-        pie_info['dimensions'].push([widget['dimensions']['height'],widget['dimensions']['width']]);
-        pie_info['category'][widget['category']] += 1;
+        for (let j = 0; j < Object.keys(colors).length; j++){
+            pie_info['color_dis'][Object.keys(colors)[j]] = parseFloat((pie_info['color_dis'][Object.keys(colors)[j]]/ pie_info['no']).toFixed(2));
+        }
+        console.log(pie_info);
+    }else{
+        $.getJSON('./data/demographics/'+ajaxData.btnType+'-'+ajaxData.category+'-'+ajaxData.color+'.json',function(demo){
+            pie_info = demo[0];
+            console.log(pie_info);
+        });
     }
-    for (let j = 0; j < Object.keys(colors).length; j++){
-        pie_info['color'][Object.keys(colors)[j]] = parseFloat((pie_info['color'][Object.keys(colors)[j]]/ pie_info['no']).toFixed(2));
-    }
-    console.log(pie_info)
+    
 
     // drawing pie chart 
     google.charts.load('current', {'packages':['corechart']});
@@ -147,15 +157,15 @@ function loadImages() { //loadSearchPage
     function drawChart() {
         var data = google.visualization.arrayToDataTable([
             ['Colors', '%'],
-            ['Black', pie_info['color']['Black']],
-            ['Blue', pie_info['color']['Blue']],
-            ['Cyan', pie_info['color']['Cyan']],
-            ['Green', pie_info['color']['Green']],
-            ['Lime', pie_info['color']['Lime']],
-            ['Magenta', pie_info['color']['Magenta']],
-            ['Red', pie_info['color']['Red']],
-            ['White', pie_info['color']['White']],
-            ['Yellow', pie_info['color']['Yellow']]
+            ['Black', pie_info['color_dis']['Black']],
+            ['Blue', pie_info['color_dis']['Blue']],
+            ['Cyan', pie_info['color_dis']['Cyan']],
+            ['Green', pie_info['color_dis']['Green']],
+            ['Lime', pie_info['color_dis']['Lime']],
+            ['Magenta', pie_info['color_dis']['Magenta']],
+            ['Red', pie_info['color_dis']['Red']],
+            ['White', pie_info['color_dis']['White']],
+            ['Yellow', pie_info['color_dis']['Yellow']]
         ]);
 
         var options = {'title':'Colors', 
@@ -177,17 +187,17 @@ function loadImages() { //loadSearchPage
     function drawChart2() {
         var data = google.visualization.arrayToDataTable([
             ['Classes', '%'],
-            ['Button', pie_info['class_distribution']['Button']],
-            ['CheckBox', pie_info['class_distribution']['CheckBox']],
-            ['Chronometer', pie_info['class_distribution']['Chronometer']],
-            ['ImageButton', pie_info['class_distribution']['ImageButton']],
-            ['ProgressBar', pie_info['class_distribution']['ProgressBar']],
-            ['RadioButton', pie_info['class_distribution']['RadioButton']],
-            ['RatingBar', pie_info['class_distribution']['RatingBar']],
-            ['SeekBar', pie_info['class_distribution']['SeekBar']],
-            ['Spinner', pie_info['class_distribution']['Spinner']],
-            ['Switch', pie_info['class_distribution']['Switch']],
-            ['ToggleButton', pie_info['class_distribution']['ToggleButton']]
+            ['Button', pie_info['class_dis']['Button']],
+            ['CheckBox', pie_info['class_dis']['CheckBox']],
+            ['Chronometer', pie_info['class_dis']['Chronometer']],
+            ['ImageButton', pie_info['class_dis']['ImageButton']],
+            ['ProgressBar', pie_info['class_dis']['ProgressBar']],
+            ['RadioButton', pie_info['class_dis']['RadioButton']],
+            ['RatingBar', pie_info['class_dis']['RatingBar']],
+            ['SeekBar', pie_info['class_dis']['SeekBar']],
+            ['Spinner', pie_info['class_dis']['Spinner']],
+            ['Switch', pie_info['class_dis']['Switch']],
+            ['ToggleButton', pie_info['class_dis']['ToggleButton']]
         ]);
 
         var options = {'title':'Classes', 
@@ -207,8 +217,8 @@ function loadImages() { //loadSearchPage
     google.charts.setOnLoadCallback(drawChart3);
     function drawChart3() {
         var hwtmp = [['Height', 'Width']]
-        for (let j = 0; j < pie_info['dimensions'].length; j++){
-            hwtmp.push(pie_info['dimensions'][j])
+        for (let j = 0; j < pie_info['hw_dis'].length; j++){
+            hwtmp.push(pie_info['hw_dis'][j])
         }
         var data = google.visualization.arrayToDataTable(hwtmp);
 
@@ -231,8 +241,8 @@ function loadImages() { //loadSearchPage
     google.charts.setOnLoadCallback(drawChart4);
     function drawChart4() {
         var cattmp = [['Category', 'Amount']];
-        var cattmp2 = Object.keys(pie_info['category']).map(function(key) {
-            return [key, pie_info['category'][key]];
+        var cattmp2 = Object.keys(pie_info['cat_dis']).map(function(key) {
+            return [key, pie_info['cat_dis'][key]];
           });
         cattmp2.sort(function(first, second) {
         return second[1] - first[1];
