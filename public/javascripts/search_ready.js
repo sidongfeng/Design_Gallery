@@ -202,42 +202,95 @@ $(document).ready(function(){
     });
 
     // 2. range js
-        var h_array;
-        var w_array;
-        if (document.URL.split("&").length<6){
-            h_array = [0,1280];
-            w_array = [0,800];
-        }else{
-            var height = document.URL.split("&")[5].split("=")[1]
-            var width = document.URL.split("&")[6].split("=")[1]
-            h_array = [height.split("+")[0],height.split("+")[2]]
-            w_array = [width.split("+")[0],width.split("+")[2]]
+    var h_array;
+    var w_array;
+    if (document.URL.split("&").length<6){
+        h_array = [0,1280];
+        w_array = [0,800];
+    }else{
+        var height = document.URL.split("&")[5].split("=")[1]
+        var width = document.URL.split("&")[6].split("=")[1]
+        h_array = [height.split("+")[0],height.split("+")[2]]
+        w_array = [width.split("+")[0],width.split("+")[2]]
+    }
+    
+    $( "#slider-range" ).slider({
+        range: true,
+        min: 0,
+        max: 1280,
+        values: h_array,
+        slide: function( event, ui ) {
+        $( "#height-slider" ).val(ui.values[ 0 ] + " - " + ui.values[ 1 ] );
         }
-        
-        $( "#slider-range" ).slider({
-            range: true,
-            min: 0,
-            max: 1280,
-            values: h_array,
-            slide: function( event, ui ) {
-            $( "#height-slider" ).val(ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+    });
+    $( "#height-slider" ).val( $( "#slider-range" ).slider( "values", 0 ) +
+    " - " + $( "#slider-range" ).slider( "values", 1 ) );
+    
+    $( "#slider-range-1" ).slider({
+        range: true,
+        min: 0,
+        max: 800,
+        values: w_array,
+        slide: function( event, ui ) {
+        $( "#width-slider" ).val(ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+        }
+    });
+    $( "#width-slider" ).val( $( "#slider-range-1" ).slider( "values", 0 ) +
+    " - " + $( "#slider-range-1" ).slider( "values", 1 ) );
+
+
+    // Image click
+    $(document).on('click','.img-widget',function(){
+        console.log($(this).data('value'));
+        $.get("/findobj", 
+            {name: $(this).data('value')}, 
+            function(data) {
+                var widget = data.widget[0];
+                $('.widget-title a').attr('href', widget.url);
+                $('.widget-title a').text(widget.application_name);
+                $('.widget-screenshot img').attr('src', Google_Storage+'screenshots/'+widget.screenshot);
+                $('.widget-package td').text(widget.package_name);
+                $('.widget-category td').text(widget.category);
+                $('.widget-text td').text(widget.text);
+                $('.widget-font td').text(widget.font);
+                $('.widget-class td').text(widget.widget_class);
+                $('.widget-coordinates td').text(widget.coordinates.from+' '+widget.coordinates.to);
+                $('.widget-size td').text(widget.dimensions.width+' x '+widget.dimensions.height);
+                var color_html = '';
+                var sortable = [];
+                for (var x in widget.color) {
+                    if (widget.color[x] > 0.3){
+                        sortable.push([x, widget.color[x]]);
+                    };
+                }
+                sortable.sort(function(a, b) {
+                    return b[1] - a[1];
+                });
+                sortable.forEach((element) => {
+                    color_html += '<div class="circle" style="background-color:'+ colors_platte[element[0]] +'"></div>'
+                });
+                $('.widget-color .row').empty().append(color_html);
+                $('.widget-developer td').text(widget.Developer);
+                $('.widget-downloads td').text(widget.downloads);
+                $('.widget-date td').text(widget.date);
+                var sim_html = '';
+                widget.sims.forEach((element) => {
+                    sim_html += '<div class="col-md-auto">'
+                    sim_html += '   <img class="img-fluid pb-1" src="https://storage.googleapis.com/gallerydc/widgets/' + element + '.png" />'
+                    sim_html += '</div>'
+                });
+                $('.widget-similiar .row').empty().append(sim_html);
+                $('.widget-modal').modal('toggle');
             }
+        ).fail(function() {
+            alert("Connect to Database Error. Error is reported to administrator.");
         });
-        $( "#height-slider" ).val( $( "#slider-range" ).slider( "values", 0 ) +
-        " - " + $( "#slider-range" ).slider( "values", 1 ) );
+    });
         
-        $( "#slider-range-1" ).slider({
-            range: true,
-            min: 0,
-            max: 800,
-            values: w_array,
-            slide: function( event, ui ) {
-            $( "#width-slider" ).val(ui.values[ 0 ] + " - " + ui.values[ 1 ] );
-            }
-        });
-        $( "#width-slider" ).val( $( "#slider-range-1" ).slider( "values", 0 ) +
-        " - " + $( "#slider-range-1" ).slider( "values", 1 ) );
-        
+
+    // $(".search-btn").on('click',function(){
+    //     return false;
+    // });
 
 });	
 

@@ -1,13 +1,11 @@
 const express = require('express');
 const router = express.Router();
-//const async = require('async');
+const app = express();
 
 const mongoose = require('mongoose');
 const Widget = mongoose.model('Widget');
-const Util = require('../util/util');
 
 const _btnTypeArr = ["All", "Button", "CheckBox", "Chronometer", "ImageButton", "ProgressBar", "RadioButton", "RatingBar", "SeekBar", "Spinner", "Switch", "ToggleButton"];
-//"EditText", "View"
 const _sortTypeDict = {
     appDownloads: "Descending Number of Application Downloads",
     appAlpbAsc: "Descending Alphabetical Order"
@@ -36,7 +34,13 @@ router.get('/', function (req, res, next) {
         colArr: _colArr,
         catArr: _catArr,
         query: req.query,
+        // widgets: [],
     });
+    // const findObj = async() =>{
+    //     const widgte = await Widget.findOne()
+    //     console.log(widgte)
+    // }
+    // findObj()
 });
 
 router.get('/:package/:screenshotID', function (req, res, next) {
@@ -63,71 +67,102 @@ router.get('/:package/:screenshotID', function (req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
-    if (!Util.isPositiveInteger(req.body.page) && req.body.page) {
-        return next(new Error('Page is not a positive integer'));
-    } else {
-        let findObj = {};
-        if (req.body.btnType === 'All') {
-            findObj = {};
-        } else {
-            findObj.widget_class = new RegExp(req.body.btnType + '\\d?');
-            // findObj.widget_class = req.body.btnType;
-        }
-        if (req.body.color !== 'All') {
-            findObj.color = req.body.color;
-        }
-        if (req.body.category !== 'All') {
-            findObj.category = req.body.category;
-        }
-        if (req.body.text !== '') {
-            findObj.text = new RegExp(req.body.text);
-        }
-        // Checking and parsing of width and height
-        let _widthArr = req.body.width.split(';').slice(0, 2);
-        if (_widthArr.every(function (value) {
-            return (value >= 0 && value <= 800);
-        })) {
-            findObj['dimensions.width'] = {"$gte": _widthArr[0], "$lte": _widthArr[1]};
-        } else {
-            return next(new Error('Invalid width.'));
-        }
-        let _heightArr = req.body.height.split(';').slice(0, 2);
-        if (_heightArr.every(function (value) {
-            return (value >= 0 && value <= 1280);
-        })) {
-            findObj['dimensions.height'] = {"$gte": _heightArr[0], "$lte": _heightArr[1]};
-        } else {
-            return next(new Error('Invalid height.'));
-        }
+    let searchQuery = {};
+    let sortQuery = {"dimensions.height": -1, "dimensions.width": 0};
+    if (req.body.btnType !== 'All') {
+        searchQuery.widget_class = req.body.btnType;
+    };
+    if (req.body.color !== 'All') {
+        searchQuery['color.'+req.body.color] = {$gte: 0.3};
+        sortQuery['color.'+req.body.color] = 1;
+    };
+    if (req.body.category !== 'All') {
+        searchQuery.category = req.body.category;
+    };
+    if (req.body.text !== '') {
+        searchQuery.text = req.body.text;
+    };
+    let _widthArr = req.body.width.split('+-+');
+    if (parseInt(_widthArr[0]) != 0 || parseInt(_widthArr[1]) != 800){
+        searchQuery['dimensions.width'] = {"$gte": parseInt(_widthArr[0]), "$lte": parseInt(_widthArr[1])};
+    };
+    
+    let _heightArr = req.body.height.split('+-+');
+    if (parseInt(_heightArr[0]) != 0 || parseInt(_heightArr[1]) != 1280){
+        searchQuery['dimensions.height'] = {"$gte": parseInt(_heightArr[0]), "$lte": parseInt(_heightArr[1])};
+    };
+    switch (req.body.sortType) {
+        case 'appDownloads':
+            sortQuery.downloads = -1;
+            break;
+        case 'appAlpbAsc':
+            sortQuery.application_name = 1;
+            break;
+        default:
+            break;
+    };
 
-        switch (req.body.sortType) {
-            case 'appDownloads':
-                _sortType = {
-                    downloads: -1,
-                    color: 1
-                };
-                break;
-            case 'appAlpbAsc':
-                _sortType = {
-                    application_name: 1,
-                    color: 1
-                };
-                break;
-            default:
-                break
-        }
+    console.log(searchQuery)
+    console.log(sortQuery)
 
-        Widget.find(findObj)
-            //.sort(_sortType)
-            .skip((req.body.page - 1) * displayPerPage)
-            .limit(displayPerPage)
-            .exec(function (err, doc) {
-                if (err) {
-                    return next(err);
-                }
-                res.json(doc);
-            });
+    const findObj = async() =>{
+        // .lean()
+        let widgets = await Widget.find(searchQuery, {"name": 1, "dimensions": 1, "category": 1, "widget_class": 1, _id: 0}).sort(sortQuery);
+        console.log(widgets.length)
+        let colavg = await Widget.aggregate([
+            {$match : searchQuery}
+        ]).group({
+            _id : null,
+            "BlueAvg" : {$avg : '$color.Blue'},
+            // Categorycount: { "$sum": 1 }, 
+            "RedAvg" : {$avg : '$color.Red'},
+            "YellowAvg" : {$avg : '$color.Yellow'},
+            "GreenAvg" : {$avg : '$color.Green'},
+            "CyanAvg" : {$avg : '$color.Cyan'},
+            "BlackAvg" : {$avg : '$color.Black'},
+            "WhiteAvg" : {$avg : '$color.White'},
+            "LimeAvg" : {$avg : '$color.Lime'},
+            "MagentaAvg" : {$avg : '$color.Magenta'},
+        });
+        console.log(colavg)
+        res.json({widgets: widgets, colavg: colavg});
     }
+    findObj();
+
+
+    // if (!Util.isPositiveInteger(req.body.page) && req.body.page) {
+    //     return next(new Error('Page is not a positive integer'));
+    // } else {
+    //     
+
+    //     switch (req.body.sortType) {
+    //         case 'appDownloads':
+    //             _sortType = {
+    //                 downloads: -1,
+    //                 color: 1
+    //             };
+    //             break;
+    //         case 'appAlpbAsc':
+    //             _sortType = {
+    //                 application_name: 1,
+    //                 color: 1
+    //             };
+    //             break;
+    //         default:
+    //             break
+    //     }
+
+    //     Widget.find(findObj)
+    //         //.sort(_sortType)
+    //         .skip((req.body.page - 1) * displayPerPage)
+    //         .limit(displayPerPage)
+    //         .exec(function (err, doc) {
+    //             if (err) {
+    //                 return next(err);
+    //             }
+    //             res.json(doc);
+    //         });
+    // }
 
 });
 

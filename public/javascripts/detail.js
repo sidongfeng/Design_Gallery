@@ -466,6 +466,9 @@ jQuery(document).ready(function($){
 	}
 
 	function modal_img(html,widget){
+		if (widget.Developer == 'Google Inc.'){
+			widget.Developer = 'Google Inc';
+		}
 		var colors_Array = [];
 		for (let i = 0; i < Object.keys(colors).length; i++){
 			if (widget['color'][Object.keys(colors)[i]]>0.1){

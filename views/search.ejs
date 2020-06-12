@@ -316,7 +316,7 @@
                                                 
                                                     <div class="col-sm-7">
                                                         <div class="about-btn travel-mrt-0 pull-right">
-                                                            <button  class="about-view travel-btn">
+                                                            <button class="about-view travel-btn search-btn">
                                                                 search	
                                                             </button><!--/.travel-btn-->
                                                         </div><!--/.about-btn-->
@@ -386,11 +386,102 @@
             <div class="gallery-details text-center demo row">
             </div>
         </div>
+
+        <div class="modal fade widget-modal" tabindex="-1" role="dialog" aria-labelledby="gridModalLabel" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+        
+                    <div class="modal-header">
+                        <h5 class="modal-title widget-title"><a href="" target="_blank"></a></h5>
+                        <div class="share-button share-button-top relative"></div> 
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-7" >
+                                    <div class="screen widget-screenshot">
+                                        <img src="" style="width:400px; cursor: hand;"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <table class="table table-borderless">
+                                        <tbody>
+                                            <tr class="widget-package">
+                                                <th scope="row">Package:</th>
+                                                <td style="word-break:break-all"></td>
+                                            </tr>
+                                            <tr class="widget-category">
+                                                <th scope="row">Category:</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr class="widget-text">
+                                                <th scope="row">Text:</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr class="widget-font">
+                                                <th scope="row">Font:</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr class="widget-class">
+                                                <th scope="row">Class:</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr class="widget-coordinates">
+                                                <th scope="row">Coordinates:</th>
+                                                <td class="coords"></td>
+                                            </tr>
+                                            <tr class="widget-size">
+                                                <th scope="row">Size:</th>
+                                                <td class="widSize"></td>
+                                            </tr>
+                                            <tr class="widget-color">
+                                                <th scope="row">Color:</th>
+                                                <td>
+                                                    <div class="d-flex justify-content-center">
+                                                        <div class="row">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="widget-developer">
+                                                <th scope="row">Developer:</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr class="widget-downloads">
+                                                <th scope="row">Downloads:</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr class="widget-date">
+                                                <th scope="row">Date:</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr class="widget-similiar">
+                                                <th scope="row">Similar:</th>
+                                                <td><div class="row"></div></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2"><i>We only annotate the selected UI elements in the image.</i></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div> -->
+                </div>
+            </div>
+        </div>
     </section>
 
     </div>
     <div class="row mb-10">
         <div id="endPage" class="loader" style="display:none;margin: 0 auto;"></div>
+        
     </div>
 
     <!-- footer -->
@@ -480,44 +571,35 @@
     </div><!--/.scroll-Top-->
 
     <!-- jquery -->
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="javascripts/js/jquery.js"></script>
     <!--jquery-ui.min.js-->
     <script src="javascripts/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <!-- Bootstrap core JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.2.0/js/ion.rangeSlider.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
-
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
     <!--Custom JS-->
     <script src="javascripts/search_ready.js"></script>
-    <script src="javascripts/search.js"></script>
+    <script src="javascripts/custom.js"></script>
 
     <script>
         $(function(){
-
             // load
             if (document.URL.split("&").length>5){
                 $("#gallery").show();
                 $(".service_inside").show();
                 $("html,body").animate({scrollTop:$(".spinner").offset().top-100})
                 console.log('loading images...');
-                let widgets = loadImages();
+                searchWidgets();
                 // showImages(widgets,30);
                 $(window).on("scroll",function(){
                     if($(window).scrollTop() + $(window).height() +1000 >= $(document).height()){
                     //当最短的ul的高度比窗口滚出去的高度+浏览器高度大时加载新图片
-                        // if (widgets.length>20000 && all_widget){
-                        //     showImages(widgets,180);
-                        //     all_widget = false;
-                        // }else if (widgets.length>15000 && all_widget){
-                        //     showImages(widgets,100);
-                        //     all_widget = false;
-                        // }else{
-                        //     showImages(widgets,85);
-                        // }
-                        showImages(widgets,100);
+                        showWidget(20);
+                        
                         // share button
                         $('.share-button-top').share({
                             title: 'Share Button',

@@ -2863,3 +2863,9 @@ font-family: 'Poppins', sans-serif;
 	border-radius:50%;
 
 }
+
+.widget-screenshot{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
