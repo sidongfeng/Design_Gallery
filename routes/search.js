@@ -26,6 +26,15 @@ const displayPerPage = 11463;
 
 /* GET search pageff */
 router.get('/', function (req, res, next) {
+    var _query = {};
+    if (Object.keys(req.query).length === 0){
+        _query = {
+            btnType: 'Button',
+            color: 'Blue'
+        };
+    }else{
+        _query = req.query;
+    };
     res.render('search', {
         title: 'Mobile UI Gallery - Search for widgets',
         url: req.originalUrl,
@@ -33,7 +42,7 @@ router.get('/', function (req, res, next) {
         sortTypeDict: _sortTypeDict,
         colArr: _colArr,
         catArr: _catArr,
-        query: req.query,
+        query: _query,
         // widgets: [],
     });
     // const findObj = async() =>{
